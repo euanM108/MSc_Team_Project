@@ -1,7 +1,5 @@
 package commandline;
 
-import SharedFunctionality.Dealer;
-
 /***
  * Top Trumps command line application
  */
@@ -29,10 +27,6 @@ public class TopTrumpsCLIApplication {
 			// Loop until the user wants to exit the game
 		}
 		
-		// Scan for number of players the user wants
-		// a temporary number of players until commandLine is set up
-		int numberOfPlayers = 2; 
-		Dealer dealer = new Dealer(numberOfPlayers);
 		
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
