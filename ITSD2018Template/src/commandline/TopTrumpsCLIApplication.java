@@ -1,11 +1,5 @@
 package commandline;
 
-//git test
-//git test Ollie
-//git test Ash 1
-//git test Ash 2
-//git test Ash 345 
-
 /**
  * Top Trumps command line application
  */
