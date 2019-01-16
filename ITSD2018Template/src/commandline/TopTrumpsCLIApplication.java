@@ -1,5 +1,7 @@
 package commandline;
 
+import SharedFunctionality.Dealer;
+
 /***
  * Top Trumps command line application
  */
@@ -10,6 +12,10 @@ public class TopTrumpsCLIApplication {
 	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
  	 * @param args
 	 */
+	
+	private static String fileName;
+	private static String textReadFromFile;
+	
 	public static void main(String[] args) {
 
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
@@ -17,6 +23,16 @@ public class TopTrumpsCLIApplication {
 		
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
+		
+		if (!userWantsToQuit) {
+			System.out.println("Welcome To The Game");
+			// Loop until the user wants to exit the game
+		}
+		
+		// Scan for number of players the user wants
+		// a temporary number of players until commandLine is set up
+		int numberOfPlayers = 2; 
+		Dealer dealer = new Dealer(numberOfPlayers);
 		
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
