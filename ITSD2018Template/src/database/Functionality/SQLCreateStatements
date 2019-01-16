@@ -11,5 +11,3 @@ CREATE TABLE Game_Statistics(
     AIPlayerThreeWins int,
     AIPlayerFourWins int,
     PRIMARY KEY (id));
-    
-help
