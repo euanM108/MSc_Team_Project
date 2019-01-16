@@ -1,6 +1,6 @@
 package commandline;
 
-/**
+/***
  * Top Trumps command line application
  */
 public class TopTrumpsCLIApplication {
