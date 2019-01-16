@@ -1,0 +1,13 @@
+SQL table create statements
+
+CREATE TABLE Game_Statistics(
+    id SERIAL,
+    winnerID int NOT NULL,
+    noDraws int NOT NULL,
+    totalRounds int NOT NULL,
+    playerWins int,
+    AIPlayerOneWins int,
+    AIPlayerTwoWins int,
+    AIPlayerThreeWins int,
+    AIPlayerFourWins int,
+    PRIMARY KEY (id));
