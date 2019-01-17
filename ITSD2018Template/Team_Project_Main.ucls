@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="databaseFunctionality.databaseCommunication" project="ITSD2018" 
-    file="/ITSD2018/src/databaseFunctionality/databaseCommunication.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="commandline.databaseCommunication" project="ITSD2018" 
+    file="/ITSD2018/src/commandline/databaseCommunication.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="618" y="516"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -65,24 +65,24 @@
     </display>  
   </class>  
   <dependency id="8">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="4"/>  
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
   </dependency>  
   <dependency id="9">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="6"/>  
-  </dependency>  
-  <dependency id="10">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="7"/>  
-  </dependency>  
-  <dependency id="11">    
     <end type="SOURCE" refId="1"/>    
     <end type="TARGET" refId="2"/>  
   </dependency>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
   <dependency id="12">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
+    <end type="TARGET" refId="7"/>  
   </dependency>  
   <dependency id="13">    
     <end type="SOURCE" refId="7"/>    
