@@ -23,3 +23,6 @@ FROM game_statistics
 --largest rounds played in single game
 SELECT MAX(totalrounds)
 FROM game_statistics
+
+--clear the database 
+DELETE FROM game_statistics
