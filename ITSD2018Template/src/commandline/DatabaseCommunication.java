@@ -30,13 +30,13 @@ public class DatabaseCommunication {
 		}
 	}
 
-	public static void writeGameResults(int draws, int winnerID, int noRounds, int AI1Wins, int AI2Wins, int AI3Wins, int AI4Wins) {
+	public static void writeGameResults(int winnerID, int draws , int noRounds, int AI1Wins, int AI2Wins, int AI3Wins, int AI4Wins) {
 		// writes the results of the game to the database
 		if (connection != null) {
 			//sql statement to write game results goes here
 		} else {
 			connectToDatabase();
-			writeGameResults(draws, winnerID, noRounds, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
+			writeGameResults(winnerID, draws, noRounds, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 		}
 	}
 	

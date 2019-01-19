@@ -1,0 +1,25 @@
+-- add stats to database
+INSERT INTO game_statistics (winnerid, nodraws, totalrounds, playerwins, aiplayeronewins, aiplayertwowins, aiplayerthreewins, aiplayerfourwins)
+VALUES (, , , , , , , )
+
+--get number of games played overall
+SELECT MAX(id)
+FROM game_statistics
+
+--number of times computer has won
+Select COUNT(winnerID)
+FROM game_statistics
+WHERE winnerID > 1
+
+--number of times human has won
+SELECT COUNT(winnerID)
+FROM game_statistics
+WHERE winnerID = 1
+
+--average number of draw
+SELECT AVG(nodraws)
+FROM game_statistics
+
+--largest rounds played in single game
+SELECT MAX(totalrounds)
+FROM game_statistics
