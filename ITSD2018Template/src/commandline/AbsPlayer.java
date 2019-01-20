@@ -11,9 +11,6 @@ public abstract class AbsPlayer {
 	//method names will be the same for both human and ai players
 	//but the code within them will be different 
 	
-	public void getTopCard() {
-		
-	}
 	
 	public void getPlayersCatChoice() {
 		
