@@ -15,14 +15,14 @@ public class TopTrumpsCLIApplication {
  	 * @param args
 	 */
 	
-	private static String fileName;
-	private static String textReadFromFile;
-	private static int numberOfPlayers; 	// players inc human
-	private static int numberOfAI; 			// AI players
-	private static ArrayList<AbsPlayer> players = new ArrayList<>();
-	
 	public static void main(String[] args) {
 
+		String fileName;
+		String textReadFromFile;
+		int numberOfPlayers; 	// players inc human
+		int numberOfAI; 			// AI players
+		ArrayList<AbsPlayer> players = new ArrayList<>();
+		
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
 		
@@ -79,7 +79,8 @@ public class TopTrumpsCLIApplication {
 		
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
-
+			
+			
 			// ----------------------------------------------------
 			// Add your game logic here based on the requirements
 			// ----------------------------------------------------
