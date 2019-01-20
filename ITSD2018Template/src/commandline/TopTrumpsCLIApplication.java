@@ -68,7 +68,7 @@ public class TopTrumpsCLIApplication {
 		    	// Need to shuffle between rounds too if user restarts? 
 		        // Maybe just recall this main if user selects restart
 		        Collections.shuffle(deck); // shuffling deck before gameplay
-		     
+		        Collections.shuffle(players);
 		        for (int i = 0; i<deck.size(); i++) {
 		        	// runs through each player giving them cards until the deck runs out
 		        	players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
