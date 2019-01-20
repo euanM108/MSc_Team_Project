@@ -1,5 +1,7 @@
 package commandline;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 /***
@@ -17,6 +19,7 @@ public class TopTrumpsCLIApplication {
 	private static String textReadFromFile;
 	private static int numberOfPlayers; 	// players inc human
 	private static int numberOfAI; 			// AI players
+	private static ArrayList<AbsPlayer> players = new ArrayList<>();
 	
 	public static void main(String[] args) {
 
@@ -29,18 +32,17 @@ public class TopTrumpsCLIApplication {
 		if (!userWantsToQuit) {
 			System.out.println(
 					"████████╗ ██████╗ ██████╗     ████████╗██████╗ ██╗   ██╗███╗   ███╗██████╗ ███████╗\n" + 
-					"╚══██╔══╝██╔═══██╗██╔══██╗    ╚══██╔══╝██╔══██╗██║   ██║████╗ ████║██╔══██╗██╔════╝\n" + 
-					"   ██║   ██║   ██║██████╔╝       ██║   ██████╔╝██║   ██║██╔████╔██║██████╔╝███████╗\n" + 
-					"   ██║   ██║   ██║██╔═══╝        ██║   ██╔══██╗██║   ██║██║╚██╔╝██║██╔═══╝ ╚════██║\n" + 
-					"   ██║   ╚██████╔╝██║            ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██║     ███████║\n" + 
-					"   ╚═╝    ╚═════╝ ╚═╝            ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝\n" + 
+					"╚��██╔���██╔���██╗██╔��██╗    ╚��██╔���██╔��██╗██║   ██║████╗ ████║██╔��██╗██╔�����\n" + 
+					"   ██║   ██║   ██║██████╔�       ██║   ██████╔�██║   ██║██╔████╔██║██████╔�███████╗\n" + 
+					"   ██║   ██║   ██║██╔����        ██║   ██╔��██╗██║   ██║██║╚██╔�██║██╔���� ╚����██║\n" + 
+					"   ██║   ╚██████╔�██║            ██║   ██║  ██║╚██████╔�██║ ╚�� ██║██║     ███████║\n" + 
+					"   ╚��    ╚������ ╚��            ╚��   ╚��  ╚�� ╚������ ╚��     ╚��╚��     ╚�������\n" + 
 					"                                                                                   \n" + 
 					"\n" + 
 					"");
 			// Loop until the user wants to exit the game
 			FileHandler filehandler = new FileHandler();
 			filehandler.getFileData();
-			
 			// Getting the number of players from the human
 		       Scanner s = new Scanner(System.in);
 		        System.out.println("How many players? Type a number 2 --> 5");
@@ -52,6 +54,25 @@ public class TopTrumpsCLIApplication {
 		            System.out.println("Incorrect number of players entered.  \b" +
 		                    "Please enter a number between 1 and 5");
 		            numberOfPlayers = s.nextInt();
+		        }
+		        
+		        HumanPlayer human = new HumanPlayer();
+		        players.add(human);
+		        for (int i = 1; i<numberOfPlayers; i++) {
+		        	AIPlayer ai = new AIPlayer();
+		        	players.add(ai);
+		        }
+		        
+		        // maybe make deck a constant?
+		        ArrayList<Card> deck = filehandler.getDeck();
+		    	// Need to shuffle between rounds too if user restarts? 
+		        // Maybe just recall this main if user selects restart
+		        Collections.shuffle(deck); // shuffling deck before gameplay
+		     
+		        for (int i = 0; i<deck.size(); i++) {
+		        	// runs through each player giving them cards until the deck runs out
+		        	players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
+		        	
 		        }
 		}
 		

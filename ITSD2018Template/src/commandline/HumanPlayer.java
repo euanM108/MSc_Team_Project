@@ -15,5 +15,9 @@ public class HumanPlayer extends AbsPlayer{
 	public void getPlayersCatChoice() {
 		//this will need system input for the human player
 	}
-	
+
+	public void givePlayerCard(Card c) {
+		System.out.println(c.getCardName() + " added to HumanPlayer");
+		personalDeck.add(c);
+	}
 }

@@ -15,12 +15,10 @@ public abstract class AbsPlayer {
 		
 	}
 	
-	public void givePlayerCard() {
-		
-	}
-	
 	public void getPlayersCatChoice() {
 		
 	}
+
+	protected abstract void givePlayerCard(Card card);
 	
 }
