@@ -10,107 +10,106 @@ import java.util.Scanner;
 public class TopTrumpsCLIApplication {
 
 	/**
-	 * This main method is called by TopTrumps.java when the user specifies that they want to run in
-	 * command line mode. The contents of args[0] is whether we should write game logs to a file.
- 	 * @param args
+	 * This main method is called by TopTrumps.java when the user specifies that
+	 * they want to run in command line mode. The contents of args[0] is whether we
+	 * should write game logs to a file.
+	 * 
+	 * @param args
 	 */
-	
+
 	public static void main(String[] args) {
 
 		String fileName;
 		String textReadFromFile;
-		int numberOfPlayers = 0; 	// players inc human
-		int numberOfAI; 			// AI players
+		int numberOfPlayers = 0; // players inc human
+		int numberOfAI; // AI players
 		ArrayList<AbsPlayer> players = new ArrayList<>();
 		HumanPlayer human = new HumanPlayer();
-		
+		AIPlayer ai = new AIPlayer();
+
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
-		
+
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
-		
+
 		if (!userWantsToQuit) {
 			System.out.println(
-					"████████╗ ██████╗ ██████╗     ████████╗██████╗ ██╗   ██╗███╗   ███╗██████╗ ███████╗\n" + 
-					"╚��██╔���██╔���██╗██╔��██╗    ╚��██╔���██╔��██╗██║   ██║████╗ ████║██╔��██╗██╔�����\n" + 
-					"   ██║   ██║   ██║██████╔�       ██║   ██████╔�██║   ██║██╔████╔██║██████╔�███████╗\n" + 
-					"   ██║   ██║   ██║██╔����        ██║   ██╔��██╗██║   ██║██║╚██╔�██║██╔���� ╚����██║\n" + 
-					"   ██║   ╚██████╔�██║            ██║   ██║  ██║╚██████╔�██║ ╚�� ██║██║     ███████║\n" + 
-					"   ╚��    ╚������ ╚��            ╚��   ╚��  ╚�� ╚������ ╚��     ╚��╚��     ╚�������\n" + 
-					"                                                                                   \n" + 
-					"\n" + 
-					"");
+					"████████╗ ██████╗ ██████╗     ████████╗██████╗ ██╗   ██╗███╗   ███╗██████╗ ███████╗\n"
+							+ "╚��██╔���██╔���██╗██╔��██╗    ╚��██╔���██╔��██╗██║   ██║████╗ ████║██╔��██╗██╔�����\n"
+							+ "   ██║   ██║   ██║██████╔�       ██║   ██████╔�██║   ██║██╔████╔██║██████╔�███████╗\n"
+							+ "   ██║   ██║   ██║██╔����        ██║   ██╔��██╗██║   ██║██║╚██╔�██║██╔���� ╚����██║\n"
+							+ "   ██║   ╚██████╔�██║            ██║   ██║  ██║╚██████╔�██║ ╚�� ██║██║     ███████║\n"
+							+ "   ╚��    ╚������ ╚��            ╚��   ╚��  ╚�� ╚������ ╚��     ╚��╚��     ╚�������\n"
+							+ "                                                                                   \n"
+							+ "\n" + "");
 			// Loop until the user wants to exit the game
 			FileHandler filehandler = new FileHandler();
 			filehandler.getFileData();
 			// Getting the number of players from the human
-		       Scanner s = new Scanner(System.in);
-		        System.out.println("How many players? Type a number 2 --> 5");
-		        numberOfPlayers = s.nextInt();
-		        numberOfAI = (numberOfPlayers - 1);
-		        System.out.println("Number of players chosen: " + numberOfPlayers);
+			Scanner s = new Scanner(System.in);
+			System.out.println("How many players? Type a number 2 --> 5");
+			numberOfPlayers = s.nextInt();
+			numberOfAI = (numberOfPlayers - 1);
+			System.out.println("Number of players chosen: " + numberOfPlayers);
 
-		        while(numberOfPlayers < 2 || numberOfPlayers >5){
-		            System.out.println("Incorrect number of players entered.  \b" +
-		                    "Please enter a number between 2 and 5");
-		            numberOfPlayers = s.nextInt();
-		        }
-		        
-		        
-		        players.add(human);
-		        for (int i = 1; i<numberOfPlayers; i++) {
-		        	AIPlayer ai = new AIPlayer();
-		        	players.add(ai);
-		        }
-		        
-		        // maybe make deck a constant?
-		        ArrayList<Card> deck = filehandler.getDeck();
-		    	// Need to shuffle between rounds too if user restarts? 
-		        // Maybe just recall this main if user selects restart
-		        Collections.shuffle(deck); // shuffling deck before gameplay
-		        Collections.shuffle(players);
-		        for (int i = 0; i<deck.size(); i++) {
-		        	// runs through each player giving them cards until the deck runs out
-		        	players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
-		        	
-		        }
+			while (numberOfPlayers < 2 || numberOfPlayers > 5) {
+				System.out
+						.println("Incorrect number of players entered.  \b" + "Please enter a number between 2 and 5");
+				numberOfPlayers = s.nextInt();
+			}
+
+			players.add(human);
+			for (int i = 1; i < numberOfPlayers; i++) {
+				players.add(ai);
+			}
+
+			// maybe make deck a constant?
+			ArrayList<Card> deck = filehandler.getDeck();
+			// Need to shuffle between rounds too if user restarts?
+			// Maybe just recall this main if user selects restart
+			Collections.shuffle(deck); // shuffling deck before gameplay
+			Collections.shuffle(players);
+			for (int i = 0; i < deck.size(); i++) {
+				// runs through each player giving them cards until the deck runs out
+				players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
+
+			}
+
+			for (int i = 0; i < players.size(); i++) {
+				System.out.println(players.get(i));
+			}
+
 		}
-		
-		
+
 		// Loop until the user wants to exit the game
-				while (!userWantsToQuit) {
-					boolean isRoundInPlay = true;
-					int i = 0;
+		while (!userWantsToQuit) {
+			boolean isRoundInPlay = true;
+			int i = 0;
 
-					while (isRoundInPlay) {
-						// System.out.println("starting : " + players.get(i));
-						if (players.get(i).equals(human)) {
-							System.out.println("Human");
-							human.getPlayersCatChoice(human.getTopCard());
-							int cat = human.getCatChoice();
-							
-						} else {
-							System.out.println("AI");
-						}
-						
-						
-						
-						if (i == (numberOfPlayers - 1)) {
-							i = 0;
-						} else {
-							i++;
-						}
-					}
-
-					// ----------------------------------------------------
-					// Add your game logic here based on the requirements
-					// ----------------------------------------------------
-
-					userWantsToQuit = true; // use this when the user wants to exit the game
+			while (isRoundInPlay) {
+				// System.out.println("starting : " + players.get(i));
+				if (players.get(i).equals(human)) {
+					System.out.println("Human");
+					human.getPlayersCatChoice(human.getTopCard());
+					int cat = human.getCatChoice();
 
 				}
 
+				if (i == (numberOfPlayers - 1)) {
+					i = 0;
+				} else {
+					i++;
+				}
+			}
+
+			// ----------------------------------------------------
+			// Add your game logic here based on the requirements
+			// ----------------------------------------------------
+
+			userWantsToQuit = true; // use this when the user wants to exit the game
+
+		}
 
 	}
 

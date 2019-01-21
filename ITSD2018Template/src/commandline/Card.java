@@ -67,6 +67,25 @@ public class Card {
 		return cat5Value;
 	}
 
+	public int getRequestedCat(int i) {
+		int catValue = 0;
+		
+		switch (i) {
+			case 1: catValue = getCat1Value();
+				break;
+			case 2: catValue = getCat2Value();
+				break;
+			case 3: catValue = getCat3Value();
+				break;
+			case 4: catValue = getCat4Value();
+				break;
+			case 5: catValue = getCat5Value();
+				break;
+		}
+		return catValue;
+			
+			
+	}
 
 	
 	
