@@ -84,15 +84,15 @@ public class TopTrumpsCLIApplication {
 		while (!userWantsToQuit) {
 			boolean isRoundInPlay = true;
 			int i = 0;
-			
+			for (int j = 0; j<players.size(); j++) {
+				System.out.println(players.get(j));
+			}
 			while (isRoundInPlay) {
 				
 				players.get(i).turn();
-			
 				
 				for (AbsPlayer currentPlayer : players) {
 					System.out.println("Player ID: " + currentPlayer.getPlayerID());
-				
 				}
 				
 

@@ -26,7 +26,7 @@ public abstract class AbsPlayer {
 	
 	protected abstract Card getTopCard();
 
-	protected abstract void turn();
+	protected abstract int turn();
 
 	protected abstract void givePlayerCard(Card card);
 	

@@ -18,11 +18,11 @@ public class HumanPlayer extends AbsPlayer{
 		return catChoice;
 	}
 
-	public void turn() {
-		getPlayersCatChoice(getTopCard());
+	public int turn() {
+		return getPlayersCatChoice(getTopCard());
 	}
 	
-	public void getPlayersCatChoice(Card c) {
+	public int getPlayersCatChoice(Card c) {
 		//this will need system input for the human player
 		c.viewCard();
 		int tempCatChoice = 0;
@@ -39,6 +39,7 @@ public class HumanPlayer extends AbsPlayer{
 		}
 		catChoice = tempCatChoice;
 		System.out.println("You have selected category " + catChoice);
+		return catChoice;
 	}
 	
 	

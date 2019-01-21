@@ -20,8 +20,8 @@ public class AIPlayer extends AbsPlayer{
 	// for getTopCard
 	// and givePlayerCard
 	
-	public void turn() {
-		getPlayersCatChoice(getTopCard());
+	public int turn() {
+		return getPlayersCatChoice(getTopCard());
 	}
 	
 	public int getPlayersCatChoice(Card c) {
