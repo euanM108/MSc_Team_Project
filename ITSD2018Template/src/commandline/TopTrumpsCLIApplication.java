@@ -19,9 +19,10 @@ public class TopTrumpsCLIApplication {
 
 		String fileName;
 		String textReadFromFile;
-		int numberOfPlayers; 	// players inc human
+		int numberOfPlayers = 0; 	// players inc human
 		int numberOfAI; 			// AI players
 		ArrayList<AbsPlayer> players = new ArrayList<>();
+		HumanPlayer human = new HumanPlayer();
 		
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
@@ -56,7 +57,7 @@ public class TopTrumpsCLIApplication {
 		            numberOfPlayers = s.nextInt();
 		        }
 		        
-		        HumanPlayer human = new HumanPlayer();
+		        
 		        players.add(human);
 		        for (int i = 1; i<numberOfPlayers; i++) {
 		        	AIPlayer ai = new AIPlayer();
@@ -78,16 +79,37 @@ public class TopTrumpsCLIApplication {
 		
 		
 		// Loop until the user wants to exit the game
-		while (!userWantsToQuit) {
-			
-			
-			// ----------------------------------------------------
-			// Add your game logic here based on the requirements
-			// ----------------------------------------------------
-			
-			userWantsToQuit=true; // use this when the user wants to exit the game
-			
-		}
+				while (!userWantsToQuit) {
+					boolean isRoundInPlay = true;
+					int i = 0;
+
+					while (isRoundInPlay) {
+						// System.out.println("starting : " + players.get(i));
+						if (players.get(i).equals(human)) {
+							System.out.println("Human");
+							human.getPlayersCatChoice(human.getTopCard());
+							int cat = human.getCatChoice();
+							
+						} else {
+							System.out.println("AI");
+						}
+						
+						
+						
+						if (i == (numberOfPlayers - 1)) {
+							i = 0;
+						} else {
+							i++;
+						}
+					}
+
+					// ----------------------------------------------------
+					// Add your game logic here based on the requirements
+					// ----------------------------------------------------
+
+					userWantsToQuit = true; // use this when the user wants to exit the game
+
+				}
 
 
 	}
