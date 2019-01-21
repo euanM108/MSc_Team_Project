@@ -25,7 +25,6 @@ public class TopTrumpsCLIApplication {
 		int numberOfAI; // AI players
 		ArrayList<AbsPlayer> players = new ArrayList<>();
 		HumanPlayer human = new HumanPlayer();
-		
 
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
@@ -64,7 +63,6 @@ public class TopTrumpsCLIApplication {
 				AIPlayer ai = new AIPlayer();
 				players.add(ai);
 			}
-			
 
 			// maybe make deck a constant?
 			ArrayList<Card> deck = filehandler.getDeck();
@@ -80,44 +78,52 @@ public class TopTrumpsCLIApplication {
 
 		}
 
+		ArrayList<Card> cardSelection = new ArrayList<Card>();
+
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
 			boolean isRoundInPlay = true;
 			int i = 0;
-			for (int j = 0; j<players.size(); j++) {
-				System.out.println(players.get(j));
+			for (int j = 0; j < players.size(); j++) {
+				System.out.println(players.get(j) + ": " + players.get(j).getPlayerID());
 			}
+
 			while (isRoundInPlay) {
 				
-				players.get(i).turn();
-				
 				for (AbsPlayer currentPlayer : players) {
-					System.out.println("Player ID: " + currentPlayer.getPlayerID());
+					cardSelection.add(currentPlayer.getTopCard());		
 				}
 				
-
-				if (i == (numberOfPlayers - 1)) {
-					i = 0;
-				} else {
-					i++;
+				
+				
+				for (Card currentCard : cardSelection) {
+			
 				}
+				
+				cardSelection.clear();
+				// use player id to check who has won
+
+			
+
+			if (i == (numberOfPlayers - 1)) {
+				i = 0;
+			} else {
+				i++;
 			}
-			}
-
-			// ----------------------------------------------------
-			// Add your game logic here based on the requirements
-			// ----------------------------------------------------
-
-			userWantsToQuit = true; // use this when the user wants to exit the game
-
 		}
-	
-		public static void compareCards(ArrayList<AbsPlayer> players) {
-			
-			
-			
-		}
+		
+	}
+
+	// ----------------------------------------------------
+	// Add your game logic here based on the requirements
+	// ----------------------------------------------------
+
+	userWantsToQuit=true; // use this when the user wants to exit the game
 
 	}
 
+	public static void compareCards(ArrayList<AbsPlayer> players) {
 
+	}
+
+}

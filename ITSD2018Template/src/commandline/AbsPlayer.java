@@ -22,11 +22,11 @@ public abstract class AbsPlayer {
 	//method names will be the same for both human and ai players
 	//but the code within them will be different 
 	
-	protected abstract void getPlayersCatChoice();
+	protected abstract int getPlayersCatChoice(Card c);
 	
 	protected abstract Card getTopCard();
 
-	protected abstract int turn();
+	//protected abstract int turn();
 
 	protected abstract void givePlayerCard(Card card);
 	

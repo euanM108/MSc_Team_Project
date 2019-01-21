@@ -7,7 +7,7 @@ public class HumanPlayer extends AbsPlayer{
 	
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
-
+	
 	
 	// call methods from super class 
 	// for getTopCard
@@ -18,9 +18,9 @@ public class HumanPlayer extends AbsPlayer{
 		return catChoice;
 	}
 
-	public int turn() {
-		return getPlayersCatChoice(getTopCard());
-	}
+//	public int turn() {
+//		return getPlayersCatChoice(getTopCard());
+//	}
 	
 	public int getPlayersCatChoice(Card c) {
 		//this will need system input for the human player
@@ -56,9 +56,4 @@ public class HumanPlayer extends AbsPlayer{
 		personalDeck.add(c);
 	}
 
-	@Override
-	protected void getPlayersCatChoice() {
-		// TODO Auto-generated method stub
-		
-	}
 }

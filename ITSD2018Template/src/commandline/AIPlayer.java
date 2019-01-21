@@ -20,9 +20,9 @@ public class AIPlayer extends AbsPlayer{
 	// for getTopCard
 	// and givePlayerCard
 	
-	public int turn() {
-		return getPlayersCatChoice(getTopCard());
-	}
+//	public int turn() {
+//		return getPlayersCatChoice(getTopCard());
+//	}
 	
 	public int getPlayersCatChoice(Card c) {
 		//this will be calculated using IF statements
@@ -62,9 +62,4 @@ public class AIPlayer extends AbsPlayer{
 		return topCard;
 	}
 
-	@Override
-	protected void getPlayersCatChoice() {
-		// TODO Auto-generated method stub
-		
-	}
 }
