@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AIPlayer extends AbsPlayer{
 	
 	private static int playerIDCount = 2;
-	private int playerID;
+
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
 
@@ -14,13 +14,16 @@ public class AIPlayer extends AbsPlayer{
 	}
 
 	public AIPlayer() {
-		playerID = playerIDCount;
-		this.playerIDCount++;
 		
 	}
 	// call methods from super class 
 	// for getTopCard
 	// and givePlayerCard
+	
+	public void turn() {
+		getPlayersCatChoice(getTopCard());
+		System.out.println("AI Players turn");
+	}
 	
 	public void getPlayersCatChoice(Card c) {
 		//this will be calculated using IF statements
@@ -47,17 +50,21 @@ public class AIPlayer extends AbsPlayer{
 	}
 	
 	public void givePlayerCard(Card c) {
-		System.out.println(c.getCardName() + " added to AIPlayer " + + getPlayerID());
+		//System.out.println(c.getCardName() + " added to AIPlayer " + + getPlayerID());
 		personalDeck.add(c);
 	}
 	
-	public int getPlayerID() {
-		return playerID;
-	}
+
 	
 	public Card getTopCard() {
 		Card topCard = personalDeck.get(0);
 		personalDeck.remove(0);
 		return topCard;
+	}
+
+	@Override
+	protected void getPlayersCatChoice() {
+		// TODO Auto-generated method stub
+		
 	}
 }

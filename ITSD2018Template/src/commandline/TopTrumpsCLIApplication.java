@@ -25,7 +25,7 @@ public class TopTrumpsCLIApplication {
 		int numberOfAI; // AI players
 		ArrayList<AbsPlayer> players = new ArrayList<>();
 		HumanPlayer human = new HumanPlayer();
-		AIPlayer ai = new AIPlayer();
+		
 
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
@@ -61,8 +61,10 @@ public class TopTrumpsCLIApplication {
 
 			players.add(human);
 			for (int i = 1; i < numberOfPlayers; i++) {
+				AIPlayer ai = new AIPlayer();
 				players.add(ai);
 			}
+			
 
 			// maybe make deck a constant?
 			ArrayList<Card> deck = filehandler.getDeck();
@@ -76,31 +78,29 @@ public class TopTrumpsCLIApplication {
 
 			}
 
-			for (int i = 0; i < players.size(); i++) {
-				System.out.println(players.get(i));
-			}
-
 		}
 
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
 			boolean isRoundInPlay = true;
 			int i = 0;
-
+			
 			while (isRoundInPlay) {
-				// System.out.println("starting : " + players.get(i));
-				if (players.get(i).equals(human)) {
-					System.out.println("Human");
-					human.getPlayersCatChoice(human.getTopCard());
-					int cat = human.getCatChoice();
-
+				
+				players.get(i).turn();
+				boolean isRoundOver = false;
+				
+				for (AbsPlayer currentPlayer : players) {
+					System.out.println("Player ID: " + currentPlayer.getPlayerID());
 				}
+				
 
 				if (i == (numberOfPlayers - 1)) {
 					i = 0;
 				} else {
 					i++;
 				}
+			}
 			}
 
 			// ----------------------------------------------------
@@ -113,4 +113,4 @@ public class TopTrumpsCLIApplication {
 
 	}
 
-}
+

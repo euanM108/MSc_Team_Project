@@ -18,6 +18,10 @@ public class HumanPlayer extends AbsPlayer{
 		return catChoice;
 	}
 
+	public void turn() {
+		getPlayersCatChoice(getTopCard());
+	}
+	
 	public void getPlayersCatChoice(Card c) {
 		//this will need system input for the human player
 		viewCard(c);
@@ -60,7 +64,13 @@ public class HumanPlayer extends AbsPlayer{
 	
 
 	public void givePlayerCard(Card c) {
-		System.out.println(c.getCardName() + " added to HumanPlayer");
+		//System.out.println(c.getCardName() + " added to HumanPlayer");
 		personalDeck.add(c);
+	}
+
+	@Override
+	protected void getPlayersCatChoice() {
+		// TODO Auto-generated method stub
+		
 	}
 }

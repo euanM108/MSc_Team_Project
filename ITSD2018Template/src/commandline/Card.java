@@ -35,8 +35,6 @@ public class Card {
 
 	}
 	
-	
-	
 	public int getHighestIndex() {
 		int valueNumber = catValues.indexOf(highestValue);
 		return valueNumber + 1;
