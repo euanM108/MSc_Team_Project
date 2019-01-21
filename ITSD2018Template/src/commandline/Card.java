@@ -12,11 +12,12 @@ public class Card {
 	private int cat5Value;
 	private ArrayList<Integer> catValues = new ArrayList<Integer>();
 	private int highestValue;
+	private ArrayList<String> catNames = new ArrayList<String>();
 	
 	
 
 	
-	public Card(String cardName, int value1, int value2, int value3, int value4, int value5) {
+	public Card(String cardName, int value1, int value2, int value3, int value4, int value5, ArrayList<String> catNames) {
 		
 		// This will contain constructor info
 		// to form new card object
@@ -32,7 +33,20 @@ public class Card {
 		catValues.add(value4);
 		catValues.add(value5);
 		highestValue = Collections.max(catValues);
-
+		this.catNames = catNames;
+	}
+	
+	public void viewCard() {
+		System.out.println("Here is your card to select a value from");
+		System.out.println("=====================");
+		System.out.println(getCardName());
+		System.out.println("_____________________");
+		System.out.println(catNames.get(0) + "\t" + cat1Value);
+		System.out.println(catNames.get(1) + "\t" + cat2Value);
+		System.out.println(catNames.get(2) + "\t" + cat3Value);
+		System.out.println(catNames.get(3) + "\t" + cat4Value);
+		System.out.println(catNames.get(4) + "\t" + cat5Value);
+		System.out.println("=====================");
 	}
 	
 	public int getHighestIndex() {

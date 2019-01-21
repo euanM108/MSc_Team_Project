@@ -24,7 +24,7 @@ public class HumanPlayer extends AbsPlayer{
 	
 	public void getPlayersCatChoice(Card c) {
 		//this will need system input for the human player
-		viewCard(c);
+		c.viewCard();
 		int tempCatChoice = 0;
 		System.out.println("Please select your category choice between 1 and 5");
 		Scanner keyboard = new Scanner(System.in);
@@ -39,19 +39,6 @@ public class HumanPlayer extends AbsPlayer{
 		}
 		catChoice = tempCatChoice;
 		System.out.println("You have selected category " + catChoice);
-	}
-	
-	public void viewCard(Card c) {
-		System.out.println("Here is your card to select a value from");
-		System.out.println("=====================");
-		System.out.println(c.getCardName());
-		System.out.println("_____________________");
-		System.out.println(c.getCat1Value());
-		System.out.println(c.getCat2Value());
-		System.out.println(c.getCat3Value());
-		System.out.println(c.getCat4Value());
-		System.out.println(c.getCat5Value());
-		System.out.println("=====================");
 	}
 	
 	
