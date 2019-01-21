@@ -1,15 +1,15 @@
 Description Size Speed Range Firepower Cargo 
-Antelope (Blackbuck) 5 30 42 11 16 
-Antelope (Pronghorn) 41 35 18 24 4 
+Antelope(Blackbuck) 5 30 42 11 16 
+Antelope(Pronghorn) 41 35 18 24 4 
 Badger 19 11 15 1 27 
-Bat (Guano) 20 20 43 50 46 
-Bear (Grizzly) 48 25 16 16 38 
+Bat(Guano) 20 20 43 50 46 
+Bear(Grizzly) 48 25 16 16 38 
 Beaver 32 36 47 31 1 
-Boa Constrictor 40 26 45 30 39 
+BoaConstrictor 40 26 45 30 39 
 Buffalo 27 13 6 21 3 
 Bullfrog 22 14 48 15 25 
 Carp 2 37 4 44 45 
-Cat (Domestic) 6 42 28 32 2 
+Cat(Domestic) 6 42 28 32 2 
 Chameleon 24 38 7 20 26 
 Chickadee 15 31 9 7 19 
 Chimpanzee 3 16 13 39 50 
@@ -17,35 +17,35 @@ Condor 47 7 50 23 40
 Cottonmouth 26 39 2 28 31 
 Crappie 23 33 25 2 48 
 Crocodile 28 24 46 8 34 
-Deer (Fallow) 43 10 1 29 49 
-Deer (Mule) 46 8 32 47 35 
-Deer (Whitetail) 39 1 30 9 44 
-Dog (Domestic) 11 23 14 18 9 
+Deer(Fallow) 43 10 1 29 49 
+Deer(Mule) 46 8 32 47 35 
+Deer(Whitetail) 39 1 30 9 44 
+Dog(Domestic) 11 23 14 18 9 
 Donkey 14 28 5 19 37 
 Dove 13 46 3 41 5 
-Eagle (Golden) 44 5 35 3 22 
-Elephant (Indian) 38 19 31 14 20 
+Eagle(Golden) 44 5 35 3 22 
+Elephant(Indian) 38 19 31 14 20 
 Flounder 4 44 12 43 23 
 Fox 7 2 17 6 32 
-Frog (Leopard) 31 18 38 12 13 
-Garter Snake 17 50 44 33 28 
-Gila Monster 9 43 36 45 12 
+Frog(Leopard) 31 18 38 12 13 
+GarterSnake 17 50 44 33 28 
+GilaMonster 9 43 36 45 12 
 Giraffe 50 32 29 13 41 
 Goat 16 22 34 48 18 
-Goose (Canada) 12 41 27 46 10 
-Guinea Pig 42 45 22 38 42 
+Goose(Canada) 12 41 27 46 10 
+GuineaPig 42 45 22 38 42 
 Heron 30 47 37 17 36 
-Herring Gull 1 9 41 37 24 
+HerringGull 1 9 41 37 24 
 Horse 37 4 10 5 8 
 Javelina 8 17 49 25 11 
-Jay (Blue) 49 27 11 26 30 
-King Snake 34 6 20 22 33 
+Jay(Blue) 49 27 11 26 30 
+KingSnake 34 6 20 22 33 
 Lion 36 12 23 42 17 
-Lizard (Anole) 33 49 26 35 7 
+Lizard(Anole) 33 49 26 35 7 
 Mole 18 3 8 34 6 
-Mountain Lion 10 15 21 40 15 
+MountainLion 10 15 21 40 15 
 Mule 29 48 39 27 43 
 Nutria 25 21 24 10 47 
-Opossum 35 34 33 36 29 
-Ostrick (African) 45 29 40 49 21 
-Owl (Snowy) 21 40 19 4 14 
+possum 35 34 33 36 29 
+Ostrich(African) 45 29 40 49 21 
+Owl(Snowy) 21 40 19 4 14 
