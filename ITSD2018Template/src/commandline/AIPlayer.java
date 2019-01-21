@@ -13,9 +13,6 @@ public class AIPlayer extends AbsPlayer{
 		return catChoice;
 	}
 
-	public AIPlayer() {
-		
-	}
 	// call methods from super class 
 	// for getTopCard
 	// and givePlayerCard
@@ -24,9 +21,10 @@ public class AIPlayer extends AbsPlayer{
 //		return getPlayersCatChoice(getTopCard());
 //	}
 	
-	public int getPlayersCatChoice(Card c) {
+	public int getPlayersCatChoice() {
 		//this will be calculated using IF statements
 		//could use temporary arrays and find the highest value on the card
+		Card c = personalDeck.get(0);
 		int tempBestChoice = 1;
 		int highestValue = c.getCat1Value();
 		if (highestValue<c.getCat2Value()) {
@@ -54,12 +52,12 @@ public class AIPlayer extends AbsPlayer{
 		personalDeck.add(c);
 	}
 	
-
 	
 	public Card getTopCard() {
 		Card topCard = personalDeck.get(0);
 		personalDeck.remove(0);
 		return topCard;
 	}
+
 
 }

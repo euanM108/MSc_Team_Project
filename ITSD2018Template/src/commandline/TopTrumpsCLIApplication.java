@@ -82,43 +82,52 @@ public class TopTrumpsCLIApplication {
 
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
-			boolean isRoundInPlay = true;
-			int i = 0;
-			for (int j = 0; j < players.size(); j++) {
-				System.out.println(players.get(j) + ": " + players.get(j).getPlayerID());
-			}
 
+			boolean isRoundInPlay = true;
+			int winIndex = 0;
 			while (isRoundInPlay) {
+
+				// Random Player selected
+				cardSelection.add(players.get(winIndex).getTopCard());
+				// Player chooses category 
+				int catChoice = players.get(winIndex).getPlayersCatChoice();
 				
-				for (AbsPlayer currentPlayer : players) {
-					cardSelection.add(currentPlayer.getTopCard());		
+				// other playes give their top card to the dealers deck
+				for (AbsPlayer currentPlayerGivingCard : players) {
+					if (currentPlayerGivingCard != players.get(winIndex)) {
+						cardSelection.add(currentPlayerGivingCard.getTopCard());
+					}
 				}
 				
-				
-				
-				for (Card currentCard : cardSelection) {
-			
+				// Need to calculate highest category
+				int winningValue = 0;
+				int winningIndex = -1;
+				for (int j=0; j<cardSelection.size(); j++) {
+					System.out.println("Card " + j + ": " + cardSelection.get(j).getRequestedCat(catChoice));
+					if (cardSelection.get(j).getRequestedCat(catChoice) > winningValue) {
+						winningValue = cardSelection.get(j).getRequestedCat(catChoice);
+						winningIndex = j;
+					}
 				}
 				
+				winIndex = winningIndex;
+				if (winIndex == 1) {
+					System.out.println("human winner: " + winningValue + " at " + winningIndex);
+				}
+				else {
+					System.out.println("winner: " + winningValue + " at " + winningIndex);
+				}
 				cardSelection.clear();
 				// use player id to check who has won
-
-			
-
-			if (i == (numberOfPlayers - 1)) {
-				i = 0;
-			} else {
-				i++;
 			}
+
 		}
-		
-	}
 
-	// ----------------------------------------------------
-	// Add your game logic here based on the requirements
-	// ----------------------------------------------------
+		// ----------------------------------------------------
+		// Add your game logic here based on the requirements
+		// ----------------------------------------------------
 
-	userWantsToQuit=true; // use this when the user wants to exit the game
+		userWantsToQuit = true; // use this when the user wants to exit the game
 
 	}
 

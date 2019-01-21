@@ -13,7 +13,6 @@ public class HumanPlayer extends AbsPlayer{
 	// for getTopCard
 	// and givePlayerCard
 	
-	
 	public int getCatChoice() {
 		return catChoice;
 	}
@@ -22,8 +21,9 @@ public class HumanPlayer extends AbsPlayer{
 //		return getPlayersCatChoice(getTopCard());
 //	}
 	
-	public int getPlayersCatChoice(Card c) {
+	public int getPlayersCatChoice() {
 		//this will need system input for the human player
+		Card c = personalDeck.get(0);
 		c.viewCard();
 		int tempCatChoice = 0;
 		System.out.println("Please select your category choice between 1 and 5");
@@ -39,17 +39,17 @@ public class HumanPlayer extends AbsPlayer{
 		}
 		catChoice = tempCatChoice;
 		System.out.println("You have selected category " + catChoice);
+	
 		return catChoice;
 	}
 	
 	
 	public Card getTopCard() {
 		Card topCard = personalDeck.get(0);
-		System.out.println(topCard.getCardName() + " is your top card");
+	//	System.out.println(topCard.getCardName() + " is your top card");
 		personalDeck.remove(0);
 		return topCard;
 	}
-	
 
 	public void givePlayerCard(Card c) {
 		//System.out.println(c.getCardName() + " added to HumanPlayer");
