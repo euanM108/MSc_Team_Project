@@ -1,6 +1,7 @@
 package commandline;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Card {
 	private String cardName;
@@ -9,6 +10,9 @@ public class Card {
 	private int cat3Value;
 	private int cat4Value;
 	private int cat5Value;
+	private ArrayList<Integer> catValues = new ArrayList<Integer>();
+	private int highestValue = Collections.max(catValues);
+
 	
 
 	
@@ -22,8 +26,19 @@ public class Card {
 		this.cat3Value = value3;
 		this.cat4Value = value4;
 		this.cat5Value = value5;
+		catValues.add(value1);
+		catValues.add(value2);
+		catValues.add(value3);
+		catValues.add(value4);
+		catValues.add(value5);
 	}
 	
+	public int getHighestIndex() {
+		int valueNumber = catValues.indexOf(highestValue);
+		return valueNumber + 1;
+	}
+	
+		
 	public String getCardName() {
 		return cardName;
 	}
