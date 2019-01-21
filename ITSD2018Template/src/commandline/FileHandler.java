@@ -52,5 +52,10 @@ public class FileHandler {
     public ArrayList<Card> getDeck(){
         return deck;
     }
+    
+    // getter for category Titles
+    public String[] catTitles() {
+    	return extractedCatArray;
+    }
 
 }
