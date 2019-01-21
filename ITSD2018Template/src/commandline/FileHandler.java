@@ -11,10 +11,10 @@ public class FileHandler {
 
     private final static String classDirectory = System.getProperty("user.dir") + "/";
     private static String nameOfDeck = "StarCitizenDeck.txt";
-    private String [] titleArray;
+    private static String [] extractedCatArray;
     private ArrayList<Card> deck = new ArrayList<>();
 
-    // this method reads the deck, separates the titles into a fixed array
+    // this method reads the deck, separates the categories into a fixed array
     // of strings and then creates a card object for each card in the deck
     public void getFileData(){
         FileReader fr = null;
@@ -27,7 +27,7 @@ public class FileHandler {
             // creating an array of the titles
             if (s.hasNextLine()){
                 String titles = s.nextLine();
-                titleArray = titles.split(" ");
+                
 
             }
             while(s.hasNextLine()){
@@ -53,8 +53,4 @@ public class FileHandler {
         return deck;
     }
 
-    // Getter for title array
-    public String[] getTitles(){
-        return titleArray;
-    }
 }

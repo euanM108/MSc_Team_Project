@@ -28,7 +28,7 @@ public class HumanPlayer extends AbsPlayer{
 		/*
 		 * More exception handling can be added
 		 */
-		while(tempCatChoice < 1 && tempCatChoice > 5) {
+		while(tempCatChoice < 1 || tempCatChoice > 5) {
 			System.err.println("Not a valid category choice");
 			System.out.println("Please enter a category choice between 1 and 5");
 			tempCatChoice = keyboard.nextInt();

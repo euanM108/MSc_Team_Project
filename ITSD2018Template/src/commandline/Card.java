@@ -11,8 +11,8 @@ public class Card {
 	private int cat4Value;
 	private int cat5Value;
 	private ArrayList<Integer> catValues = new ArrayList<Integer>();
-	private int highestValue = Collections.max(catValues);
-
+	private int highestValue;
+	
 	
 
 	
@@ -31,7 +31,11 @@ public class Card {
 		catValues.add(value3);
 		catValues.add(value4);
 		catValues.add(value5);
+		highestValue = Collections.max(catValues);
+
 	}
+	
+	
 	
 	public int getHighestIndex() {
 		int valueNumber = catValues.indexOf(highestValue);
