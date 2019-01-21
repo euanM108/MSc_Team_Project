@@ -88,10 +88,11 @@ public class TopTrumpsCLIApplication {
 			while (isRoundInPlay) {
 				
 				players.get(i).turn();
-				boolean isRoundOver = false;
+			
 				
 				for (AbsPlayer currentPlayer : players) {
 					System.out.println("Player ID: " + currentPlayer.getPlayerID());
+				
 				}
 				
 
@@ -109,6 +110,12 @@ public class TopTrumpsCLIApplication {
 
 			userWantsToQuit = true; // use this when the user wants to exit the game
 
+		}
+	
+		public static void compareCards(ArrayList<AbsPlayer> players) {
+			
+			
+			
 		}
 
 	}

@@ -22,10 +22,9 @@ public class AIPlayer extends AbsPlayer{
 	
 	public void turn() {
 		getPlayersCatChoice(getTopCard());
-		System.out.println("AI Players turn");
 	}
 	
-	public void getPlayersCatChoice(Card c) {
+	public int getPlayersCatChoice(Card c) {
 		//this will be calculated using IF statements
 		//could use temporary arrays and find the highest value on the card
 		int tempBestChoice = 1;
@@ -47,6 +46,7 @@ public class AIPlayer extends AbsPlayer{
 			tempBestChoice = 5;
 		}
 		catChoice = tempBestChoice;
+		return catChoice;
 	}
 	
 	public void givePlayerCard(Card c) {
