@@ -2,6 +2,7 @@ package commandline;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /***
@@ -45,23 +46,37 @@ public class TopTrumpsCLIApplication {
 			// Loop until the user wants to exit the game
 			FileHandler filehandler = new FileHandler();
 			filehandler.getFileData();
-			// Getting the number of players from the human
 			Scanner s = new Scanner(System.in);
-			System.out.println("How many players? Type a number 2 --> 5");
-			numberOfPlayers = s.nextInt();
+
+			// Catching invalid input exception if user enters a letter
+			boolean inputOk = false;
+			while (!inputOk) {
+			    // Getting the number of players from the human
+			    System.out.println("How many players? Type a number 2 --> 5");
+			    try {
+			        numberOfPlayers = s.nextInt();
+			        inputOk = true;
+			    } catch (InputMismatchException e) {
+			        System.err.println("Error! Please try again.");
+			        s.next();
+			    }
+			}
 			numberOfAI = (numberOfPlayers - 1);
 			System.out.println("Number of players chosen: " + numberOfPlayers);
-
 			while (numberOfPlayers < 2 || numberOfPlayers > 5) {
-				System.out
-						.println("Incorrect number of players entered.  \b" + "Please enter a number between 2 and 5");
-				numberOfPlayers = s.nextInt();
+			    System.out
+			        .println("Incorrect number of players entered.  \b" + "Please enter a number between 2 and 5");
+			    try {
+			        numberOfPlayers = s.nextInt();
+			    } catch (InputMismatchException e) {
+			        System.err.println("Error! Please try again.");
+			        s.next();
+			    }
 			}
-
 			players.add(human);
 			for (int i = 1; i < numberOfPlayers; i++) {
-				AIPlayer ai = new AIPlayer();
-				players.add(ai);
+			    AIPlayer ai = new AIPlayer();
+			    players.add(ai);
 			}
 
 			// maybe make deck a constant?

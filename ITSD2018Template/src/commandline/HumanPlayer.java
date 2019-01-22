@@ -1,6 +1,7 @@
 package commandline;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HumanPlayer extends AbsPlayer{
@@ -22,25 +23,36 @@ public class HumanPlayer extends AbsPlayer{
 //	}
 	
 	public int getPlayersCatChoice() {
-		//this will need system input for the human player
-		Card c = personalDeck.get(0);
-		c.viewCard();
-		int tempCatChoice = 0;
-		System.out.println("Please select your category choice between 1 and 5");
-		Scanner keyboard = new Scanner(System.in);
-		tempCatChoice = keyboard.nextInt();
-		/*
-		 * More exception handling can be added
-		 */
-		while(tempCatChoice < 1 || tempCatChoice > 5) {
-			System.err.println("Not a valid category choice");
-			System.out.println("Please enter a category choice between 1 and 5");
-			tempCatChoice = keyboard.nextInt();
-		}
-		catChoice = tempCatChoice;
-		System.out.println("You have selected category " + catChoice);
-	
-		return catChoice;
+	    //this will need system input for the human player
+	    Card c = personalDeck.get(0);
+	    c.viewCard();
+	    int tempCatChoice = 0;
+	    Scanner keyboard = new Scanner(System.in);
+	    // Exception handling for incorrect input by user
+	    boolean inputOk = false;
+	    while (!inputOk) {
+	        System.out.println("Please select your category choice between 1 and 5");
+	        try {
+	            tempCatChoice = keyboard.nextInt();
+	            inputOk = true;
+	        } catch (InputMismatchException e) {
+	            System.err.println("Error! Please try again.");
+	            keyboard.next();
+	        }
+	        while (tempCatChoice < 1 || tempCatChoice > 5) {
+	            System.err.println("Not a valid category choice");
+	            System.out.println("Please enter a category choice between 1 and 5");
+	            try {
+	            tempCatChoice = keyboard.nextInt();
+	            }catch (InputMismatchException e) {
+	            	System.err.println("Error! Please try again.");
+		            keyboard.next();
+	            }
+	        }
+	        catChoice = tempCatChoice;
+	        System.out.println("You have selected category " + catChoice);
+	    }
+	    return catChoice;
 	}
 	
 	
