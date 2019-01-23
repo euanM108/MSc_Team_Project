@@ -9,6 +9,8 @@ import java.util.Scanner;
  * Top Trumps command line application
  */
 public class TopTrumpsCLIApplication {
+	
+	//private static ArrayList<Card> deck = new ArrayList<Card>();
 
 	/**
 	 * This main method is called by TopTrumps.java when the user specifies that
@@ -20,6 +22,7 @@ public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 
+		//which of these could we make global?
 		String fileName;
 		String textReadFromFile;
 		int numberOfPlayers = 0; // players inc human
@@ -34,6 +37,9 @@ public class TopTrumpsCLIApplication {
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
 
 		if (!userWantsToQuit) {
+			// Loop until the user wants to exit the game
+
+			// Welcome message
 			System.out.println(
 					"████████╗ ██████╗ ██████╗     ████████╗██████╗ ██╗   ██╗███╗   ███╗██████╗ ███████╗\n"
 							+ "╚��██╔���██╔���██╗██╔��██╗    ╚��██╔���██╔��██╗██║   ██║████╗ ████║██╔��██╗██╔�����\n"
@@ -43,24 +49,17 @@ public class TopTrumpsCLIApplication {
 							+ "   ╚��    ╚������ ╚��            ╚��   ╚��  ╚�� ╚������ ╚��     ╚��╚��     ╚�������\n"
 							+ "                                                                                   \n"
 							+ "\n" + "");
-			// Loop until the user wants to exit the game
-			FileHandler filehandler = new FileHandler();
-			filehandler.getFileData();
+			
+			//read the deck form the txt files and create the deck ArrayList
+			ArrayList<Card> deck = new ArrayList<Card>();
+			deck = readAndCreateDeck();
+			
+			//Set up scanner for UI
 			Scanner s = new Scanner(System.in);
-
-			// Catching invalid input exception if user enters a letter
-			boolean inputOk = false;
-			while (!inputOk) {
-			    // Getting the number of players from the human
-			    System.out.println("How many players? Type a number 2 --> 5");
-			    try {
-			        numberOfPlayers = s.nextInt();
-			        inputOk = true;
-			    } catch (InputMismatchException e) {
-			        System.err.println("Error! Please try again.");
-			        s.next();
-			    }
-			}
+			
+			
+			//a bit confused as to how to put this part into a method
+			numberOfPlayers = getNoPlayers(s);
 			numberOfAI = (numberOfPlayers - 1);
 			System.out.println("Number of players chosen: " + numberOfPlayers);
 			while (numberOfPlayers < 2 || numberOfPlayers > 5) {
@@ -73,6 +72,8 @@ public class TopTrumpsCLIApplication {
 			        s.next();
 			    }
 			}
+			/////////////////////////////////////////////////////////
+			
 			players.add(human);
 			for (int i = 1; i < numberOfPlayers; i++) {
 			    AIPlayer ai = new AIPlayer();
@@ -80,11 +81,12 @@ public class TopTrumpsCLIApplication {
 			}
 
 			// maybe make deck a constant?
-			ArrayList<Card> deck = filehandler.getDeck();
 			// Need to shuffle between rounds too if user restarts?
 			// Maybe just recall this main if user selects restart
-			Collections.shuffle(deck); // shuffling deck before gameplay
+			deck = shuffleDeck(deck);
+			
 			Collections.shuffle(players);
+			
 			for (int i = 0; i < deck.size(); i++) {
 				// runs through each player giving them cards until the deck runs out
 				players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
@@ -144,6 +146,37 @@ public class TopTrumpsCLIApplication {
 
 		userWantsToQuit = true; // use this when the user wants to exit the game
 
+	}
+	
+	public static ArrayList<Card> readAndCreateDeck() {
+		ArrayList<Card> deck = new ArrayList<Card>();
+		//method to tiy up reading the files and getting the deck
+		FileHandler filehandler = new FileHandler();
+		filehandler.getFileData();
+		return deck = filehandler.getDeck();
+	}
+	
+	public static ArrayList shuffleDeck(ArrayList<Card> deck) {
+		Collections.shuffle(deck);
+		return deck;
+	}
+	
+	public static int getNoPlayers(Scanner s) {
+		int noPlayers = 0;
+		boolean inputOk = false;
+		while (!inputOk) {
+		    // Getting the number of players from the human
+		    System.out.println("How many players? Type a number 2 --> 5");
+		    try {
+		        noPlayers = s.nextInt();
+		        inputOk = true;
+		    } catch (InputMismatchException e) { // Catching invalid input exception if user enters a letter
+		        System.err.println("Error! Please try again.");
+		        s.next();
+		    }
+		}
+		
+		return noPlayers;
 	}
 
 	public static void compareCards(ArrayList<AbsPlayer> players) {
