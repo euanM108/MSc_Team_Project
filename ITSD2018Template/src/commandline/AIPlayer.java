@@ -2,9 +2,9 @@ package commandline;
 
 import java.util.ArrayList;
 
-public class AIPlayer extends AbsPlayer{
+public class AIPlayer extends AbsPlayer {
 	
-	private static int playerIDCount = 2;
+	//private static int playerIDCount = 2;
 
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
@@ -55,8 +55,15 @@ public class AIPlayer extends AbsPlayer{
 	
 	public Card getTopCard() {
 		Card topCard = personalDeck.get(0);
-		personalDeck.remove(0);
+		//personalDeck.remove(0);
 		return topCard;
+	}
+	
+	public void removeTopCard() {
+		for (int i = 0; i<personalDeck.size(); i++) {
+			System.out.println("A :       " +personalDeck.get(i).getCardName());
+		}
+		personalDeck.remove(0);
 	}
 
 

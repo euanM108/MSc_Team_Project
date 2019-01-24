@@ -7,12 +7,12 @@ import java.util.ArrayList;
 public abstract class AbsPlayer {
 		
 	private int playerID;
-	private static int playerIDCount = 1;
+//	private static int playerIDCount = 1;
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	
 	public AbsPlayer() {
-		playerID = playerIDCount;
-		playerIDCount++;
+//		playerID = playerIDCount;
+//		playerIDCount++;
 	}
 	
 	public int getPlayerID() {
@@ -26,6 +26,7 @@ public abstract class AbsPlayer {
 	
 	protected abstract Card getTopCard();
 
+	protected abstract void removeTopCard();
 	//protected abstract int turn();
 
 	protected abstract void givePlayerCard(Card card);

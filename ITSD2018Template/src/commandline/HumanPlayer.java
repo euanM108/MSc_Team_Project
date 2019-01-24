@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class HumanPlayer extends AbsPlayer{
+public class HumanPlayer extends AbsPlayer {
 	
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
@@ -58,14 +58,28 @@ public class HumanPlayer extends AbsPlayer{
 	
 	public Card getTopCard() {
 		Card topCard = personalDeck.get(0);
-	//	System.out.println(topCard.getCardName() + " is your top card");
-		personalDeck.remove(0);
+		System.out.println(topCard.getCardName() + " is your top card");
+		//personalDeck.remove(0); 	// THIS IS THE PROBLEM
 		return topCard;
+	}
+	
+	public void removeTopCard() {
+		for (int i = 0; i<personalDeck.size(); i++) {
+			System.out.println("H :       " +personalDeck.get(i).getCardName());
+		}
+		personalDeck.remove(0);
+		
+		
+		
 	}
 
 	public void givePlayerCard(Card c) {
-		//System.out.println(c.getCardName() + " added to HumanPlayer");
+		//System.out.println(c.getCardName() + " added to Player");
 		personalDeck.add(c);
+	}
+	
+	public ArrayList<Card> getPersonalDeck(){
+		return personalDeck;
 	}
 
 }
