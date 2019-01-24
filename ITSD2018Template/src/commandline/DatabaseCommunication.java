@@ -20,7 +20,7 @@ public class DatabaseCommunication {
 		}
 
 		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/ITGroupProject", "postgres", "password here");
+			connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/", "m_18_2426628r", "2426628r");
 		} catch (SQLException e) {
 			System.err.println("Connection Failed!");
 			e.printStackTrace();
@@ -170,11 +170,24 @@ public class DatabaseCommunication {
 	public static void main(String[] args) {
 		//the main can be used for testing and will be removed when 
 		//implemented into the full programme
-		getPreviousStatistics();
 		writeGameResults(3, 1, 1, 4, 6, 1, 4, 8);
 		getPreviousStatistics();
 		clearHistory();
 		getPreviousStatistics();
+/*		connectToDatabase();
+		try {
+			String noGames;
+			Statement SQLStatement = connection.createStatement();
+			String SQLQuery = "SELECT * FROM Game_Statistics";
+			ResultSet queryResult = SQLStatement.executeQuery(SQLQuery);
+			queryResult.next();
+			noGames = queryResult.getString(6);
+			System.out.println(noGames);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}*/
+		//return noGames;
+
 	}
 
 }
