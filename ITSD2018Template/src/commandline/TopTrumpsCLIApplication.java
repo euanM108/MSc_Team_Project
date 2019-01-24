@@ -78,13 +78,23 @@ public class TopTrumpsCLIApplication {
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
 
-			playersGiveCardsToDealer(players, cardSelection);
-
+			for (int i = 0; i < players.size(); i++) {
+				try {
+					cardSelection.add(players.get(i).getTopCard());
+				} catch (IndexOutOfBoundsException e) {
+					System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
+					players.remove(i);
+				}
+			}
+			
 			userWantsToQuit = checkForWin(players);
+			
 			if (userWantsToQuit) {
 				System.out.println("\nEnd of game.");
 				break;
 			}
+			
+			// WIN INDEX CAUSES EXCEPTION WHEN MORE THAN ONE PLAYER IS REMOVED AT THE SAME TIME
 			try {
 				if (players.get(winIndex).getPlayerID() == 1) {
 					catChoice = players.get(winIndex).getHumanPlayersCatChoice();
@@ -114,7 +124,7 @@ public class TopTrumpsCLIApplication {
 			for (int i = 0; i < cardSelection.size(); i++) {
 				players.get(winIndex).givePlayerCard(cardSelection.get(i));
 			}
-			}catch(Exception e) {
+			}catch(IndexOutOfBoundsException e) {
 				e.printStackTrace();
 			}
 			
@@ -178,10 +188,6 @@ public class TopTrumpsCLIApplication {
 		return noPlayers;
 	}
 
-	private static void compareCards(ArrayList<AbsPlayer> players) {
-
-	}
-
 	private static String getCategory(int i) {
 		String category = "";
 		switch (i) {
@@ -206,25 +212,12 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static boolean checkForWin(ArrayList<Player> players) {
-
 		if (players.size() == 1) {
 			System.out.println();
 			System.out.println("Player " + players.get(0).getPlayerID() + " has won the game.");
 			return true;
 		}
 		return false;
-	}
-
-	public static void playersGiveCardsToDealer(ArrayList<Player> players, ArrayList<Card> cardSelection) {
-		// players give their top card to the dealers deck
-		for (int i = 0; i < players.size(); i++) {
-			try {
-				cardSelection.add(players.get(i).getTopCard());
-			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
-				players.remove(i);
-			}
-		}
 	}
 	
 	public static int checkForNumberOfPlayers(int numberOfPlayers, Scanner s) {
