@@ -8,30 +8,41 @@ import java.sql.*;
 public class DatabaseCommunication {
 
 	private static Connection connection = null;
+	private static boolean connectionFailure = false;
 
 	private static void connectToDatabase() {
 		// check for the driver
-		try {
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			System.err.println("Could not fine JDBC Driver");
-			e.printStackTrace();
-			return;
-		}
+		if (!connectionFailure) {
+			try {
+				Class.forName("org.postgresql.Driver");
+			} catch (ClassNotFoundException e) {
+				System.err.println("Could not fine JDBC Driver");
+				e.printStackTrace();
+				return;
+			}
 
-		try {
-			connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/", "m_18_2426628r", "2426628r");
-		} catch (SQLException e) {
-			System.err.println("Connection Failed!");
-			e.printStackTrace();
-			return;
+			try {
+				connection = DriverManager.getConnection("jdbc:postgresql://yacata.dcs.gla.ac.uk:5432/",
+						"m_18_2426628r", "2426628r");
+			} catch (SQLException e) {
+				System.err.println("Connection Failed! Unable to read or write statistics.");
+				connectionFailure = true;
+				e.printStackTrace(); //do we want to remove this line for production?
+				return;
+			}
+		} else {
+			System.out.println("Connection attempts failed, please check credentials or database status.");
 		}
 	}
 
-	public static void writeGameResults(int winnerID, int draws , int noRounds, int playerWins, int AI1Wins, int AI2Wins, int AI3Wins, int AI4Wins) {
+	public static void writeGameResults(int winnerID, int draws, int noRounds, int playerWins, int AI1Wins, int AI2Wins,
+			int AI3Wins, int AI4Wins) {
 		// writes the results of the game to the database
-		//winner id is 1 for player and then 2-5 for each AI player in ascending order
-		if (connection != null) {
+		// winner id is 1 for player and then 2-5 for each AI player in ascending order
+		if (connection == null) {
+			System.out.println("No database connection, attempting to connect.");
+			connectToDatabase();
+		} else {
 			try {
 				Statement SQLStatement = connection.createStatement();
 				String SQLQuery = String.format(
@@ -42,16 +53,15 @@ public class DatabaseCommunication {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
-		} else {
-			connectToDatabase();
-			writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 		}
 	}
 	
 	public static String getPreviousStatistics() {
 		//use 5 different methods then combine to 1 string or return 5 strings
-		if (connection != null) {
+		if (connection == null) {
+			System.out.println("No database connection, attempting to connect.");
+			connectToDatabase();
+		} else {
 			int noGames = getNoGames();
 			int AIWins = getNoAIWins();
 			int humanWins = getNoHumanWins();
@@ -61,9 +71,6 @@ public class DatabaseCommunication {
 			String statistics = String.format("%d\t%d\t%d\t%.2f\t%d", noGames, AIWins, humanWins, AVGDraws, largestNoRounds);
 			System.out.println(statistics);
 			return statistics;
-		} else {
-			connectToDatabase();
-			getPreviousStatistics();
 		}
 		return null;
 	}
@@ -151,8 +158,11 @@ public class DatabaseCommunication {
 	}
 	
 	public static void clearHistory() {
-		//this method completely clears the database table
-		if (connection != null) {
+		// this method completely clears the database table
+		if (connection == null) {
+			System.out.println("No database connection, attempting to connect.");
+			connectToDatabase();
+		} else {
 			try {
 				Statement SQLStatement = connection.createStatement();
 				String SQLQuery = "DELETE FROM game_statistics";
@@ -160,34 +170,20 @@ public class DatabaseCommunication {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-
-		} else {
-			connectToDatabase();
-			clearHistory();
 		}
 	}
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		//the main can be used for testing and will be removed when 
 		//implemented into the full programme
+		System.out.println("1");
 		writeGameResults(3, 1, 1, 4, 6, 1, 4, 8);
+		System.out.println("2");
 		getPreviousStatistics();
+		System.out.println("3");
 		clearHistory();
+		System.out.println("4");
 		getPreviousStatistics();
-/*		connectToDatabase();
-		try {
-			String noGames;
-			Statement SQLStatement = connection.createStatement();
-			String SQLQuery = "SELECT * FROM Game_Statistics";
-			ResultSet queryResult = SQLStatement.executeQuery(SQLQuery);
-			queryResult.next();
-			noGames = queryResult.getString(6);
-			System.out.println(noGames);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}*/
-		//return noGames;
-
-	}
+	}*/
 
 }
