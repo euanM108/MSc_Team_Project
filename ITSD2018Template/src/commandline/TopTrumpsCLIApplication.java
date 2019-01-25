@@ -22,10 +22,9 @@ public class TopTrumpsCLIApplication {
 
 	public static void main(String[] args) {
 
-
 		int numberOfPlayers = 0; // players inc human
 		ArrayList<Player> players = new ArrayList<>();
-		
+
 		boolean writeGameLogsToFile = false; // Should we write game logs to file?
 //		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command line selection
 
@@ -50,11 +49,9 @@ public class TopTrumpsCLIApplication {
 		// Set up scanner for UI
 		Scanner s = new Scanner(System.in);
 
-	
-		
 		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s);
 		System.out.println("Number of players chosen: " + numberOfPlayers);
-		
+
 		Player human = new Player();
 		players.add(human);
 		for (int i = 1; i < numberOfPlayers; i++) {
@@ -73,58 +70,72 @@ public class TopTrumpsCLIApplication {
 
 		ArrayList<Card> cardSelection = new ArrayList<Card>();
 		int catChoice = 0;
-		int winIndex = 0;
+		int winningIndex = 0;
 
 		// Loop until the user wants to exit the game
 		while (!userWantsToQuit) {
-
+			System.out.println("Winning Index is     : " + winningIndex);
 			for (int i = 0; i < players.size(); i++) {
-				try {
-					cardSelection.add(players.get(i).getTopCard());
-				} catch (IndexOutOfBoundsException e) {
-					System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
-					players.remove(i);
-				}
+				System.out.println("PLayer " + players.get(i).getPlayerID() + " is index : " + i);
 			}
-			
+
+			try {
+				for (int i = 0; i < players.size(); i++) {
+					try {
+						cardSelection.add(players.get(i).getTopCard());
+					} catch (IndexOutOfBoundsException e) {
+						System.out
+								.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
+						players.remove(i);
+					}
+				}
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Not Happy");
+			}
 			userWantsToQuit = checkForWin(players);
-			
+
 			if (userWantsToQuit) {
 				System.out.println("\nEnd of game.");
 				break;
 			}
+
+			while (winningIndex >= players.size()) {
+				winningIndex--;
+			}
 			
-			// WIN INDEX CAUSES EXCEPTION WHEN MORE THAN ONE PLAYER IS REMOVED AT THE SAME TIME
 			try {
-				if (players.get(winIndex).getPlayerID() == 1) {
-					catChoice = players.get(winIndex).getHumanPlayersCatChoice();
-					System.out.println(
-							"Player " + players.get(winIndex).getPlayerID() + " has selected " + getCategory(catChoice)
-									+ " at " + players.get(winIndex).getTopCard().getRequestedCat(catChoice));
+				if (players.get(winningIndex).getPlayerID() != 1) {
+					catChoice = players.get(winningIndex).getAIPlayersCatChoice();
+					System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "
+							+ players.get(winningIndex).getTopCard().getCardName() + "'s " + getCategory(catChoice)
+							+ " at " + players.get(winningIndex).getTopCard().getRequestedCat(catChoice));		
 				} else {
-					catChoice = players.get(winIndex).getAIPlayersCatChoice();
-					System.out.println("Player " + players.get(winIndex).getPlayerID() + " has selected "
-							+ players.get(winIndex).getTopCard().getCardName() + "'s " + getCategory(catChoice) + " at "
-							+ players.get(winIndex).getTopCard().getRequestedCat(catChoice));
+					catChoice = players.get(winningIndex).getHumanPlayersCatChoice();
+					System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "
+							+ getCategory(catChoice) + " at "
+							+ players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
 				}
 
-				int winningIndex = getWinningIndex(cardSelection, catChoice);
+				winningIndex = getWinningIndex(cardSelection, catChoice);
 
+				while (winningIndex >= players.size()) {
+					winningIndex--;
+				}
+				
 				System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has won with "
 						+ players.get(winningIndex).getTopCard().getCardName() + "'s " + getCategory(catChoice) + " at "
 						+ players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
-				winIndex = winningIndex;
 				System.out.println();
 
 			} catch (IndexOutOfBoundsException e) {
 				e.printStackTrace();
 			}
-			
+
 			try {
-			for (int i = 0; i < cardSelection.size(); i++) {
-				players.get(winIndex).givePlayerCard(cardSelection.get(i));
-			}
-			}catch(IndexOutOfBoundsException e) {
+				for (int i = 0; i < cardSelection.size(); i++) {
+					players.get(winningIndex).givePlayerCard(cardSelection.get(i));
+				}
+			} catch (IndexOutOfBoundsException e) {
 				e.printStackTrace();
 			}
 			
@@ -165,7 +176,7 @@ public class TopTrumpsCLIApplication {
 		return deck = filehandler.getDeck();
 	}
 
-	private static ArrayList shuffleDeck(ArrayList<Card> deck) {
+	private static ArrayList<Card> shuffleDeck(ArrayList<Card> deck) {
 		Collections.shuffle(deck);
 		return deck;
 	}
@@ -219,7 +230,7 @@ public class TopTrumpsCLIApplication {
 		}
 		return false;
 	}
-	
+
 	public static int checkForNumberOfPlayers(int numberOfPlayers, Scanner s) {
 		while (numberOfPlayers < 2 || numberOfPlayers > 5) {
 			System.out.println("Incorrect number of players entered.  \b" + "Please enter a number between 2 and 5");
