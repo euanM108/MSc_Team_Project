@@ -23,6 +23,12 @@
         <version>${dropwizard.version}</version>
     </dependency>
     
+    <dependency>
+    	<groupId>org.webjars</groupId>
+    	<artifactId>bootstrap</artifactId>
+    	<version>3.3.4</version>
+	</dependency>
+    
     <!-- When hosting a website with dropwizard, we need to specify a language for writing views,
          In this case, we are using freemarker https://freemarker.apache.org/ -->
 	<dependency>
