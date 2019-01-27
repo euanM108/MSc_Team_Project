@@ -144,6 +144,7 @@ body {
 
 <div class="header">
   <h1>Top Trumps Game</h1>
+    <p>Please select the number of players below and press <b>begin</b></p>
 
 </div>
 
@@ -152,16 +153,24 @@ body {
   <a href="/toptrumps/">Exit</a>
 
 </div>
-
-</div>
-
-
+				<div id="setNumberOfPlayers">
+					
+					<br><select id="numberOfPlayers" style="font-size: 20px;">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+					</select><br>
+					<br>
+					<button class="btn btn-default" onclick="setNumberOfPlayers();"
+						style="padding: 20px;">Begin!</button>
+					<br>
+					<br>
+				</div>
 
 </body>
-</html>
 
-ƒ
-		</div>
+
 		
 		<script type="text/javascript">
 		
@@ -182,6 +191,31 @@ body {
 			// -----------------------------------------
 			// Add your other Javascript methods Here
 			// -----------------------------------------
+
+			  function setNumberOfPlayers() {
+
+			  	var players = document.getElementById('setNumberOfPlayers').value;
+			  	// First create a CORS request, this is the message we are going to send (a get request in this case)
+				 var xhr = createCORSRequest('GET',
+      			"http://localhost:7777/toptrumps/setNumberOfPlayers?Number=" + number); // Request type and URL+parameters
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var responseText = xhr.response; // the text of the response
+					
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send()
+				alert("total number of players selected is " + responseText); 
+				console.log("Total number of players")
+
+			  }
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
