@@ -25,27 +25,197 @@
     	<div class="container">
 
 			<!-- Add your HTML Here -->
-		
-		</div>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Home Page</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Top Trumps Game</h1>
+    <p>Please select the number of players below and press <b>begin</b></p>
+
+</div>
+
+<div class="navbar">
+
+  <a href="/toptrumps/">Exit</a>
+
+</div>
+				<div id="setNumberOfPlayers">
+					
+					<br><select id="numberOfPlayers" style="font-size: 20px;">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+					</select><br>
+					<br>
+					<button class="btn btn-default" onclick="setNumberOfPlayers();"
+						style="padding: 20px;">Begin!</button>
+					<br>
+					<br>
+				</div>
+
+</body>
+
+
 		
 		<script type="text/javascript">
 		
 			// Method that is called on page load
 			function initalize() {
 			
+			
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
 				
 				// For example, lets call our sample methods
-				helloJSONList();
-				helloWord("Student");
+				// helloJSONList();
+				// helloWord("Student");
 				
 			}
 			
 			// -----------------------------------------
 			// Add your other Javascript methods Here
 			// -----------------------------------------
+
+			  function setNumberOfPlayers() {
+
+			  	var players = document.getElementById('setNumberOfPlayers').value;
+			  	// First create a CORS request, this is the message we are going to send (a get request in this case)
+				 var xhr = createCORSRequest('GET',
+      			"http://localhost:7777/toptrumps/setNumberOfPlayers?Number=" + number); // Request type and URL+parameters
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhr) {
+  					alert("CORS not supported");
+				}
+
+				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+				// to do when the response arrives 
+				xhr.onload = function(e) {
+ 					var responseText = xhr.response; // the text of the response
+					
+				};
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send()
+				alert("total number of players selected is " + responseText); 
+				console.log("Total number of players")
+
+			  }
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {

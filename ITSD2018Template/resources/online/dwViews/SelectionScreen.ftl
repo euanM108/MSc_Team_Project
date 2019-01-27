@@ -25,78 +25,141 @@
     	<div class="container">
 
 			<!-- Add your HTML Here -->
-			
 			<!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
+<html lang="en">
+<head>
+<title>Home Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-body,h1 {font-family: "Montserrat", sans-serif}
-img {margin-bottom: -7px}
-.w3-row-padding img {margin-bottom: 12px}
-</style>
-<body>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 40px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
 
 
 
-<!-- !PAGE CONTENT! -->
-<div class="w3-content" style="max-width:1500px">
 
-<!-- Header -->
-<div class="w3-opacity">
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
 
-<div class="w3-clear"></div>
-<header class="w3-center w3-margin-bottom">
-  <h1><b>Welcome to Top Trumps!</b></h1>
-  <p><b>Click the button below to get started.</b></p>
-  <p class="w3-padding-16"><button class="w3-button w3-black" onclick="myFunction()">Start Game</
-    button></p>
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
 
-</header>
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
 
-<header class="w3-center w3-margin-bottom">
-<p class="w3-padding-16"><button class="w3-button w3-black" onclick="myFunction()">Game Stats</
-    button></p>
-</div>
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
 
 
+}
 
-<!-- End Page Content -->
-</div>
-
-<!-- Footer -->
-<footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin-top:128px"> 
-  <p class="w3-medium">Group: Django Unchained 2019 </p>
-</footer>
- 
-<script>
-// Toggle grid padding
-function myFunction() {
-  var x = document.getElementById("myGrid");
-  if (x.className === "w3-row") {
-    x.className = "w3-row-padding";
-  } else { 
-    x.className = x.className.replace("w3-row-padding", "w3-row");
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
   }
 }
 
-// Open and close sidebar
-function w3_open() {
-  document.getElementById("mySidebar").style.width = "100%";
-  document.getElementById("mySidebar").style.display = "block";
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
 }
+</style>
+</head>
+<body>
 
-function w3_close() {
-  document.getElementById("mySidebar").style.display = "none";
-}
-</script>
+<div class="header">
+  <h1>Welcome to Top Trumps!</h1>
+  <p>Your favourite card game just went <b>digital</b></p>
+</div>
+
+<div class="navbar">
+  <a href="/toptrumps/game">New Game</a>
+  <a href="/toptrumps/stats">Game Stats</a>
+
+</div>
+
+</div>
+
+
 
 </body>
 </html>
+
 
 		
 		</div>
@@ -112,8 +175,7 @@ function w3_close() {
 				
 				// For example, lets call our sample methods
 				// helloJSONList();
-				//helloWord("Student");
-				
+				// helloWord("Student");
 				
 			}
 			

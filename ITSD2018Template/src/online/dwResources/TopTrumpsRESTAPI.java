@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
  * methods that allow a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
+	private int playerNumber;
 
 	/** A Jackson Object writer. It allows us to turn Java objects
 	 * into JSON strings easily. */
@@ -70,6 +71,17 @@ public class TopTrumpsRESTAPI {
 		String listAsJSONString = oWriter.writeValueAsString(listOfWords);
 		
 		return listAsJSONString;
+	}
+	
+	@GET
+	@Path("/numberOfPlayers")
+	/**
+	 Setting the number of players
+	 */
+	public int numberOfPlayers(@QueryParam("Number") int Number) throws IOException {
+		playerNumber = Number +1;
+		System.err.println("The number of players is " + playerNumber);
+		return playerNumber;
 	}
 	
 	@GET
