@@ -31,7 +31,6 @@ public class TopTrumpsCLIApplication {
 		// Welcome message
 				printWelcomeMessage();
 				
-				
 		// Set up scanner for UI
 		Scanner s = new Scanner(System.in);
 		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s);
@@ -47,7 +46,7 @@ public class TopTrumpsCLIApplication {
 
 		// State
 		boolean userWantsToQuit = false; // flag to check whether the user wants to quit the application
-		boolean writeGameLogsToFile = false; // Should we write game logs to file?
+		//boolean writeGameLogsToFile = false; // Should we write game logs to file?
 		// if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		
 		// runs through each player giving them cards until the deck runs out
@@ -187,11 +186,10 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static ArrayList<Card> readAndCreateDeck() {
-		ArrayList<Card> deck = new ArrayList<Card>();
 		// method to tiy up reading the files and getting the deck
 		FileHandler filehandler = new FileHandler();
 		filehandler.getFileData();
-		return deck = filehandler.getDeck();
+		return  filehandler.getDeck();
 	}
 
 	private static ArrayList<Card> shuffleDeck(ArrayList<Card> deck) {

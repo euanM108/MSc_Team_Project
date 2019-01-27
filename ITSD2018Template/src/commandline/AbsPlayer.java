@@ -8,7 +8,6 @@ public abstract class AbsPlayer {
 		
 	private int playerID;
 //	private static int playerIDCount = 1;
-	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	
 	public AbsPlayer() {
 //		playerID = playerIDCount;
