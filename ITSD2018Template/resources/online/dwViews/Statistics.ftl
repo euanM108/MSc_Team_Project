@@ -175,19 +175,6 @@ table.blueTable thead th {
   color: #FFFFFF;
   text-align: center;
 }
-table.blueTable tfoot td {
-  font-size: 14px;
-}
-table.blueTable tfoot .links {
-  text-align: right;
-}
-table.blueTable tfoot .links a{
-  display: inline-block;
-  background: #1C6EA4;
-  color: #FFFFFF;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
 
 </style>
 </head>
