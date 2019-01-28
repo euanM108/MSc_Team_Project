@@ -45,7 +45,7 @@ body {
 
 /* Header/logo Title */
 .header {
-  padding: 80px;
+  padding: 10px;
   text-align: center;
   background: #1abc9c;
   color: white;
@@ -139,6 +139,56 @@ body {
     width: 100%;
   }
 }
+
+/*css for the table*/
+
+.statsTable{
+    margin: 5% 5% 5% 5%
+}
+
+table.blueTable {
+  font-family: "Courier New", Courier, monospace;
+  border: 4px solid #000000;
+  background-color: #FFFFFF;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.blueTable td, table.blueTable th {
+  border: 1px solid #000000;
+}
+table.blueTable tbody td {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1ABC9C;
+}
+table.blueTable thead {
+  background: #1ABC9C;
+  background: -moz-linear-gradient(top, #53cdb5 0%, #31c2a6 66%, #1ABC9C 100%);
+  background: -webkit-linear-gradient(top, #53cdb5 0%, #31c2a6 66%, #1ABC9C 100%);
+  background: linear-gradient(to bottom, #53cdb5 0%, #31c2a6 66%, #1ABC9C 100%);
+  border-bottom: 0px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 30px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+}
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a{
+  display: inline-block;
+  background: #1C6EA4;
+  color: #FFFFFF;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
 </style>
 </head>
 <body>
@@ -151,6 +201,39 @@ body {
 <div class="navbar">
   <a href="/toptrumps">Home</a>
 
+</div>
+
+<div class="statsTable">
+    <table class="blueTable">
+        <thead>
+            <tr>
+            <th>Statistic</th>
+            <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>Total Number of Games</td>
+            <td>placeholder</td>
+            </tr>
+            <tr>
+            <td>Number of Computer Wins</td>
+            <td>placeholder</td>
+            </tr>
+            <tr>
+            <td>Number of Human Wins</td>
+            <td>placeholder</td>
+            </tr>
+            <tr>
+            <td>Average Number of Draws</td>
+            <td>placeholder</td>
+            </tr>
+            <tr>
+            <td>Largest Rounds in One Game</td>
+            <td>placeholder</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 </div>
