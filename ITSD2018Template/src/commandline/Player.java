@@ -101,5 +101,10 @@ public class Player {
 	public int getPersonalDeckSize() {
 		return personalDeck.size();
 	}
+	
+	public ArrayList<Card> getPersonalDeck() {
+		return personalDeck;
+	}
+	
 
 }

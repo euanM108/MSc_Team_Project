@@ -18,6 +18,10 @@ public abstract class AbsPlayer {
 		return playerID;
 	}
 	
+	public ArrayList<Card> getPersonalDeck() {
+		return null;
+	}
+	
 	//method names will be the same for both human and ai players
 	//but the code within them will be different 
 	
