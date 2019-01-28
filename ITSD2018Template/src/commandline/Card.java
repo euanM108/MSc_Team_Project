@@ -49,6 +49,16 @@ public class Card {
 		System.out.println("=====================");
 	}
 	
+	public String toString() {
+		String cardDescription = getCardName();
+		cardDescription += "\n" + catNames.get(1) + "\t" + "\t" + cat1Value;
+		cardDescription += "\n" + catNames.get(2) + "\t" + "\t" + cat2Value;
+		cardDescription += "\n" + catNames.get(3) + "\t" + "\t" + cat3Value;
+		cardDescription += "\n" + catNames.get(4) + "\t" + "\t" + cat4Value;
+		cardDescription += "\n" + catNames.get(5) + "\t" + "\t" + cat5Value;
+		return cardDescription;
+	}
+	
 	public int getHighestIndex() {
 		int valueNumber = catValues.indexOf(highestValue);
 		return valueNumber + 1;
@@ -94,9 +104,11 @@ public class Card {
 			case 5: catValue = getCat5Value();
 				break;
 		}
-		return catValue;
-			
-			
+		return catValue;						
+	}
+	
+	public ArrayList<String> getCatNames(){
+		return catNames;
 	}
 
 	

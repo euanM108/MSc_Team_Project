@@ -65,6 +65,10 @@ public class AIPlayer extends AbsPlayer {
 		}
 		personalDeck.remove(0);
 	}
-
+	
+	public ArrayList<Card> getPersonalDeck() {
+		return personalDeck;
+	}
+	
 
 }
