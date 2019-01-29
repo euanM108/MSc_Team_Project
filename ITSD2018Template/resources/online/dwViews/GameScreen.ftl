@@ -193,29 +193,31 @@ body {
 			// -----------------------------------------
 
 			  function setNumberOfPlayers() {
-
-			  	var players = document.getElementById('setNumberOfPlayers').value;
-			  	// First create a CORS request, this is the message we are going to send (a get request in this case)
+				// getting numberOfPlayers from dropdown menu and save as 
+				// variable players
+			  	var players = document.getElementById('numberOfPlayers').value;
+			  	console.log("The total number of players is " + players)
+			  	
+			  	//  create a CORS request, this is the message we are going to send (a get request in this case)
 				 var xhr = createCORSRequest('GET',
-      			"http://localhost:7777/toptrumps/setNumberOfPlayers?Number=" + number); // Request type and URL+parameters
+      			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+players); // Request type and URL+parameters
 				// Message is not sent yet, but we can check that the browser supports CORS
 				if (!xhr) {
   					alert("CORS not supported");
 				}
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhr.send()
 
 				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
 				// to do when the response arrives 
 				xhr.onload = function(e) {
  					var responseText = xhr.response; // the text of the response
-					
+					alert(responseText);
 				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send()
-				alert("total number of players selected is " + responseText); 
-				console.log("Total number of players")
 
 			  }
+
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
