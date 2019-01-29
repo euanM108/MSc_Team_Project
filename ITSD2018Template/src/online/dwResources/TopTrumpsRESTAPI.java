@@ -79,9 +79,10 @@ public class TopTrumpsRESTAPI {
 	 Setting the number of players
 	 */
 	public String numberOfPlayers(@QueryParam("Number") String Number) throws IOException {
-		
+		// cast number recieved as an int 
+		int numberOfPlayers = Integer.parseInt(Number);
 		System.err.println("The number of players is " + playerNumber);
-		return "total number of players is " + Number;
+		return "total number of players is " + numberOfPlayers;
 	}
 	
 	@GET
