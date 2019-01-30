@@ -440,7 +440,7 @@ public class TopTrumpsCLIApplication {
 		System.out.println();
 	}
 
-	private static ArrayList<Card> readAndCreateDeck() {
+	public static ArrayList<Card> readAndCreateDeck() {
 		// method to tiy up reading the files and getting the deck
 		FileHandler filehandler = new FileHandler();
 		filehandler.getFileData();

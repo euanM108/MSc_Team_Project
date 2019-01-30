@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import commandline.Card;
 import commandline.FileHandler;
 import commandline.Player;
+import commandline.TopTrumpsCLIApplication;
 import online.configuration.TopTrumpsJSONConfiguration;
 
 @Path("/toptrumps") // Resources specified here should be hosted at http://localhost:7777/toptrumps
@@ -34,9 +36,9 @@ import online.configuration.TopTrumpsJSONConfiguration;
  * a TopTrumps game to be controled from a Web page.
  */
 public class TopTrumpsRESTAPI {
-	private ArrayList<Card> deck = new ArrayList<Card>();
+	private static ArrayList<Card> deck = new ArrayList<Card>();
 	
-	private int playerNumber;
+	private int numberOfPlayers;
 
 	/**
 	 * A Jackson Object writer. It allows us to turn Java objects into JSON strings
@@ -86,11 +88,13 @@ public class TopTrumpsRESTAPI {
 	/**
 	 * Setting up the game when game launched
 	 */
-	public void launchGame() throws IOException {
-		// Create TopTrumpsCLIApplicaiton reference
+	public String launchGame() throws IOException {
 		FileHandler fl = new FileHandler();
-		fl.getFileData();
+		// Create File Handler reference
+		// to create deck, players and shuffle
 		deck = fl.getDeck();
+		return deck.toString();
+
 
 	}
 
@@ -102,7 +106,7 @@ public class TopTrumpsRESTAPI {
 	public String numberOfPlayers(@QueryParam("Number") String Number) throws IOException {
 		ArrayList<Player> players = new ArrayList<Player>();
 		// cast number received as an int
-		int numberOfPlayers = Integer.parseInt(Number);
+		numberOfPlayers = Integer.parseInt(Number);
 
 		// create the players
 		Player human = new Player();
@@ -111,12 +115,10 @@ public class TopTrumpsRESTAPI {
 			Player AIPlayer = new Player();
 			players.add(AIPlayer);
 		}
-
 		// Commented out until gameplay is complete
 		// Collections.shuffle(deck);
 		// Collections.shuffle(players);
 
-		System.err.println("The number of players is " + playerNumber);
 		return "total number of players is " + numberOfPlayers;
 	}
 	
