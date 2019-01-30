@@ -121,6 +121,34 @@ body {
   padding: 20px;
 }
 
+.card {
+
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 35%;
+  /* 15 pixel rounded corners */
+  border-radius: 15px; 
+  background: #1abc9c;
+  font-family: Helvetica;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Padding inside the card container */
+.container {
+  padding: 9px 16px;
+}
+
+img {
+  border-radius: 15px 15px 0 0;
+}
+
+
+
 
 }
 
@@ -165,56 +193,27 @@ body {
 					<button class="btn btn-default" onclick="setNumberOfPlayers();"
 						style="padding: 20px;">Begin!</button>
 					<br>
+					<button class="btn btn-default" onclick="getDeck();"
+						style="padding: 20px;">Get Deck!</button>
+					<br>
 					<br>
 				</div>
-				----------------------------------
 				
-				<style>
-.card {
+				<div class="playing card">
 
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 35%;
-  /* 15 pixel rounded corners */
-  border-radius: 15px; 
-  background: #1abc9c;
-  font-family: Helvetica;
-}
+				  <alt="Avatar" style="width:100%">
+				  <div class="container">
+				    <h4><b><center><font size=5>Tiger</b></h4></center></font size=5> 
+				    <p>Cat 1</p> 
+				    <p>Cat 2</p>
+				    <p>Cat 3</p>
+				    <p>Cat 4</p>
+				    <p>Cat 5</p>
+				    <p>Cat 6</p>
+				  </div>
+				</div>
 
-/* On mouse-over, add a deeper shadow */
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
 
-/* Padding inside the card container */
-.container {
-  padding: 9px 16px;
-}
-
-img {
-  border-radius: 15px 15px 0 0;
-}
-
-</style>
-</head>
-<body>
-
-<div class="playing card">
-
-  <alt="Avatar" style="width:100%">
-  <div class="container">
-    <h4><b><center><font size=5>Tiger</b></h4></center></font size=5> 
-    <p>Cat 1</p> 
-    <p>Cat 2</p>
-    <p>Cat 3</p>
-    <p>Cat 4</p>
-    <p>Cat 5</p>
-    <p>Cat 6</p>
-  </div>
-</div>
-
-</body>
 
 
 		
@@ -222,8 +221,9 @@ img {
 		
 			// Method that is called on page load
 			function initalize() {
-			
-			
+
+				launchGame();
+		
 				// --------------------------------------------------------------------------
 				// You can call other methods you want to run when the page first loads here
 				// --------------------------------------------------------------------------
@@ -261,6 +261,20 @@ img {
  					var responseText = xhr.response; // the text of the response
 					alert(responseText);
 				};
+
+
+			  }
+
+			  function getDeck(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
+			  	if(!xhr){
+			  		alert("CORS not supported");
+			  	}
+			  	xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log("This is working");
+			  		alert(responseText);
+			  	}
 
 			  }
 
