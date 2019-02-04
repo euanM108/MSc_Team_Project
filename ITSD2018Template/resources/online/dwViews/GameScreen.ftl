@@ -4,6 +4,10 @@
 		<!-- Web page title -->
     	<title>Top Trumps</title>
     	
+    	<!-- Our own CSS file -->
+		<link rel="stylesheet" type="text/css" href="style.css"> 
+    	
+    	
     	<!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
     	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
@@ -143,6 +147,12 @@ body {
   padding: 9px 16px;
 }
 
+.cat-buttons{
+	display: block;
+	width: 100%;
+}
+
+
 img {
   border-radius: 15px 15px 0 0;
 }
@@ -166,13 +176,26 @@ img {
     width: 100%;
   }
 }
+
+.after-begin-gameplay{
+	display: none;
+}
+
+.btn-default:visited{
+	display: none;
+}
+.btn-default:visited .after-begin-gameplay{
+	display: block;
+}
+
 </style>
 </head>
 <body>
 
 <div class="header">
   <h1>Top Trumps Game</h1>
-    <p>Please select the number of players below and press <b>begin</b></p>
+
+    <p>Please select the number of opponents below and press <b>begin</b></p>
 
 </div>
 
@@ -181,47 +204,48 @@ img {
   <a href="/toptrumps/">Exit</a>
 
 </div>
-				<div id="setNumberOfPlayers">
-					
-					<br><select id="numberOfPlayers" style="font-size: 20px;">
+
+				<div id="before-gameplay-display">
+					<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
 						<option value="1">1</option>
 						<option value="2">2</option>
 						<option value="3">3</option>
 						<option value="4">4</option>
-					</select><br>
-					<br>
-					<button class="btn btn-default" onclick="setNumberOfPlayers();"
-						style="padding: 20px;">Begin!</button>
-					<br>
-					<button class="btn btn-default" onclick="getDeck();"
-						style="padding: 20px;">Get Deck!</button>
-					<br>
-					<br>
+					</select>
+						<button id="btn btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none';"
+						>Begin!</button>
 				</div>
 				
+				<div id="after-begin-gameplay">
+					<p id="roundNum" this.style.display = 'none';></p>
+					<button class="btn btn-next" onclick="nextRound();">Next Turn!</button>
+				</div>
+
+	
 				<div class="playing card">
 
 				  <alt="Avatar" style="width:100%">
-				  <div class="container">
-				    <h4><b><center><font size=5>Tiger</b></h4></center></font size=5> 
-				    <p>Cat 1</p> 
-				    <p>Cat 2</p>
-				    <p>Cat 3</p>
-				    <p>Cat 4</p>
-				    <p>Cat 5</p>
-				    <p>Cat 6</p>
-				  </div>
+					  <div class="container">
+					    <h2 id="cardName">Card Name</h2>
+					    	<img src = "#" alt="picture of spaceship">
+						    <div class="cat-buttons">
+						    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size      </button>
+						    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed     </button>
+						    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range     </button>
+						    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower </button>
+						    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo     </button>
+						    </div>
+					  </div>
 				</div>
 
 
 
 
-		
+
 		<script type="text/javascript">
 		
 			// Method that is called on page load
 			function initalize() {
-
 				launchGame();
 		
 				// --------------------------------------------------------------------------
@@ -238,7 +262,7 @@ img {
 			// Add your other Javascript methods Here
 			// -----------------------------------------
 
-			  function setNumberOfPlayers() {
+			function setNumberOfPlayers() {
 				// getting numberOfPlayers from dropdown menu and save as 
 				// variable players
 			  	var players = document.getElementById('numberOfPlayers').value;
@@ -261,24 +285,140 @@ img {
  					var responseText = xhr.response; // the text of the response
 					alert(responseText);
 				};
-
-
 			  }
 
+			function setCategory(clicked_id) {
+				console.log("this clicked id is: " + clicked_id);
+
+				
+				
+				
+			}
+			
+			
 			  function getDeck(){
 			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
 			  	if(!xhr){
 			  		alert("CORS not supported");
 			  	}
+			  	xhr.send();
 			  	xhr.onload = function(e){
 			  		var responseText = xhr.response;
-			  		console.log("This is working");
-			  		alert(responseText);
+			  		console.log(responseText);
+			  		distributeDeck();
 			  	}
-
+			  	
+			  	
+			  	
 			  }
-
+			  
+			  
+			  function distributeDeck(){
+			  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/distributeCards	");
+			  		if(!xhr){
+			  		alert("CORS not supported");
+			  		}
+			  		xhr.send();
+			 		console.log("distributing deck");
+			  		xhr.onload = function(e){
+			  			var responseText = xhr.response;
+			  			nextRound();
+			  	}
+			  }
 		
+			  
+			  function nextRound(){
+			  console.log("initiating gameplay");
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		getRoundNumber();
+			  		getCardName();
+			  		getCategories();
+			  	} 
+			  	
+			  }
+			  
+			  function getRoundNumber(){
+			  var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("roundNum").innerHTML = "round number is " + responseText;
+
+			  	} 
+			  }
+			  
+			  function getCategories(){
+			  getCat1();
+			  getCat2();
+			  getCat3();
+			  getCat4();
+			  getCat5();
+			  }
+			  
+			  function getCat1(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat1	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("1").innerHTML = "Size      " +responseText;
+			  	} 
+			  }
+			  
+			  function getCat2(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat2 ");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("2").innerHTML = "Speed     " +responseText;
+			  	} 
+			  }
+			  
+			  function getCat3(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat3	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("3").innerHTML = "Range     "+responseText;
+			  	} 
+			  }
+			  
+			  function getCat4(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat4	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("4").innerHTML = "Firepower " +responseText;
+			  	} 
+			  }
+			  	
+			  function getCat5(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat5	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("5").innerHTML = "Cargo     "+responseText;
+			  	} 
+			  }
+			 function getCardName(){
+			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName	");
+				xhr.send();
+				xhr.onload = function(e){
+			  		var responseText = xhr.response;
+			  		console.log(responseText);
+			  		document.getElementById("cardName").innerHTML = responseText;
+			  	} 
+			  	}
+			  
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
   				var xhr = new XMLHttpRequest();

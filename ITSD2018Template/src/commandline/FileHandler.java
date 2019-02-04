@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class FileHandler {
 
     private final static String classDirectory = System.getProperty("user.dir") + "/";
-    private static String nameOfDeck = "DrawDeck.txt";
+    private static String nameOfDeck = "StarCitizenDeck.txt";
     private static String [] extractedCatArray;
     private ArrayList<Card> deck = new ArrayList<>();
     private ArrayList<String> catNames = new ArrayList<String>();

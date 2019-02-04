@@ -16,6 +16,10 @@ public class Player {
 		playerIDCount++;
 	}
 
+	public static void resetPlayerIDCount() {
+		playerIDCount = 1;
+	}
+	
 	public int getPlayerID() {
 		return playerID;
 	}
@@ -49,7 +53,7 @@ public class Player {
 		catChoice = tempBestChoice;
 		return catChoice;
 	}
-
+	
 	public int getHumanPlayersCatChoice() {
 		// this will need system input for the human player
 		Card c = personalDeck.get(0);
