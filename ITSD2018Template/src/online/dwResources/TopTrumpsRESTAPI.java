@@ -38,12 +38,12 @@ public class TopTrumpsRESTAPI {
 	
 	private int numberOfPlayers;
 	private ArrayList<Player> players;
-	private ArrayList<Card> cardSelection = new ArrayList<Card>();
+	private ArrayList<Card> communalPile = new ArrayList<Card>();
 	private int winnerID;
 	private int winningIndex = 0; // current winning index
 	private int catChoice = 0; // current category choice
 	private int currentRoundNumber = 0;
-	
+	private boolean hasPlayerSubmitted;
 	public void removePlayer(int i) {
 		players.remove(i);
 	}
@@ -131,12 +131,8 @@ public class TopTrumpsRESTAPI {
 			players.add(AIPlayer);
 		}
 		this.players = players;
-		
 		// Commented out until gameplay is complete
 		// Collections.shuffle(players);
-		System.out.println();
-		System.out.println("PLAYER SIZE IS: " + players.size());
-		System.out.println();
 		return "total number of players is " + numberOfPlayers;
 	}
 	
@@ -224,16 +220,60 @@ public class TopTrumpsRESTAPI {
 		System.out.println();
 		System.out.println("Category choice in RESTAPI: " + catChoice);
 		System.out.println();
+		
+		hasPlayerSubmitted = true;
+		
+		if (players.get(winningIndex).getPlayerID() != 1) {
+			catChoice = players.get(winningIndex).getAIPlayersCatChoice();
+			System.out.println();
+			printCatSelectedStatement(players, catChoice, winningIndex);
+			System.out.println();
+		} 	else {			
+			
+			// need to wait for players category submission
+			printCatSelectedStatement(players, catChoice, winningIndex);
+		}
+		
+		winningIndex = getWinningIndex(communalPile, catChoice);
+		
+		// Giving the winner the cards they won for this round
+		for (int i = 0; i < communalPile.size(); i++) {
+			players.get(winningIndex).givePlayerCard(communalPile.get(i));
+		}
+		
+		//if there are cards in the communalPile give the player those
+		if(communalPile.size() > 0) {
+			for(int i = 0; i < communalPile.size(); i++){
+				players.get(winningIndex).givePlayerCard(communalPile.get(i));
+			}
+			communalPile.clear();			
+		}
+		
+		// remove top cards after round is finished
+		removeCards(players);
+		
+		System.out.println("winning index is : " + winningIndex);
+		// check players submission against others here
+	}
+	
+	private static void removeCards(ArrayList<Player> players) {
+		for (int i = 0; i < players.size(); i++) {
+			try {
+				players.get(i).removeTopCard();
+			} catch (IndexOutOfBoundsException e) {
+
+			}
+		}
 	}
 	
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
 			
-			cardSelection = getTopCards(this.players);
+			communalPile = getTopCards(this.players);
 			System.out.println("\n\n\n");
-			for (int i = 0; i<cardSelection.size(); i++) {
-				System.out.println(cardSelection.get(i));
+			for (int i = 0; i<communalPile.size(); i++) {
+				System.out.println(communalPile.get(i));
 			}
 			System.out.println("\n\n\n");
 
@@ -244,32 +284,18 @@ public class TopTrumpsRESTAPI {
 			while (winningIndex >= players.size()) {
 				winningIndex--;
 			}
-			
-			// If human player, call human method getHumanPlayersCatChoice()
-			// If AI Player, call AI method getAIPLayersCatChoice()
-			// Printing out a statement regarding their category choice
-
-			if (players.get(winningIndex).getPlayerID() != 1) {
-				catChoice = players.get(winningIndex).getAIPlayersCatChoice();
-				printCatSelectedStatement(players, catChoice, winningIndex);
-			} 	else {			
-				// need to wait for players category submission
-				printCatSelectedStatement(players, catChoice, winningIndex);
-			}
-			
-			getWinningIndex(cardSelection, catChoice);
 				
 			
 			currentRoundNumber++;
 	}
 	
-	private static int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
+	private int getWinningIndex(ArrayList<Card> communalPile, int catChoice) {
 		int winningValue = 0;
 		int winningIndex = 0;
 
-		for (int j = 0; j < cardSelection.size(); j++) {
-			if (cardSelection.get(j).getRequestedCat(catChoice) > winningValue) {
-				winningValue = cardSelection.get(j).getRequestedCat(catChoice);
+		for (int j = 0; j < communalPile.size(); j++) {
+			if (communalPile.get(j).getRequestedCat(catChoice) > winningValue) {
+				winningValue = communalPile.get(j).getRequestedCat(catChoice);
 				winningIndex = j;
 			}
 		}
@@ -317,14 +343,14 @@ public class TopTrumpsRESTAPI {
 	}
 	
 	private static ArrayList<Card> getTopCards(ArrayList<Player> players) {
-		ArrayList<Card> cardSelection = new ArrayList<Card>();
+		ArrayList<Card> communalPile = new ArrayList<Card>();
 		try {
 			// running through each player and storing their top card in the dealers deck
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getPersonalDeckSize() > 0) {
-					cardSelection.add(players.get(i).getTopCard()); // adding to cardSelection
+					communalPile.add(players.get(i).getTopCard()); // adding to communalPile
 					System.out.println();
-					System.out.println(players.get(i).getPlayerID() + " has given " + players.get(i).getTopCard().getCardName() + " to cardSelection.");
+					System.out.println(players.get(i).getPlayerID() + " has given " + players.get(i).getTopCard().getCardName() + " to communalPile.");
 					System.out.println();
 				} else {
 					// if they do not have a top card, they are removed from the game
@@ -337,7 +363,7 @@ public class TopTrumpsRESTAPI {
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
-		return cardSelection;
+		return communalPile;
 	} 
 	
 	@GET

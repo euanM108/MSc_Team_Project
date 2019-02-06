@@ -185,6 +185,14 @@ public class TopTrumpsCLIApplication {
 				winningIndex = getWinningIndex(cardSelection, catChoice);
 				winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
 				
+				
+				
+				
+				
+				
+				// IS THIS GIVING THE CARDS TWICE?
+				
+				
 				// Giving the winner the cards they won for this round
 				for (int i = 0; i < cardSelection.size(); i++) {
 					players.get(winningIndex).givePlayerCard(cardSelection.get(i));
