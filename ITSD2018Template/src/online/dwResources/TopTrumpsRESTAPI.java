@@ -64,6 +64,24 @@ public class TopTrumpsRESTAPI {
 	 */
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
 
+		
+		
+		
+		
+		
+		
+			// this should be the while loop for gameplay should be
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 
 	// ----------------------------------------------------
@@ -154,6 +172,9 @@ public class TopTrumpsRESTAPI {
 		return deck;
 	}
 	
+	
+	
+	
 	@GET
 	@Path("/getPlayers")
 	public ArrayList<Player> getPlayers() throws IOException{
@@ -162,9 +183,7 @@ public class TopTrumpsRESTAPI {
 	
 	@GET
 	@Path("/distributeCards")
-	public String distributeCards() throws IOException{
-		
-		
+	public String distributeCards() throws IOException{	
 		for (int i = 0; i < deck.size(); i++) {
 			this.players.get(i % players.size()).givePlayerCard(deck.get(i));
 			System.out.println(players.get(i % players.size()).getPlayerID() + " has been given " + deck.get(i));
@@ -304,6 +323,9 @@ public class TopTrumpsRESTAPI {
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getPersonalDeckSize() > 0) {
 					cardSelection.add(players.get(i).getTopCard()); // adding to cardSelection
+					System.out.println();
+					System.out.println(players.get(i).getPlayerID() + " has given " + players.get(i).getTopCard().getCardName() + " to cardSelection.");
+					System.out.println();
 				} else {
 					// if they do not have a top card, they are removed from the game
 					System.out

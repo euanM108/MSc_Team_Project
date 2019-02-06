@@ -4,10 +4,6 @@
 		<!-- Web page title -->
     	<title>Top Trumps</title>
     	
-    	<!-- Our own CSS file -->
-		<link rel="stylesheet" type="text/css" href="style.css"> 
-    	
-    	
     	<!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
     	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
@@ -177,17 +173,21 @@ img {
   }
 }
 
-.after-begin-gameplay{
-	display: none;
-}
 
-.btn-default:visited{
-	display: none;
-}
-.btn-default:visited .after-begin-gameplay{
+#btn-default, #btn-next{
+	margin: 5px;
 	display: block;
+	padding: 5px;
 }
 
+#btn-next {
+	display: none;
+}
+
+#roundNum {
+	margin: 5px;
+	width: 130px;
+}
 </style>
 </head>
 <body>
@@ -205,21 +205,19 @@ img {
 
 </div>
 
-				<div id="before-gameplay-display">
-					<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-					</select>
-						<button id="btn btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none';"
-						>Begin!</button>
-				</div>
 				
-				<div id="after-begin-gameplay">
-					<p id="roundNum" this.style.display = 'none';></p>
-					<button class="btn btn-next" onclick="nextRound();">Next Turn!</button>
-				</div>
+				<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+				</select>
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-next').style.display='block';"
+					>Begin!</button>
+		
+				<p id="roundNum"></p>
+				<button id="btn-next"; onclick="nextRound();">Next Turn!</button>
+			
 
 	
 				<div class="playing card">
@@ -244,205 +242,180 @@ img {
 
 		<script type="text/javascript">
 		
-			// Method that is called on page load
-			function initalize() {
-				launchGame();
+		// Method that is called on page load
+		function initalize() {
+			launchGame();
 		
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
+			// --------------------------------------------------------------------------
+			// You can call other methods you want to run when the page first loads here
+			// --------------------------------------------------------------------------
+			
+			// For example, lets call our sample methods
+			// helloJSONList();
+			// helloWord("Student");
 				
-				// For example, lets call our sample methods
-				// helloJSONList();
-				// helloWord("Student");
-				
+		}
+			
+		// -----------------------------------------
+		// Add your other Javascript methods Here
+		// -----------------------------------------
+
+		function setNumberOfPlayers() {
+			// getting numberOfPlayers from dropdown menu and save as variable players
+		  	var players = document.getElementById('numberOfPlayers').value;
+		  	console.log("The total number of players is " + players)
+		  	
+		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET',
+			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+players); // Request type and URL+parameters
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
 			}
 			
-			// -----------------------------------------
-			// Add your other Javascript methods Here
-			// -----------------------------------------
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send()
+	
+			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+			// to do when the response arrives 
+			xhr.onload = function(e) {
+				var responseText = xhr.response; // the text of the response
+				alert(responseText);
+			};
+		  }
 
-			function setNumberOfPlayers() {
-				// getting numberOfPlayers from dropdown menu and save as 
-				// variable players
-			  	var players = document.getElementById('numberOfPlayers').value;
-			  	console.log("The total number of players is " + players)
-			  	
-			  	//  create a CORS request, this is the message we are going to send (a get request in this case)
-				 var xhr = createCORSRequest('GET',
-      			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+players); // Request type and URL+parameters
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send()
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText);
-				};
-			  }
-
-			function setCategory(clicked_id) {
-				console.log("this clicked id is: " + clicked_id);
-
-				
-				
-				
+		function setCategory(clicked_id) {
+			console.log("this clicked id is: " + clicked_id);
+		}
+			
+        function getDeck(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
+		  	if(!xhr){
+		  		alert("CORS not supported");
+		  	}
+		  	xhr.send();
+		  	xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		distributeDeck();
+		  	}  	
+		  }
+			  
+		function distributeDeck(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/distributeCards	");
+	  		if(!xhr){
+		  		alert("CORS not supported");
+	  		}
+	  		xhr.send();
+	 		console.log("distributing deck");
+	  		xhr.onload = function(e){
+	  			var responseText = xhr.response;
+	  			nextRound();			  			
 			}
-			
-			
-			  function getDeck(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
-			  	if(!xhr){
-			  		alert("CORS not supported");
-			  	}
-			  	xhr.send();
-			  	xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		distributeDeck();
-			  	}
-			  	
-			  	
-			  	
-			  }
-			  
-			  
-			  function distributeDeck(){
-			  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/distributeCards	");
-			  		if(!xhr){
-			  		alert("CORS not supported");
-			  		}
-			  		xhr.send();
-			 		console.log("distributing deck");
-			  		xhr.onload = function(e){
-			  			var responseText = xhr.response;
-			  			nextRound();
-			  	}
-			  }
+		}
 		
 			  
-			  function nextRound(){
-			  console.log("initiating gameplay");
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		getRoundNumber();
-			  		getCardName();
-			  		getCategories();
-			  	} 
-			  	
-			  }
+		function nextRound(){
+			console.log("initiating gameplay");
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		getRoundNumber();
+		  		getCardName();
+		  		getCategories();
+		  	} 
+		}
+		  
+		function getRoundNumber(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("roundNum").innerHTML = "round number is " + responseText;
+		  	} 
+		}
 			  
-			  function getRoundNumber(){
-			  var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("roundNum").innerHTML = "round number is " + responseText;
-
-			  	} 
-			  }
+		function getCategories(){
+		  getCat1();
+		  getCat2();
+		  getCat3();
+		  getCat4();
+		  getCat5();
+		}
 			  
-			  function getCategories(){
-			  getCat1();
-			  getCat2();
-			  getCat3();
-			  getCat4();
-			  getCat5();
-			  }
+	 	function getCat1(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat1	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("1").innerHTML = "Size      " +responseText;
+		  	} 
+		}
 			  
-			  function getCat1(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat1	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("1").innerHTML = "Size      " +responseText;
-			  	} 
-			  }
+		function getCat2(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat2 ");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("2").innerHTML = "Speed     " +responseText;
+		  	} 
+		}
+		  
+		function getCat3(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat3	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("3").innerHTML = "Range     "+responseText;
+		  	} 
+		}
+		  
+		function getCat4(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat4	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("4").innerHTML = "Firepower " +responseText;
+		  	} 
+		}
+		  	
+		function getCat5(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat5	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("5").innerHTML = "Cargo     "+responseText;
+		  	} 
+		}
+		
+		function getCardName(){
+		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName	");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("cardName").innerHTML = responseText;
+		  	} 
+	  	}
 			  
-			  function getCat2(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat2 ");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("2").innerHTML = "Speed     " +responseText;
-			  	} 
-			  }
-			  
-			  function getCat3(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat3	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("3").innerHTML = "Range     "+responseText;
-			  	} 
-			  }
-			  
-			  function getCat4(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat4	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("4").innerHTML = "Firepower " +responseText;
-			  	} 
-			  }
-			  	
-			  function getCat5(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat5	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("5").innerHTML = "Cargo     "+responseText;
-			  	} 
-			  }
-			 function getCardName(){
-			  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName	");
-				xhr.send();
-				xhr.onload = function(e){
-			  		var responseText = xhr.response;
-			  		console.log(responseText);
-			  		document.getElementById("cardName").innerHTML = responseText;
-			  	} 
-			  	}
-			  
-			// This is a reusable method for creating a CORS request. Do not edit this.
-			function createCORSRequest(method, url) {
-  				var xhr = new XMLHttpRequest();
-  				if ("withCredentials" in xhr) {
+		// This is a reusable method for creating a CORS request. Do not edit this.
+		function createCORSRequest(method, url) {
+			var xhr = new XMLHttpRequest();
+			if ("withCredentials" in xhr) {
+				// Check if the XMLHttpRequest object has a "withCredentials" property.
+				// "withCredentials" only exists on XMLHTTPRequest2 objects.
+				xhr.open(method, url, true);
 
-    				// Check if the XMLHttpRequest object has a "withCredentials" property.
-    				// "withCredentials" only exists on XMLHTTPRequest2 objects.
-    				xhr.open(method, url, true);
-
-  				} else if (typeof XDomainRequest != "undefined") {
-
-    				// Otherwise, check if XDomainRequest.
-    				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-    				xhr = new XDomainRequest();
-    				xhr.open(method, url);
-
- 				 } else {
-
-    				// Otherwise, CORS is not supported by the browser.
-    				xhr = null;
-
-  				 }
-  				 return xhr;
-			}
+  			} else if (typeof XDomainRequest != "undefined") {
+				// Otherwise, check if XDomainRequest.
+				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
+			 } else {
+   				// Otherwise, CORS is not supported by the browser.
+   				xhr = null;
+			 }
+			 return xhr;
+		}
 		
 		</script>
 		
@@ -458,7 +431,7 @@ img {
 				// Message is not sent yet, but we can check that the browser supports CORS
 				if (!xhr) {
   					alert("CORS not supported");
-				}
+					}
 
 				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
 				// to do when the response arrives 
