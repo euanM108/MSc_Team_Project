@@ -63,25 +63,7 @@ public class TopTrumpsRESTAPI {
 	 * @param conf
 	 */
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
-
-		
-		
-		
-		
-		
-		
-			// this should be the while loop for gameplay should be
-		
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
+			
 	}
 
 	// ----------------------------------------------------
@@ -192,6 +174,7 @@ public class TopTrumpsRESTAPI {
 		return "cards distributed";
 	}
 	
+
 	@GET
 	@Path("/getCardName")
 	public String getCardName() throws IOException{
@@ -233,11 +216,15 @@ public class TopTrumpsRESTAPI {
 		return players.get(0).getTopCard().getCat5Value() +"";
 	}
 	
-//	@POST
-//	@Path("/setCatChoice")
-//	public static void setSelectedCatChoice(@QueryParam("Number") String categoryChoice) {
-//		catChoice = Integer.parseInt(categoryChoice);
-//	}
+	@GET
+	@Path("/submit_category")
+	public void submit_category(@QueryParam("categoryChoice") String categoryChoice) {
+		
+		catChoice = Integer.parseInt(categoryChoice);
+		System.out.println();
+		System.out.println("Category choice in RESTAPI: " + catChoice);
+		System.out.println();
+	}
 	
 	@GET
 	@Path("/nextRound")
@@ -265,16 +252,29 @@ public class TopTrumpsRESTAPI {
 			if (players.get(winningIndex).getPlayerID() != 1) {
 				catChoice = players.get(winningIndex).getAIPlayersCatChoice();
 				printCatSelectedStatement(players, catChoice, winningIndex);
-			} else {
-				// NEED TO CHANGE THIS FOR INPUT ON SCREEN
-				
-//				catChoice = getSelectedCatChoice();
-				
+			} 	else {			
+				// need to wait for players category submission
 				printCatSelectedStatement(players, catChoice, winningIndex);
 			}
+			
+			getWinningIndex(cardSelection, catChoice);
+				
+			
 			currentRoundNumber++;
 	}
 	
+	private static int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
+		int winningValue = 0;
+		int winningIndex = 0;
+
+		for (int j = 0; j < cardSelection.size(); j++) {
+			if (cardSelection.get(j).getRequestedCat(catChoice) > winningValue) {
+				winningValue = cardSelection.get(j).getRequestedCat(catChoice);
+				winningIndex = j;
+			}
+		}
+		return winningIndex;
+	}
 	
 	
 	

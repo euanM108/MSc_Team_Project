@@ -174,13 +174,13 @@ img {
 }
 
 
-#btn-default, #btn-next{
+#btn-default, #btn-next, #btn-submit{
 	margin: 5px;
 	display: block;
 	padding: 5px;
 }
 
-#btn-next {
+#btn-next, #btn-submit {
 	display: none;
 }
 
@@ -212,12 +212,12 @@ img {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-next').style.display='block';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-next').style.display='block'; document.getElementById('btn-submit').style.display='block';"
 					>Begin!</button>
 		
 				<p id="roundNum"></p>
 				<button id="btn-next"; onclick="nextRound();">Next Turn!</button>
-			
+				
 
 	
 				<div class="playing card">
@@ -227,15 +227,16 @@ img {
 					    <h2 id="cardName">Card Name</h2>
 					    	<img src = "#" alt="picture of spaceship">
 						    <div class="cat-buttons">
-						    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size      </button>
-						    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed     </button>
-						    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range     </button>
-						    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower </button>
-						    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo     </button>
+							    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size      </button>
+							    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed     </button>
+							    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range     </button>
+							    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower </button>
+							    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo     </button>
 						    </div>
 					  </div>
 				</div>
 
+				<button id="btn-submit"; onclick="submit();">Submit you category!</button>
 
 
 
@@ -260,6 +261,8 @@ img {
 		// Add your other Javascript methods Here
 		// -----------------------------------------
 
+		var category_selected;//global variable  
+				
 		function setNumberOfPlayers() {
 			// getting numberOfPlayers from dropdown menu and save as variable players
 		  	var players = document.getElementById('numberOfPlayers').value;
@@ -285,9 +288,24 @@ img {
 		  }
 
 		function setCategory(clicked_id) {
-			console.log("this clicked id is: " + clicked_id);
+			category_selected = clicked_id;
+			console.log("this clicked id is: " + category_selected);
 		}
 			
+		function submit(){		  	
+		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET',
+			"http://localhost:7777/toptrumps/submit_category?categoryChoice="+category_selected); // Request type and URL+parameters
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send()
+			
+		}
+		
         function getDeck(){
 		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
 		  	if(!xhr){
@@ -326,6 +344,11 @@ img {
 		  	} 
 		}
 		  
+		
+		
+		
+		
+		
 		function getRoundNumber(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
 			xhr.send();
