@@ -212,11 +212,11 @@ img {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-next').style.display='block'; document.getElementById('btn-submit').style.display='block';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-submit').style.display='block';"
 					>Begin!</button>
 		
 				<p id="roundNum"></p>
-				<button id="btn-next"; onclick="nextRound();">Next Turn!</button>
+				<button id="btn-next"; onclick="nextRound(); this.style.display='none';" this.style.display='none';>Next Turn!</button>
 				
 
 	
@@ -236,7 +236,7 @@ img {
 					  </div>
 				</div>
 
-				<button id="btn-submit"; onclick="submit();">Submit you category!</button>
+				<button id="btn-submit"; onclick="submit(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
 
 
 
@@ -303,6 +303,8 @@ img {
 			
 			// We have done everything we need to prepare the CORS request, so send it
 			xhr.send()
+			
+			
 			
 		}
 		
