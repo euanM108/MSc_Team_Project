@@ -75,7 +75,7 @@ public class DatabaseCommunication {
 		return null;
 	}
 	
-	private static int getNoGames() {
+	public static int getNoGames() {
 		int noGames = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();

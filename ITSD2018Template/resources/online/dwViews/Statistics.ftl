@@ -201,7 +201,7 @@ table.blueTable thead th {
         <tbody>
             <tr>
             <td>Total Number of Games</td>
-            <td>placeholder</td>
+            <td id="noGames">Number of Games</td>
             </tr>
             <tr>
             <td>Number of Computer Wins</td>
@@ -245,12 +245,27 @@ table.blueTable thead th {
 				// For example, lets call our sample methods
 				// helloJSONList();
 				// helloWord("Student");
+				getNumberOfGames()
 				
 			}
 			
 			// -----------------------------------------
 			// Add your other Javascript methods Here
 			// -----------------------------------------
+
+            ///////******** Game Stats *******/////////
+            function getNumberOfGames(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getTotalGames	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("noGames").innerHTML = responseText;
+		  	    } 
+		    }
+            ////////******* Games Stats End *******///////////
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
@@ -325,6 +340,9 @@ table.blueTable thead th {
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
+            
+
+            
 
 		</script>
 		

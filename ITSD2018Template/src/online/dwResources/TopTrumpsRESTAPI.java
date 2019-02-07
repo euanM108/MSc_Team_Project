@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import commandline.Card;
+import commandline.DatabaseCommunication;
 import commandline.FileHandler;
 import commandline.Player;
 import online.configuration.TopTrumpsJSONConfiguration;
@@ -389,5 +390,15 @@ public class TopTrumpsRESTAPI {
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
 		return "Hello " + Word;
 	}
+	
+	///******** Database API methods ********///
+	@GET
+	@Path("/getTotalGames")
+	public String getTotalGames() throws IOException {
+		//int games = DatabaseCommunication.getNoGames();
+		int games = 6;
+		return ""+games;
+	}
+	
 
 }
