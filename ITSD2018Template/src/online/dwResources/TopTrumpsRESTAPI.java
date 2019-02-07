@@ -120,6 +120,9 @@ public class TopTrumpsRESTAPI {
 		currentRoundNumber=0;
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.clear();
+		for (int i=0; i<players.size(); i++) {
+			players.get(i).getPersonalDeck().clear();
+		}
 		Player.resetPlayerIDCount();
 		// cast number received as an int
 		numberOfPlayers = Integer.parseInt(Number);
@@ -163,6 +166,10 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/distributeCards")
 	public String distributeCards() throws IOException{	
+		for (int i = 0; i < players.size(); i++) {
+			this.players.get(i).getPersonalDeck().clear();
+		}
+		
 		for (int i = 0; i < deck.size(); i++) {
 			this.players.get(i % players.size()).givePlayerCard(deck.get(i));
 			System.out.println(players.get(i % players.size()).getPlayerID() + " has been given " + deck.get(i));
@@ -270,7 +277,11 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
-			
+			System.out.println();
+			System.out.println();
+			System.out.println("DECK SIZE: " + players.get(0).getPersonalDeck().size());
+			System.out.println();
+			System.out.println();
 			communalPile = getTopCards(this.players);
 			System.out.println("\n\n\n");
 			for (int i = 0; i<communalPile.size(); i++) {
@@ -285,8 +296,7 @@ public class TopTrumpsRESTAPI {
 			while (winningIndex >= players.size()) {
 				winningIndex--;
 			}
-				
-			
+							
 			currentRoundNumber++;
 	}
 	

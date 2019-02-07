@@ -212,7 +212,7 @@ img {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none'; document.getElementById('btn-submit').style.display='block';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
 		
 				<p id="roundNum"></p>
@@ -288,6 +288,7 @@ img {
 		  }
 
 		function setCategory(clicked_id) {
+			document.getElementById('btn-submit').style.display='block';
 			category_selected = clicked_id;
 			console.log("this clicked id is: " + category_selected);
 		}
@@ -335,6 +336,7 @@ img {
 		
 			  
 		function nextRound(){
+			document.getElementById('btn-submit').style.display='none';
 			console.log("initiating gameplay");
 		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
 			xhr.send();
@@ -361,6 +363,7 @@ img {
 		}
 			  
 		function getCategories(){
+		  
 		  getCat1();
 		  getCat2();
 		  getCat3();
