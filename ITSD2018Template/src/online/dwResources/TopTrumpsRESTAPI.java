@@ -112,6 +112,7 @@ public class TopTrumpsRESTAPI {
 		return ""+currentRoundNumber;
 	}
 	
+	
 	@GET
 	@Path("/numberOfPlayers")
 	/**
@@ -398,6 +399,38 @@ public class TopTrumpsRESTAPI {
 		//int games = DatabaseCommunication.getNoGames();
 		int games = 6;
 		return ""+games;
+	}
+	
+	@GET
+	@Path("/getCompWins")
+	public String getCompWins() throws IOException {
+		//int AIwins = DatabaseCommunication.getNoAIWins();
+		int AIwins = 7;
+		return ""+AIwins;
+	}
+	
+	@GET
+	@Path("/getHumanWins")
+	public String getHumanWins() throws IOException {
+		//int humanWins = DatabaseCommunication.getNoHumanWins();
+		int humanWins = 8;
+		return ""+humanWins;
+	}
+	
+	@GET
+	@Path("/getAveDraws")
+	public String getAveDraws() throws IOException {
+		//double drawAvg = DatabaseCommunication.getAVGDraws();
+		double drawAvg = 9;
+		return ""+drawAvg;
+	}
+	
+	@GET
+	@Path("/getBigRound")
+	public String getBigRound() throws IOException {
+		//int roundMax = DatabaseCommunication.getLargestNoRounds();
+		int roundMax = 10;
+		return ""+roundMax;
 	}
 	
 

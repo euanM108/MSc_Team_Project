@@ -205,19 +205,19 @@ table.blueTable thead th {
             </tr>
             <tr>
             <td>Number of Computer Wins</td>
-            <td>placeholder</td>
+            <td id="AIWins">Number of AI Wins</td>
             </tr>
             <tr>
             <td>Number of Human Wins</td>
-            <td>placeholder</td>
+            <td id="humanWins">Number of Human Wins</td>
             </tr>
             <tr>
             <td>Average Number of Draws</td>
-            <td>placeholder</td>
+            <td id="avgDraws">Ave Number of Draws</td>
             </tr>
             <tr>
             <td>Largest Rounds in One Game</td>
-            <td>placeholder</td>
+            <td id="bigRound">Largest Round</td>
             </tr>
         </tbody>
     </table>
@@ -245,8 +245,16 @@ table.blueTable thead th {
 				// For example, lets call our sample methods
 				// helloJSONList();
 				// helloWord("Student");
-				getNumberOfGames()
-				
+
+                getNumberOfGames();
+                getNumberOfAIWins();
+                getNumberOfHumanWins();
+                getNumberOfAverageDraws();
+                getLargestRoundsInOneGame();
+
+
+
+
 			}
 			
 			// -----------------------------------------
@@ -263,6 +271,54 @@ table.blueTable thead th {
 			    xhr.onload = function(e){
 		  		    var responseText = xhr.response;
 		  		    document.getElementById("noGames").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfAIWins(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCompWins	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("AIWins").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfHumanWins(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanWins	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("humanWins").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfAverageDraws(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getAveDraws	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("avgDraws").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getLargestRoundsInOneGame(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getBigRound	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("bigRound").innerHTML = responseText;
 		  	    } 
 		    }
             ////////******* Games Stats End *******///////////
