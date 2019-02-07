@@ -433,5 +433,11 @@ public class TopTrumpsRESTAPI {
 		return ""+roundMax;
 	}
 	
+	@GET
+	@Path("/wipeDatabase")
+	public void wipeDatabase() throws IOException {
+		DatabaseCommunication.clearHistory();
+	}
+	
 
 }
