@@ -46,7 +46,7 @@ public class TopTrumpsCLIApplication {
 		
 		//Game log stuff
 		boolean writeGameLogsToFile = true; // Should we write game logs to file?
-		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
+		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		FileWriter fw = null;
 		try {
 			fw = new FileWriter("TomTrumps.log");
