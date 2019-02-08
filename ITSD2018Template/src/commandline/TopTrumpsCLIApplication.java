@@ -46,6 +46,7 @@ public class TopTrumpsCLIApplication {
 		
 		//Game log stuff
 		boolean writeGameLogsToFile = true; // Should we write game logs to file?
+		DatabaseCommunication.connectToDatabase();
 		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		FileWriter fw = null;
 		try {
@@ -514,7 +515,7 @@ public class TopTrumpsCLIApplication {
 	private static void logStatistics() {
 		//can only test this on university computers
 		System.out.println(String.format("%d %d %d %d %d %d %d %d", winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins));
-		//DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
+		DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 	}
 
 	private static int checkForNumberOfPlayers(int numberOfPlayers, Scanner s) {
