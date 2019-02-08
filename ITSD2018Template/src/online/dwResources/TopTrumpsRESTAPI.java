@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import commandline.Card;
+import commandline.DatabaseCommunication;
 import commandline.FileHandler;
 import commandline.Player;
 import online.configuration.TopTrumpsJSONConfiguration;
@@ -110,6 +111,7 @@ public class TopTrumpsRESTAPI {
 	public String getRoundNumber() throws IOException {
 		return ""+currentRoundNumber;
 	}
+	
 	
 	@GET
 	@Path("/numberOfPlayers")
@@ -389,5 +391,53 @@ public class TopTrumpsRESTAPI {
 	public String helloWord(@QueryParam("Word") String Word) throws IOException {
 		return "Hello " + Word;
 	}
+	
+	///******** Database API methods ********///
+	@GET
+	@Path("/getTotalGames")
+	public String getTotalGames() throws IOException {
+		//int games = DatabaseCommunication.getNoGames();
+		int games = 6;
+		return ""+games;
+	}
+	
+	@GET
+	@Path("/getCompWins")
+	public String getCompWins() throws IOException {
+		//int AIwins = DatabaseCommunication.getNoAIWins();
+		int AIwins = 7;
+		return ""+AIwins;
+	}
+	
+	@GET
+	@Path("/getHumanWins")
+	public String getHumanWins() throws IOException {
+		//int humanWins = DatabaseCommunication.getNoHumanWins();
+		int humanWins = 8;
+		return ""+humanWins;
+	}
+	
+	@GET
+	@Path("/getAveDraws")
+	public String getAveDraws() throws IOException {
+		//double drawAvg = DatabaseCommunication.getAVGDraws();
+		double drawAvg = 9;
+		return ""+drawAvg;
+	}
+	
+	@GET
+	@Path("/getBigRound")
+	public String getBigRound() throws IOException {
+		//int roundMax = DatabaseCommunication.getLargestNoRounds();
+		int roundMax = 10;
+		return ""+roundMax;
+	}
+	
+	@GET
+	@Path("/wipeDatabase")
+	public void wipeDatabase() throws IOException {
+		DatabaseCommunication.clearHistory();
+	}
+	
 
 }

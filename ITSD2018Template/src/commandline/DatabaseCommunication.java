@@ -75,7 +75,7 @@ public class DatabaseCommunication {
 		return null;
 	}
 	
-	private static int getNoGames() {
+	public static int getNoGames() {
 		int noGames = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();
@@ -91,7 +91,7 @@ public class DatabaseCommunication {
 		return noGames;
 	}
 
-	private static int getNoAIWins() {
+	public static int getNoAIWins() {
 		int noAIWins = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();
@@ -108,7 +108,7 @@ public class DatabaseCommunication {
 		return noAIWins;
 	}
 	
-	private static int getNoHumanWins() {
+	public static int getNoHumanWins() {
 		int noHumanWins = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();
@@ -125,7 +125,7 @@ public class DatabaseCommunication {
 		return noHumanWins;
 	}
 	
-	private static double getAVGDraws() {
+	public static double getAVGDraws() {
 		double AVGDraws = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();
@@ -141,7 +141,7 @@ public class DatabaseCommunication {
 		return AVGDraws;
 	}
 	
-	private static int getLargestNoRounds() {
+	public static int getLargestNoRounds() {
 		int largestNoRounds = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();

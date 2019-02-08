@@ -201,23 +201,23 @@ table.blueTable thead th {
         <tbody>
             <tr>
             <td>Total Number of Games</td>
-            <td>placeholder</td>
+            <td id="noGames">Number of Games</td>
             </tr>
             <tr>
             <td>Number of Computer Wins</td>
-            <td>placeholder</td>
+            <td id="AIWins">Number of AI Wins</td>
             </tr>
             <tr>
             <td>Number of Human Wins</td>
-            <td>placeholder</td>
+            <td id="humanWins">Number of Human Wins</td>
             </tr>
             <tr>
             <td>Average Number of Draws</td>
-            <td>placeholder</td>
+            <td id="avgDraws">Ave Number of Draws</td>
             </tr>
             <tr>
             <td>Largest Rounds in One Game</td>
-            <td>placeholder</td>
+            <td id="bigRound">Largest Round</td>
             </tr>
         </tbody>
     </table>
@@ -245,12 +245,83 @@ table.blueTable thead th {
 				// For example, lets call our sample methods
 				// helloJSONList();
 				// helloWord("Student");
-				
+
+                getNumberOfGames();
+                getNumberOfAIWins();
+                getNumberOfHumanWins();
+                getNumberOfAverageDraws();
+                getLargestRoundsInOneGame();
+
+
+
+
 			}
 			
 			// -----------------------------------------
 			// Add your other Javascript methods Here
 			// -----------------------------------------
+
+            ///////******** Game Stats *******/////////
+            function getNumberOfGames(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getTotalGames	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("noGames").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfAIWins(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCompWins	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("AIWins").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfHumanWins(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanWins	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("humanWins").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getNumberOfAverageDraws(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getAveDraws	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("avgDraws").innerHTML = responseText;
+		  	    } 
+		    }
+
+            function getLargestRoundsInOneGame(){
+			    var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getBigRound	");
+                if (!xhr) {
+  					alert("CORS not supported");
+				}
+			    xhr.send();
+			    xhr.onload = function(e){
+		  		    var responseText = xhr.response;
+		  		    document.getElementById("bigRound").innerHTML = responseText;
+		  	    } 
+		    }
+            ////////******* Games Stats End *******///////////
 		
 			// This is a reusable method for creating a CORS request. Do not edit this.
 			function createCORSRequest(method, url) {
@@ -325,6 +396,9 @@ table.blueTable thead th {
 				// We have done everything we need to prepare the CORS request, so send it
 				xhr.send();		
 			}
+            
+
+            
 
 		</script>
 		

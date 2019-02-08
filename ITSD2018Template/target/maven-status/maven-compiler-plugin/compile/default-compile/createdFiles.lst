@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 online/dwViews/SelectionScreenView.class
 online/dwResources/GameWebPagesResource.class
 commandline/AIPlayer.class
@@ -11,6 +13,10 @@ commandline/HumanPlayer.class
 commandline/AbsPlayer.class
 online/dwViews/StatisticsView.class
 online/dwViews/GameScreenView.class
+>>>>>>> refs/remotes/origin/master
 TopTrumps.class
+<<<<<<< HEAD
+=======
 commandline/FileHandler.class
 online/TopTrumpsOnlineApplication.class
+>>>>>>> refs/remotes/origin/master
