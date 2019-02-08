@@ -10,7 +10,7 @@ public class DatabaseCommunication {
 	private static Connection connection = null;
 	private static boolean connectionFailure = false;
 
-	private static void connectToDatabase() {
+	public static void connectToDatabase() {
 		// check for the driver
 		if (!connectionFailure) {
 			try {
