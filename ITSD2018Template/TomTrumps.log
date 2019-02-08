@@ -23,172 +23,67 @@ card20
 
 ---------------------------------------------
 
-card1
-card12
-card9
-card20
-card17
-card18
-card2
-card14
-card10
-card16
 card19
-card4
+card17
+card2
 card7
-card6
-card11
+card20
+card8
 card5
 card3
-card8
-card15
-card13
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card1
-card9
-card17
-card2
-card10
-card19
-card7
 card11
-card3
-card15
-
----------------------------------------------
-
-Human Players Deck:
-
-card12
-card20
+card1
+card10
+card9
 card18
+card15
 card14
-card16
 card4
 card6
-card5
-card8
+card16
 card13
-
----------------------------------------------
-
-Cards in Play: 
-
-card1
-Size		1
-Speed		9
-Range		2
-Firepower		3
-Cargo		0
-
-card12
-Size		1
-Speed		7
-Range		2
-Firepower		5
-Cargo		0
-
-
----------------------------------------------
-
-The selected Category was: Speed.
-
-card1 has a Speed value of 9
-card12 has a Speed value of 7
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card9
-card17
-card2
-card10
-card19
-card7
-card11
-card3
-card15
-card1
 card12
 
 ---------------------------------------------
 
 Human Players Deck:
 
+card19
+card2
 card20
+card5
+card11
+card10
 card18
 card14
-card16
-card4
 card6
-card5
-card8
 card13
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card17
+card7
+card8
+card3
+card1
+card9
+card15
+card4
+card16
+card12
 
 ---------------------------------------------
 
 Cards in Play: 
 
-card9
-Size		1
-Speed		10
-Range		2
-Firepower		2
-Cargo		0
-
-card20
+card19
 Size		1
 Speed		5
-Range		5
-Firepower		5
-Cargo		5
-
-
----------------------------------------------
-
-The selected Category was: Speed.
-
-card9 has a Speed value of 10
-card20 has a Speed value of 5
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card17
-card2
-card10
-card19
-card7
-card11
-card3
-card15
-card1
-card12
-card9
-card20
-
----------------------------------------------
-
-Human Players Deck:
-
-card18
-card14
-card16
-card4
-card6
-card5
-card8
-card13
-
----------------------------------------------
-
-Cards in Play: 
+Range		3
+Firepower		4
+Cargo		1
 
 card17
 Size		1
@@ -197,50 +92,48 @@ Range		7
 Firepower		3
 Cargo		4
 
-card18
-Size		1
-Speed		3
-Range		2
-Firepower		4
-Cargo		0
-
 
 ---------------------------------------------
 
-The selected Category was: Range.
+The selected Category was: Speed.
 
-card17 has a Range value of 7
-card18 has a Range value of 2
+card19 has a Speed value of 5
+card17 has a Speed value of 5
 
 ---------------------------------------------
 
-AI Player Number 1's deck:
+Communal Pile Updated:
 
-card2
-card10
 card19
-card7
-card11
-card3
-card15
-card1
-card12
-card9
-card20
 card17
-card18
 
 ---------------------------------------------
 
 Human Players Deck:
 
-card14
-card16
-card4
-card6
+card2
+card20
 card5
-card8
+card11
+card10
+card18
+card14
+card6
 card13
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card7
+card8
+card3
+card1
+card9
+card15
+card4
+card16
+card12
 
 ---------------------------------------------
 
@@ -253,11 +146,11 @@ Range		4
 Firepower		3
 Cargo		2
 
-card14
+card7
 Size		1
-Speed		9
-Range		2
-Firepower		3
+Speed		5
+Range		3
+Firepower		5
 Cargo		0
 
 
@@ -266,50 +159,117 @@ Cargo		0
 The selected Category was: Speed.
 
 card2 has a Speed value of 5
-card14 has a Speed value of 9
+card7 has a Speed value of 5
 
 ---------------------------------------------
 
-AI Player Number 1's deck:
+Communal Pile Updated:
 
-card10
 card19
-card7
-card11
-card3
-card15
-card1
-card12
-card9
-card20
 card17
-card18
+card2
+card7
 
 ---------------------------------------------
 
 Human Players Deck:
 
-card16
-card4
-card6
+card20
 card5
-card8
-card13
-card2
+card11
+card10
+card18
 card14
+card6
+card13
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card8
+card3
+card1
+card9
+card15
+card4
+card16
+card12
 
 ---------------------------------------------
 
 Cards in Play: 
 
+card20
+Size		1
+Speed		5
+Range		5
+Firepower		5
+Cargo		5
+
+card8
+Size		1
+Speed		2
+Range		7
+Firepower		10
+Cargo		6
+
+
+---------------------------------------------
+
+The selected Category was: Speed.
+
+card20 has a Speed value of 5
+card8 has a Speed value of 2
+
+---------------------------------------------
+
+
+The communal Pile was emptied.
+
+
+---------------------------------------------
+
+Human Players Deck:
+
+card5
+card11
 card10
+card18
+card14
+card6
+card13
+card20
+card8
+card19
+card17
+card2
+card7
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card3
+card1
+card9
+card15
+card4
+card16
+card12
+
+---------------------------------------------
+
+Cards in Play: 
+
+card5
 Size		1
 Speed		3
-Range		5
-Firepower		6
-Cargo		8
+Range		2
+Firepower		4
+Cargo		0
 
-card16
+card3
 Size		1
 Speed		2
 Range		10
@@ -319,157 +279,45 @@ Cargo		6
 
 ---------------------------------------------
 
-The selected Category was: Range.
+The selected Category was: Firepower.
 
-card10 has a Range value of 5
-card16 has a Range value of 10
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card19
-card7
-card11
-card3
-card15
-card1
-card12
-card9
-card20
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card4
-card6
-card5
-card8
-card13
-card2
-card14
-card10
-card16
-
----------------------------------------------
-
-Cards in Play: 
-
-card19
-Size		1
-Speed		5
-Range		3
-Firepower		4
-Cargo		1
-
-card4
-Size		1
-Speed		5
-Range		7
-Firepower		3
-Cargo		4
-
-
----------------------------------------------
-
-The selected Category was: Range.
-
-card19 has a Range value of 3
-card4 has a Range value of 7
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card7
-card11
-card3
-card15
-card1
-card12
-card9
-card20
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card6
-card5
-card8
-card13
-card2
-card14
-card10
-card16
-card19
-card4
-
----------------------------------------------
-
-Cards in Play: 
-
-card7
-Size		1
-Speed		5
-Range		3
-Firepower		5
-Cargo		0
-
-card6
-Size		1
-Speed		5
-Range		3
-Firepower		4
-Cargo		1
-
-
----------------------------------------------
-
-The selected Category was: Speed.
-
-card7 has a Speed value of 5
-card6 has a Speed value of 5
+card5 has a Firepower value of 4
+card3 has a Firepower value of 4
 
 ---------------------------------------------
 
 Communal Pile Updated:
 
-card7
-card6
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card11
+card5
 card3
-card15
-card1
-card12
-card9
-card20
-card17
-card18
 
 ---------------------------------------------
 
 Human Players Deck:
 
-card5
-card8
-card13
-card2
-card14
+card11
 card10
-card16
+card18
+card14
+card6
+card13
+card20
+card8
 card19
+card17
+card2
+card7
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card1
+card9
+card15
 card4
+card16
+card12
 
 ---------------------------------------------
 
@@ -482,20 +330,20 @@ Range		6
 Firepower		2
 Cargo		9
 
-card5
+card1
 Size		1
-Speed		3
+Speed		9
 Range		2
-Firepower		4
+Firepower		3
 Cargo		0
 
 
 ---------------------------------------------
 
-The selected Category was: Firepower.
+The selected Category was: Range.
 
-card11 has a Firepower value of 2
-card5 has a Firepower value of 4
+card11 has a Range value of 6
+card1 has a Range value of 2
 
 ---------------------------------------------
 
@@ -505,283 +353,37 @@ The communal Pile was emptied.
 
 ---------------------------------------------
 
-AI Player Number 1's deck:
-
-card3
-card15
-card1
-card12
-card9
-card20
-card17
-card18
-
----------------------------------------------
-
 Human Players Deck:
 
-card8
-card13
-card2
-card14
 card10
-card16
-card19
-card4
-card11
-card5
-card7
-card6
-
----------------------------------------------
-
-Cards in Play: 
-
-card3
-Size		1
-Speed		2
-Range		10
-Firepower		4
-Cargo		6
-
-card8
-Size		1
-Speed		2
-Range		7
-Firepower		10
-Cargo		6
-
-
----------------------------------------------
-
-The selected Category was: Firepower.
-
-card3 has a Firepower value of 4
-card8 has a Firepower value of 10
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card15
-card1
-card12
-card9
-card20
-card17
 card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card13
-card2
 card14
-card10
-card16
-card19
-card4
-card11
-card5
-card7
 card6
-card3
-card8
-
----------------------------------------------
-
-Cards in Play: 
-
-card15
-Size		1
-Speed		5
-Range		4
-Firepower		3
-Cargo		2
-
 card13
-Size		1
-Speed		4
-Range		5
-Firepower		5
-Cargo		2
-
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card15 has a Size value of 1
-card13 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
-card15
-card13
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card1
-card12
-card9
 card20
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card2
-card14
-card10
-card16
-card19
-card4
-card11
-card5
-card7
-card6
-card3
 card8
-
----------------------------------------------
-
-Cards in Play: 
-
-card1
-Size		1
-Speed		9
-Range		2
-Firepower		3
-Cargo		0
-
-card2
-Size		1
-Speed		5
-Range		4
-Firepower		3
-Cargo		2
-
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card1 has a Size value of 1
-card2 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
-card15
-card13
-card1
-card2
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card12
-card9
-card20
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card14
-card10
-card16
 card19
-card4
-card11
-card5
-card7
-card6
-card3
-card8
-
----------------------------------------------
-
-Cards in Play: 
-
-card12
-Size		1
-Speed		7
-Range		2
-Firepower		5
-Cargo		0
-
-card14
-Size		1
-Speed		9
-Range		2
-Firepower		3
-Cargo		0
-
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card12 has a Size value of 1
-card14 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
-card15
-card13
-card1
+card17
 card2
-card12
-card14
+card7
+card11
+card1
+card5
+card3
 
 ---------------------------------------------
 
 AI Player Number 1's deck:
 
 card9
-card20
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card10
-card16
-card19
+card15
 card4
-card11
-card5
-card7
-card6
-card3
-card8
+card16
+card12
 
 ---------------------------------------------
 
 Cards in Play: 
-
-card9
-Size		1
-Speed		10
-Range		2
-Firepower		2
-Cargo		0
 
 card10
 Size		1
@@ -790,170 +392,50 @@ Range		5
 Firepower		6
 Cargo		8
 
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card9 has a Size value of 1
-card10 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
-card15
-card13
-card1
-card2
-card12
-card14
 card9
-card10
+Size		1
+Speed		10
+Range		2
+Firepower		2
+Cargo		0
+
 
 ---------------------------------------------
 
-AI Player Number 1's deck:
+The selected Category was: Cargo.
 
-card20
-card17
-card18
+card10 has a Cargo value of 8
+card9 has a Cargo value of 0
 
 ---------------------------------------------
 
 Human Players Deck:
 
-card16
-card19
-card4
-card11
-card5
-card7
-card6
-card3
-card8
-
----------------------------------------------
-
-Cards in Play: 
-
-card20
-Size		1
-Speed		5
-Range		5
-Firepower		5
-Cargo		5
-
-card16
-Size		1
-Speed		2
-Range		10
-Firepower		4
-Cargo		6
-
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card20 has a Size value of 1
-card16 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
-card15
-card13
-card1
-card2
-card12
+card18
 card14
-card9
-card10
+card6
+card13
 card20
-card16
+card8
+card19
+card17
+card2
+card7
+card11
+card1
+card5
+card3
+card10
+card9
 
 ---------------------------------------------
 
 AI Player Number 1's deck:
 
-card17
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
-card19
-card4
-card11
-card5
-card7
-card6
-card3
-card8
-
----------------------------------------------
-
-Cards in Play: 
-
-card17
-Size		1
-Speed		5
-Range		7
-Firepower		3
-Cargo		4
-
-card19
-Size		1
-Speed		5
-Range		3
-Firepower		4
-Cargo		1
-
-
----------------------------------------------
-
-The selected Category was: Size.
-
-card17 has a Size value of 1
-card19 has a Size value of 1
-
----------------------------------------------
-
-Communal Pile Updated:
-
 card15
-card13
-card1
-card2
-card12
-card14
-card9
-card10
-card20
-card16
-card17
-card19
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
-card18
-
----------------------------------------------
-
-Human Players Deck:
-
 card4
-card11
-card5
-card7
-card6
-card3
-card8
+card16
+card12
 
 ---------------------------------------------
 
@@ -964,6 +446,67 @@ Size		1
 Speed		3
 Range		2
 Firepower		4
+Cargo		0
+
+card15
+Size		1
+Speed		5
+Range		4
+Firepower		3
+Cargo		2
+
+
+---------------------------------------------
+
+The selected Category was: Size.
+
+card18 has a Size value of 1
+card15 has a Size value of 1
+
+---------------------------------------------
+
+Communal Pile Updated:
+
+card18
+card15
+
+---------------------------------------------
+
+Human Players Deck:
+
+card14
+card6
+card13
+card20
+card8
+card19
+card17
+card2
+card7
+card11
+card1
+card5
+card3
+card10
+card9
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card4
+card16
+card12
+
+---------------------------------------------
+
+Cards in Play: 
+
+card14
+Size		1
+Speed		9
+Range		2
+Firepower		3
 Cargo		0
 
 card4
@@ -978,43 +521,165 @@ Cargo		4
 
 The selected Category was: Size.
 
-card18 has a Size value of 1
+card14 has a Size value of 1
 card4 has a Size value of 1
 
 ---------------------------------------------
 
 Communal Pile Updated:
 
-card15
-card13
-card1
-card2
-card12
-card14
-card9
-card10
-card20
-card16
-card17
-card19
 card18
+card15
+card14
 card4
-
----------------------------------------------
-
-AI Player Number 1's deck:
-
 
 ---------------------------------------------
 
 Human Players Deck:
 
-card11
-card5
-card7
 card6
-card3
+card13
+card20
 card8
+card19
+card17
+card2
+card7
+card11
+card1
+card5
+card3
+card10
+card9
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card16
+card12
+
+---------------------------------------------
+
+Cards in Play: 
+
+card6
+Size		1
+Speed		5
+Range		3
+Firepower		4
+Cargo		1
+
+card16
+Size		1
+Speed		2
+Range		10
+Firepower		4
+Cargo		6
+
+
+---------------------------------------------
+
+The selected Category was: Size.
+
+card6 has a Size value of 1
+card16 has a Size value of 1
+
+---------------------------------------------
+
+Communal Pile Updated:
+
+card18
+card15
+card14
+card4
+card6
+card16
+
+---------------------------------------------
+
+Human Players Deck:
+
+card13
+card20
+card8
+card19
+card17
+card2
+card7
+card11
+card1
+card5
+card3
+card10
+card9
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
+card12
+
+---------------------------------------------
+
+Cards in Play: 
+
+card13
+Size		1
+Speed		4
+Range		5
+Firepower		5
+Cargo		2
+
+card12
+Size		1
+Speed		7
+Range		2
+Firepower		5
+Cargo		0
+
+
+---------------------------------------------
+
+The selected Category was: Size.
+
+card13 has a Size value of 1
+card12 has a Size value of 1
+
+---------------------------------------------
+
+Communal Pile Updated:
+
+card18
+card15
+card14
+card4
+card6
+card16
+card13
+card12
+
+---------------------------------------------
+
+Human Players Deck:
+
+card20
+card8
+card19
+card17
+card2
+card7
+card11
+card1
+card5
+card3
+card10
+card9
+
+---------------------------------------------
+
+AI Player Number 1's deck:
+
 
 ---------------------------------------------
 

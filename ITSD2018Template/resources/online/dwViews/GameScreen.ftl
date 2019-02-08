@@ -153,6 +153,86 @@ img {
   border-radius: 15px 15px 0 0;
 }
 
+                .card-container {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    grid-template-rows: 1fr 1fr;
+                    grid-template-areas: ". . ."". . .";
+                    grid-template-areas:
+                        "a b c"
+                        "a d e";
+                }
+
+                .card {
+
+                    /* Add shadows to create the "card" effect */
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                    transition: 0.3s;
+                    width: 90%;
+                    /* 15 pixel rounded corners */
+                    border-radius: 15px;
+                    margin: 5% 5% 5% 5%;
+                    background: #1abc9c;
+                    font-family: Helvetica;
+                }
+
+                .playing-card-1 {
+                    grid-area: a;
+                    align-self: center;
+
+                }
+
+                .playing-card-2 {
+                    grid-area: b;
+                    align-self: center;
+                    text-align: center;
+                }
+
+
+                .playing-card-3 {
+                    grid-area: c;
+                    align-self: center;
+                    text-align: center;
+
+                }
+
+
+                .playing-card-4 {
+                    grid-area: d;
+                    align-self: center;
+                    text-align: center;
+
+                }
+
+
+                .playing-card-5 {
+                    grid-area: e;
+                    align-self: center;
+                    text-align: center;
+
+                }
+
+                table.cat-table {
+                    background-color: white;
+                    text-align: center;
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                table.cat-table td,
+                table.cat-table th {
+                    border: 1px solid #AAAAAA;
+                    padding: 3px 2px;
+                }
+
+                table.cat-table tbody td {
+                    font-size: 13px;
+                }
+
+                table.cat-table tfoot td {
+                    font-size: 14px;
+                }
+
 
 
 
@@ -220,21 +300,185 @@ img {
 				
 
 	
-				<div class="playing card">
+            <div class="card-container">
+                <div class="playing-card-1">
+                    <div class="card">
 
-				  <alt="Avatar" style="width:100%">
-					  <div class="container">
-					    <h2 id="cardName">Card Name</h2>
-					    	<img src = "#" alt="picture of spaceship">
-						    <div class="cat-buttons">
-							    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size      </button>
-							    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed     </button>
-							    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range     </button>
-							    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower </button>
-							    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo     </button>
-						    </div>
-					  </div>
-				</div>
+                        <alt="Avatar" style="width:100%">
+                            <div class="container">
+                                <h2 id="cardName">Card Name</h2>
+                                <img src="#" alt="picture of spaceship">
+                                <div class="cat-buttons">
+                                    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size
+                                    </button>
+                                    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed
+                                    </button>
+                                    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range
+                                    </button>
+                                    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower
+                                    </button>
+                                    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo
+                                    </button>
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="playing-card-2">
+                    AI PLAYER 1
+                    <div class="card">
+                        <div class="container">
+                            <h2 id="cardName">Card Name</h2>
+                            <img src="#" alt="picture of spaceship">
+                            <div class="cat-tables">
+                                <table class="cat-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>cell1_1</td>
+                                            <td>cell2_1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cell1_2</td>
+                                            <td>cell2_2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cell1_3</td>
+                                            <td>cell2_3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cell1_4</td>
+                                            <td>cell2_4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>cell1_5</td>
+                                            <td>cell2_5</td>
+                                        </tr>
+                                    </tbody>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="playing-card-3">
+                    AI PLAYER 2
+                    <div class="card">
+
+                        <alt="Avatar" style="width:100%">
+                            <div class="container">
+                                <h2 id="cardName">Card Name</h2>
+                                <img src="#" alt="picture of spaceship">
+                                <div class="cat-tables">
+                                        <table class="cat-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>cell1_1</td>
+                                                    <td>cell2_1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_2</td>
+                                                    <td>cell2_2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_3</td>
+                                                    <td>cell2_3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_4</td>
+                                                    <td>cell2_4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_5</td>
+                                                    <td>cell2_5</td>
+                                                </tr>
+                                            </tbody>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="playing-card-4">
+                    AI PLAYER 3
+                    <div class="card">
+
+                        <alt="Avatar" style="width:100%">
+                            <div class="container">
+                                <h2 id="cardName">Card Name</h2>
+                                <img src="#" alt="picture of spaceship">
+                                <div class="cat-tables">
+                                        <table class="cat-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>cell1_1</td>
+                                                    <td>cell2_1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_2</td>
+                                                    <td>cell2_2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_3</td>
+                                                    <td>cell2_3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_4</td>
+                                                    <td>cell2_4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_5</td>
+                                                    <td>cell2_5</td>
+                                                </tr>
+                                            </tbody>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                            </div>
+                    </div>
+                </div>
+                <div class="playing-card-5">
+                    AI PLAYER 4
+                    <div class="card">
+
+                        <alt="Avatar" style="width:100%">
+                            <div class="container">
+                                <h2 id="cardName">Card Name</h2>
+                                <img src="#" alt="picture of spaceship">
+                                <div class="cat-tables">
+                                        <table class="cat-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>cell1_1</td>
+                                                    <td>cell2_1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_2</td>
+                                                    <td>cell2_2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_3</td>
+                                                    <td>cell2_3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_4</td>
+                                                    <td>cell2_4</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>cell1_5</td>
+                                                    <td>cell2_5</td>
+                                                </tr>
+                                            </tbody>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
 
 				<button id="btn-submit"; onclick="submit(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
 
