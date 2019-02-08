@@ -25,34 +25,72 @@
     	<div class="container">
 
 			<!-- Add your HTML Here -->
-			<!DOCTYPE html>
+			
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <title>Home Page</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
+
 * {
   box-sizing: border-box;
 }
 
 /* Style the body */
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
   margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
-/* Header/logo Title */
+/* Header */
+
 .header {
-  padding: 80px;
+  padding: 60px;
   text-align: center;
   background: #1abc9c;
-  color: white;
+
 }
 
-/* Increase the font size of the heading */
-.header h1 {
-  font-size: 40px;
+/* Top Trumps Logo */
+
+h1 {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 5vw;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  background-size: 120% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-image: linear-gradient(45deg, 
+                    #7794ff, 
+                    #44107A,
+                    #FF1361,
+                    #FFF800);
+  animation: .8s shake infinite alternate;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
 }
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
@@ -143,8 +181,9 @@ body {
 <body>
 
 <div class="header">
-  <h1>Welcome to Top Trumps!</h1>
-  <p>Your favourite card game just went <b>digital</b></p>
+  <p>Welcome to</p>
+  <h1>Top Trumps!</h1>
+  <p>Your favourite card game just went <b><i>digital</i></b></p>
 </div>
 
 <div class="navbar">
