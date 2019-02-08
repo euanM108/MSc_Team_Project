@@ -44,16 +44,53 @@ body {
 }
 
 /* Header/logo Title */
+
 .header {
-  padding: 10px;
+  padding: 60px;
   text-align: center;
   background: #1abc9c;
-  color: white;
 }
 
-/* Increase the font size of the heading */
-.header h1 {
-  font-size: 40px;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+h1 {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 5vw;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  background-size: 120% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-image: linear-gradient(45deg, 
+                    #7794ff, 
+                    #44107A,
+                    #FF1361,
+                    #FFF800);
+  animation: .8s shake infinite alternate;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
 }
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
@@ -143,25 +180,34 @@ body {
 /*css for the table*/
 
 .statsTable{
-    margin: 5% 5% 5% 5%
+    padding-top: 50px;
+    width:70%;
+    margin-left:22%;
+    margin-right:15%;
 }
 
 table.blueTable {
-  font-family: "Courier New", Courier, monospace;
-  border: 4px solid #000000;
-  background-color: #FFFFFF;
-  width: 100%;
+  font-family: Verdana, sans-serif;
+  background: linear-gradient(45deg, #1abc9c, #5f2c82);
+  overflow: hidden;
+  max-width: 600px;
+  width: 200%;
+  border-radius: 16px;
+  position: relative;
   text-align: center;
   border-collapse: collapse;
+  border-spacing: 1;
 }
+
 table.blueTable td, table.blueTable th {
-  border: 1px solid #000000;
+  border: 
 }
+
 table.blueTable tbody td {
-  font-size: 22px;
-  font-weight: bold;
-  color: #1ABC9C;
+  font-size: 14px;
+  color: white;
 }
+
 table.blueTable thead {
   background: #1ABC9C;
   background: -moz-linear-gradient(top, #53cdb5 0%, #31c2a6 66%, #1ABC9C 100%);
@@ -169,12 +215,22 @@ table.blueTable thead {
   background: linear-gradient(to bottom, #53cdb5 0%, #31c2a6 66%, #1ABC9C 100%);
   border-bottom: 0px solid #444444;
 }
+
 table.blueTable thead th {
-  font-size: 30px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
-}
+    height: 60px;
+    background: linear-gradient(#1abc9c, #000000);
+    font-size: 20px;
+    color: white;
+    font-family: Verdana, sans-serif;
+  }
+
+tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #e3f1d5;
+    &:last-child {
+      border: 0;
+    }
+  }
 
 </style>
 </head>
