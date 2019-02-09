@@ -41,11 +41,11 @@ public class Card {
 		System.out.println("=====================");
 		System.out.println(getCardName());
 		System.out.println("_____________________");
-		System.out.println(catNames.get(1) + "\t" + "\t" + cat1Value);
-		System.out.println(catNames.get(2) + "\t" + "\t" + cat2Value);
-		System.out.println(catNames.get(3) + "\t" + "\t" + cat3Value);
-		System.out.println(catNames.get(4) + "\t" + cat4Value);
-		System.out.println(catNames.get(5) + "\t" + "\t" + cat5Value);
+		System.out.println("Category 1: \t" + catNames.get(1) + "\t" + "\t" + cat1Value);
+		System.out.println("Category 2: \t" + catNames.get(2) + "\t" + "\t" + cat2Value);
+		System.out.println("Category 3: \t" + catNames.get(3) + "\t" + "\t" + cat3Value);
+		System.out.println("Category 4: \t" + catNames.get(4) + "\t" + cat4Value);
+		System.out.println("Category 5: \t" + catNames.get(5) + "\t" + "\t" + cat5Value);
 		System.out.println("=====================");
 	}
 	
