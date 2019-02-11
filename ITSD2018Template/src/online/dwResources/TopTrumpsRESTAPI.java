@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -192,6 +191,16 @@ public class TopTrumpsRESTAPI {
 		return "no name";
 	}
 	
+	@GET // unused 
+	@Path("/getPlayersCardNames")
+	public ArrayList<String> getPlayersCardNames() throws IOException{
+		ArrayList<String> playersCardNames = null;
+		for (int i = 1; i<players.size(); i++) {
+			playersCardNames.add(players.get(i).getTopCard().getCardName());
+		}
+		return playersCardNames;
+	}
+	
 	@GET
 	@Path("/getCat1")
 	public String getCat1() throws IOException{
@@ -273,6 +282,19 @@ public class TopTrumpsRESTAPI {
 			} catch (IndexOutOfBoundsException e) {
 
 			}
+		}
+	}
+	
+	@GET
+	@Path("/getRoundWinner")
+	public String getRoundWinner() throws IOException{
+		if (players.get(winningIndex).getPlayerID()==1) {
+			System.out.println("YOU WON THE ROUND");
+			return "You won the round!";
+		}
+		else {
+			System.out.println("YOU DIDNT WIN THE ROUND");
+		return "Round winner is player " + players.get(winningIndex).getPlayerID();
 		}
 	}
 	

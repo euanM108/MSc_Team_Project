@@ -264,10 +264,20 @@ img {
 	display: none;
 }
 
-#roundNum {
-	margin: 5px;
-	width: 130px;
+#roundNum, #roundWinner {
+	display: none;
+  margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 30%;
+  height: 5%;
+  border-radius: 15px; 
+  background: #1abc9c;
+  font-family: Helvetica;
+  text-align: center;
+  line-height: 25px;
 }
+
 </style>
 </head>
 <body>
@@ -292,10 +302,11 @@ img {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); numberOfPlayers.style.display='none'; this.style.display = 'none';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck();  roundWinner.style.display='block'; roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
 		
 				<p id="roundNum"></p>
+				<p id="roundWinner"></p>
 				<button id="btn-next"; onclick="nextRound(); this.style.display='none';" this.style.display='none';>Next Turn!</button>
 				
 
@@ -328,7 +339,7 @@ img {
                     AI PLAYER 1
                     <div class="card">
                         <div class="container">
-                            <h2 id="cardName">Card Name</h2>
+                            <h2 id="cardName-p2">Card Name</h2>
                             <img src="#" alt="picture of spaceship">
                             <div class="cat-tables">
                                 <table class="cat-table">
@@ -367,7 +378,7 @@ img {
 
                         <alt="Avatar" style="width:100%">
                             <div class="container">
-                                <h2 id="cardName">Card Name</h2>
+                                <h2 id="cardName-p3">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
@@ -406,7 +417,7 @@ img {
 
                         <alt="Avatar" style="width:100%">
                             <div class="container">
-                                <h2 id="cardName">Card Name</h2>
+                                <h2 id="cardName-p4">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
@@ -445,7 +456,7 @@ img {
 
                         <alt="Avatar" style="width:100%">
                             <div class="container">
-                                <h2 id="cardName">Card Name</h2>
+                                <h2 id="cardName-p5">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
@@ -549,8 +560,28 @@ img {
 			// We have done everything we need to prepare the CORS request, so send it
 			xhr.send()
 			
+			xhr.onload = function(e){
+		  		getRoundWinner();
+		  	} 
+		
+		}
+		
+		function getRoundWinner(){
+			//  create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundWinner"); // Request type and URL+parameters
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
+			}
 			
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send()
 			
+			xhr.onload = function(e){
+		  		document.getElementById("roundWinner").innerHTML =  xhr.response;
+		  	} 
+		
+		  	
 		}
 		
         function getDeck(){
