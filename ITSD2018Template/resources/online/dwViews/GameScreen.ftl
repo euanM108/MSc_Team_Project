@@ -74,9 +74,6 @@ body {
   text-decoration: none;
 }
 
-
-
-
 /* Change color on hover */
 .navbar a:hover {
   background-color: #ddd;
@@ -121,18 +118,6 @@ body {
   padding: 20px;
 }
 
-.card {
-
-  /* Add shadows to create the "card" effect */
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 35%;
-  /* 15 pixel rounded corners */
-  border-radius: 15px; 
-  background: #1abc9c;
-  font-family: Helvetica;
-}
-
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -148,93 +133,92 @@ body {
 	width: 100%;
 }
 
-
 img {
   border-radius: 15px 15px 0 0;
 }
 
-                .card-container {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr;
-                    grid-template-rows: 1fr 1fr;
-                    grid-template-areas: ". . ."". . .";
-                    grid-template-areas:
-                        "a b c"
-                        "a d e";
-                }
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: ". . ."". . .";
+    grid-template-areas:
+        "a b c"
+        "d e f";
+}
 
-                .card {
+.card {
 
-                    /* Add shadows to create the "card" effect */
-                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-                    transition: 0.3s;
-                    width: 90%;
-                    /* 15 pixel rounded corners */
-                    border-radius: 15px;
-                    margin: 5% 5% 5% 5%;
-                    background: #1abc9c;
-                    font-family: Helvetica;
-                }
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    width: 90%;
+    /* 15 pixel rounded corners */
+    border-radius: 15px;
+    margin: 5% 5% 5% 5%;
+    background: #1abc9c;
+    font-family: Helvetica;
+}
 
-                .playing-card-1 {
-                    grid-area: a;
-                    align-self: center;
+#playing-card-1 {
+    grid-area: a;
+    align-self: center;
+	text-align: center;
+}
 
-                }
-
-                .playing-card-2 {
-                    grid-area: b;
-                    align-self: center;
-                    text-align: center;
-                }
-
-
-                .playing-card-3 {
-                    grid-area: c;
-                    align-self: center;
-                    text-align: center;
-
-                }
+#playing-card-2 {
+	display: none;
+    grid-area: b;
+    align-self: center;
+    text-align: center;
+}
 
 
-                .playing-card-4 {
-                    grid-area: d;
-                    align-self: center;
-                    text-align: center;
+#playing-card-3 {
+	display: none;
+    grid-area: c;
+    align-self: center;
+    text-align: center;
 
-                }
-
-
-                .playing-card-5 {
-                    grid-area: e;
-                    align-self: center;
-                    text-align: center;
-
-                }
-
-                table.cat-table {
-                    background-color: white;
-                    text-align: center;
-                    width: 100%;
-                    border-collapse: collapse;
-                }
-
-                table.cat-table td,
-                table.cat-table th {
-                    border: 1px solid #AAAAAA;
-                    padding: 3px 2px;
-                }
-
-                table.cat-table tbody td {
-                    font-size: 13px;
-                }
-
-                table.cat-table tfoot td {
-                    font-size: 14px;
-                }
+}
 
 
+#playing-card-4 {
+ 	display: none;
+    grid-area: e;
+    align-self: center;
+    text-align: center;
 
+}
+
+#playing-card-5 {
+	display: none;
+    grid-area: f;
+    align-self: center;
+    text-align: center;
+
+}
+
+table.cat-table {
+    background-color: white;
+    text-align: center;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.cat-table td,
+table.cat-table th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+}
+
+table.cat-table tbody td {
+    font-size: 13px;
+}
+
+table.cat-table tfoot td {
+    font-size: 14px;
+}
 
 }
 
@@ -261,22 +245,18 @@ img {
 }
 
 #btn-next, #btn-submit {
-	display: none;
+ 	display: none;
 }
 
-#roundNum, #roundWinner {
-	display: none;
-  margin: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+#roundNum {
+  display: none;
   transition: 0.3s;
-  width: 30%;
   height: 5%;
-  border-radius: 15px; 
   background: #1abc9c;
   font-family: Helvetica;
   text-align: center;
-  line-height: 25px;
 }
+
 
 </style>
 </head>
@@ -292,7 +272,8 @@ img {
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-
+	<button id="btn-next"; onclick="nextRound(); this.style.display='none';" this.style.display='none';>Next Turn!</button>
+	<button id="btn-submit"; onclick="submit(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
 </div>
 
 				
@@ -302,19 +283,15 @@ img {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck();  roundWinner.style.display='block'; roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck();  roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
-		
-				<p id="roundNum"></p>
-				<p id="roundWinner"></p>
-				<button id="btn-next"; onclick="nextRound(); this.style.display='none';" this.style.display='none';>Next Turn!</button>
-				
-
 	
+				<p id="roundNum"></p> 
+			
             <div class="card-container">
-                <div class="playing-card-1">
+                <div id="playing-card-1">
+                YOU
                     <div class="card">
-
                         <alt="Avatar" style="width:100%">
                             <div class="container">
                                 <h2 id="cardName">Card Name</h2>
@@ -335,7 +312,7 @@ img {
                             </div>
                     </div>
                 </div>
-                <div class="playing-card-2">
+                <div id="playing-card-2">
                     AI PLAYER 1
                     <div class="card">
                         <div class="container">
@@ -372,7 +349,7 @@ img {
                         </div>
                     </div>
                 </div>
-                <div class="playing-card-3">
+                <div id="playing-card-3">
                     AI PLAYER 2
                     <div class="card">
 
@@ -411,7 +388,7 @@ img {
                             </div>
                     </div>
                 </div>
-                <div class="playing-card-4">
+                <div id="playing-card-4">
                     AI PLAYER 3
                     <div class="card">
 
@@ -450,7 +427,7 @@ img {
                             </div>
                     </div>
                 </div>
-                <div class="playing-card-5">
+                <div id="playing-card-5">
                     AI PLAYER 4
                     <div class="card">
 
@@ -490,9 +467,8 @@ img {
                     </div>
                 </div>
             </div>
-
-				<button id="btn-submit"; onclick="submit(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
-
+		
+			
 
 
 
@@ -515,17 +491,21 @@ img {
 		// -----------------------------------------
 		// Add your other Javascript methods Here
 		// -----------------------------------------
-
-		var category_selected;//global variable  
-				
-		function setNumberOfPlayers() {
+		
+		// Global variables
+		var category_selected;
+		var current_round_num;
+		var number_of_players;
+		
+		function setNumberOfPlayers() {		
+		
 			// getting numberOfPlayers from dropdown menu and save as variable players
-		  	var players = document.getElementById('numberOfPlayers').value;
-		  	console.log("The total number of players is " + players)
+		  	var number_of_players = document.getElementById('numberOfPlayers').value;
+		  	console.log("The total number of players is " + number_of_players)
 		  	
 		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
 			var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+players); // Request type and URL+parameters
+			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+number_of_players); // Request type and URL+parameters
 			// Message is not sent yet, but we can check that the browser supports CORS
 			if (!xhr) {
 				alert("CORS not supported");
@@ -539,6 +519,25 @@ img {
 			xhr.onload = function(e) {
 				var responseText = xhr.response; // the text of the response
 				alert(responseText);
+				
+				if(number_of_players == 1) {
+					    	document.getElementById('playing-card-2').style.display='block';
+				}
+				else if(number_of_players == 2){
+					    	document.getElementById('playing-card-2').style.display='block';
+					    	document.getElementById('playing-card-3').style.display='block';
+				}
+				else if(number_of_players == 3){
+					    	document.getElementById('playing-card-2').style.display='block';
+					    	document.getElementById('playing-card-3').style.display='block';
+					    	document.getElementById('playing-card-4').style.display='block';
+				}
+				else if(number_of_players == 4){
+					    	document.getElementById('playing-card-2').style.display='block';
+					    	document.getElementById('playing-card-3').style.display='block';
+					    	document.getElementById('playing-card-4').style.display='block';
+					  		document.getElementById('playing-card-5').style.display='block';
+				}
 			};
 		  }
 
@@ -578,7 +577,7 @@ img {
 			xhr.send()
 			
 			xhr.onload = function(e){
-		  		document.getElementById("roundWinner").innerHTML =  xhr.response;
+		  		document.getElementById("roundNum").innerHTML = "Round number " + current_round_num + ":  " + xhr.response;
 		  	} 
 		
 		  	
@@ -632,8 +631,7 @@ img {
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
 			xhr.send();
 			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("roundNum").innerHTML = "round number is " + responseText;
+		  		current_round_num =  xhr.response;
 		  	} 
 		}
 			  
