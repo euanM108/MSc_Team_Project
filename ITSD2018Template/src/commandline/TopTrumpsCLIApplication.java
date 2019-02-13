@@ -3,6 +3,7 @@ package commandline;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -43,7 +44,7 @@ public class TopTrumpsCLIApplication {
 		FileWriter fw = null;
 		
 		
-		boolean writeGameLogsToFile = true; // Should we write game logs to file? REMOVE FOR PRODUCTION
+		boolean writeGameLogsToFile = false; // Should we write game logs to file? REMOVE FOR PRODUCTION
 		//DatabaseCommunication.connectToDatabase();
 		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		
@@ -98,7 +99,7 @@ public class TopTrumpsCLIApplication {
 		ArrayList<Card> cardSelection = new ArrayList<Card>();
 		ArrayList<Card> communalPile = new ArrayList<Card>();
 	
-				
+		Player.resetPlayerIDCount();		
 		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s);
 		System.out.println("Number of players chosen: " + numberOfPlayers);
 
@@ -129,7 +130,8 @@ public class TopTrumpsCLIApplication {
 			}			
 		}
 
-		
+		resetStatistics(); //sets all the  statistics counters back to 0
+
 		// *** GAMEPLAY BELOW ***		
 		
 		boolean gameInProgress = true; // flag to check whether a game is in progress or not
@@ -139,12 +141,15 @@ public class TopTrumpsCLIApplication {
 			
 			if(gameWon) {
 				//logStatistics();
-				writeWinnerToLog(players, fw);
-				try {
-					fw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+				if(writeGameLogsToFile) {
+					writeWinnerToLog(players, fw);
+					try {
+						fw.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+
 				gameInProgress = false;
 			}
 			
@@ -153,116 +158,117 @@ public class TopTrumpsCLIApplication {
 			// there is no longer a game in progress
 			if (!gameInProgress) {
 				System.out.println("\nEnd of game.");
+				s.nextLine(); //stops the menue interface from displaying twice
 				break;
 			}
 			
-			gameWon = playRound(cardSelection, players, winningIndex, catChoice, fw, writeGameLogsToFile, draw, communalPile);
-			
-		}
-	}
-	
-	public static Boolean playRound(ArrayList<Card> cardSelection, ArrayList<Player> players, int winningIndex, int catChoice, FileWriter fw, boolean writeGameLogsToFile, boolean draw, ArrayList<Card> communalPile) {
-		
-		cardSelection = getTopCards(players, cardSelection);
+			cardSelection = getTopCards(players, cardSelection);
+			//System.out.println(cardSelection);
 
-		// keeps winningIndex under players arrayList size
-		// As players are removed from the game, the index must be reduced
-		while (winningIndex >= players.size()) {
-			winningIndex--;
-		}
 
-		// If human player, call human method getHumanPlayersCatChoice()
-		// If AI Player, call AI method getAIPLayersCatChoice()
-		// Printing out a statement regarding their category choice
-
-		if (players.get(winningIndex).getPlayerID() != 1) {
-			catChoice = players.get(winningIndex).getAIPlayersCatChoice();
-			printCatSelectedStatement(players, catChoice, winningIndex);
-		} else {
-			catChoice = players.get(winningIndex).getHumanPlayersCatChoice();
-			printCatSelectedStatement(players, catChoice, winningIndex);
-		}
-
-		
-		//print current cards in play to log
-		if(writeGameLogsToFile) {
-			writeCurrentCards(cardSelection, fw);
-		}
-
-		
-		//print selected category to log
-		if(writeGameLogsToFile) {
-			writeCatAndValues(cardSelection, catChoice, fw);
-		}
-
-		// find out if the game results in a win or a draw
-		draw = testForDraw(cardSelection, catChoice);
-
-		if (draw) {
-			// if the round is a draw
-			// winning index stays the same
-			// cards are moved to communal pile
-			draws++; //add 1 to the count of draws for the database
-			for (Card tempCard : cardSelection) {
-				communalPile.add(tempCard);
+			// keeps winningIndex under players arrayList size
+			// As players are removed from the game, the index must be reduced
+			while (winningIndex >= players.size()) {
+				winningIndex--;
 			}
+
+			// If human player, call human method getHumanPlayersCatChoice()
+			// If AI Player, call AI method getAIPLayersCatChoice()
+			// Printing out a statement regarding their category choice
+			System.out.println("Round number:  " + noRounds + "\tActive Player:  " + players.get(winningIndex).getPlayerID() + "\tCard Drawn:  " + players.get(winningIndex).getTopCard().getCardName());
+			if (players.get(winningIndex).getPlayerID() != 1) {
+				catChoice = players.get(winningIndex).getAIPlayersCatChoice();
+				printCatSelectedStatement(players, catChoice, winningIndex);
+			} else {
+				catChoice = players.get(winningIndex).getHumanPlayersCatChoice();
+				printCatSelectedStatement(players, catChoice, winningIndex);
+			}
+
 			
-			//print communal pile to log here
+			//print current cards in play to log
 			if(writeGameLogsToFile) {
-				//write the contents of the communal pile
-				writeCommunalPile(communalPile, fw);
+				writeCurrentCards(cardSelection, fw);
 			}
+
 			
-		
-			printDraw(players, catChoice, winningIndex);
-		} else {
-			// if there is not a draw
-			winningIndex = getWinningIndex(cardSelection, catChoice);
-			winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
-			
-							
-			
-			// Giving the winner the cards they won for this round
-			for (int i = 0; i < cardSelection.size(); i++) {
-				players.get(winningIndex).givePlayerCard(cardSelection.get(i));
+			//print selected category to log
+			if(writeGameLogsToFile) {
+				writeCatAndValues(cardSelection, catChoice, fw);
 			}
-			
-			//if there are cards in the communalPile give the player those
-			if(communalPile.size() > 0) {
-				for(int i = 0; i < communalPile.size(); i++){
-					players.get(winningIndex).givePlayerCard(communalPile.get(i));
+
+			// find out if the game results in a win or a draw
+			draw = testForDraw(cardSelection, catChoice);
+
+			if (draw) {
+				// if the round is a draw
+				// winning index stays the same
+				// cards are moved to communal pile
+				draws++; //add 1 to the count of draws for the database
+				for (Card tempCard : cardSelection) {
+					communalPile.add(tempCard);
 				}
-				communalPile.clear();
+				
 				//print communal pile to log here
 				if(writeGameLogsToFile) {
 					//write the contents of the communal pile
 					writeCommunalPile(communalPile, fw);
 				}
-			}
+				
 			
-			// Prints who wins the round
-			printWinStatement(players, catChoice, winningIndex);
-		}
+				printDraw(players, catChoice, winningIndex);
+			} else {
+				// if there is not a draw1
+				winningIndex = getWinningIndex(cardSelection, catChoice);
+				winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
 
-		// clear the current cardSelection
-		cardSelection.clear();
-
-		// remove top cards after round is finished
-		removeCards(players);
-
-		// at the end of each round we write each players deck
-		if (writeGameLogsToFile) {
-			// print each players deck here
-			for (Player p : players) {
-				writePlayerDeckToLog(p, fw);
+								
+				
+				// Giving the winner the cards they won for this round
+				for (int i = 0; i < cardSelection.size(); i++) {
+					players.get(winningIndex).givePlayerCard(cardSelection.get(i));
+				}
+				
+				//if there are cards in the communalPile give the player those
+				if(communalPile.size() > 0) {
+					for(int i = 0; i < communalPile.size(); i++){
+						players.get(winningIndex).givePlayerCard(communalPile.get(i));
+					}
+					communalPile.clear();
+					//print communal pile to log here
+					if(writeGameLogsToFile) {
+						//write the contents of the communal pile
+						writeCommunalPile(communalPile, fw);
+					}
+				}
+				
+				// Prints who wins the round
+				printWinStatement(players, catChoice, winningIndex);
 			}
+
+			// clear the current cardSelection
+			cardSelection.clear();
+
+			// remove top cards after round is finished
+			removeCards(players);
+
+			// at the end of each round we write each players deck
+			if (writeGameLogsToFile) {
+				// print each players deck here
+				for (Player p : players) {
+					writePlayerDeckToLog(p, fw);
+				}
+			}
+
+			gameWon = checkForOverallGameWin(players);
 		}
-		
-		return checkForOverallGameWin(players);
 	}
+	
+
+	
 	
 	private static void writeCatAndValues(ArrayList<Card> cardSelection, int catChoice, FileWriter fw) {
 		String stringToPrint = "The selected Category was: ";
+		//System.out.println(cardSelection);
 		ArrayList<String> catNames = cardSelection.get(0).getCatNames();
 		String selectedCatName = catNames.get(catChoice);
 		stringToPrint += selectedCatName + ".\n\n";
@@ -275,7 +281,7 @@ public class TopTrumpsCLIApplication {
 
 
 	private static void writeCurrentCards(ArrayList<Card> cardSelection, FileWriter fw) {
-		String stringToPrint = "Cards in Play: \n\n";
+		String stringToPrint = "Round number: " + noRounds + "\nCards in Play: \n\n";
 		
 		for(Card c: cardSelection) {		
 			stringToPrint += c.toString() + "\n\n";
@@ -372,9 +378,7 @@ public class TopTrumpsCLIApplication {
 
 	private static void printDraw(ArrayList<Player> players, int catChoice, int winningIndex) {
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "+ getCategory(catChoice) + ". Multiple"
-				+ " player's cards had a value of "
-				+ players.get(winningIndex).getTopCard().getRequestedCat(catChoice) + 
-				" so the round was a draw.");
+				+ " player's cards had the winning value so the round is a draw.");
 		System.out.println();
 	}
 
@@ -540,6 +544,18 @@ public class TopTrumpsCLIApplication {
 		//can only test this on university computers
 		System.out.println(String.format("%d %d %d %d %d %d %d %d", winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins));
 		DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
+	}
+	
+	private static void resetStatistics() {
+		winnerID = 0;
+		draws = 0;
+		noRounds = 0;
+		playerWins = 0;
+		AI1Wins = 0;
+		AI2Wins = 0;
+		AI3Wins = 0;
+		AI4Wins = 0;
+
 	}
 
 	private static int checkForNumberOfPlayers(int numberOfPlayers, Scanner s) {
