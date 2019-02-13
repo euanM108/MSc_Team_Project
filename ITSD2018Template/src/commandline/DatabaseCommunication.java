@@ -68,7 +68,11 @@ public class DatabaseCommunication {
 			double AVGDraws = getAVGDraws();
 			int largestNoRounds = getLargestNoRounds();
 			//basic return string for now, can be altered as required.
-			String statistics = String.format("%d\t%d\t%d\t%.2f\t%d", noGames, AIWins, humanWins, AVGDraws, largestNoRounds);
+			String statistics = String.format("\n\nTotal number of games played:\t%d\n"
+					+ "Number of times the AI has won:\t%d\n"
+					+ "Number of times the Human Player has won:\t%d\n"
+					+ "The average number of draws in a game:\t%.2f\n"
+					+ "The largest number of rounds played in a game:\t%d\n\n", noGames, AIWins, humanWins, AVGDraws, largestNoRounds);
 			System.out.println(statistics);
 			return statistics;
 		}
