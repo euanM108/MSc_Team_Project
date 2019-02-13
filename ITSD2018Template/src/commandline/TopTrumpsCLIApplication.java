@@ -44,7 +44,7 @@ public class TopTrumpsCLIApplication {
 		FileWriter fw = null;
 		
 		
-		boolean writeGameLogsToFile = false; // Should we write game logs to file? REMOVE FOR PRODUCTION
+		boolean writeGameLogsToFile = true; // Should we write game logs to file? REMOVE FOR PRODUCTION
 		//DatabaseCommunication.connectToDatabase();
 		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		
@@ -161,7 +161,7 @@ public class TopTrumpsCLIApplication {
 				s.nextLine(); //stops the menue interface from displaying twice
 				break;
 			}
-			
+			//System.out.println(cardSelection);
 			cardSelection = getTopCards(players, cardSelection);
 			//System.out.println(cardSelection);
 
@@ -192,7 +192,10 @@ public class TopTrumpsCLIApplication {
 
 			
 			//print selected category to log
-			if(writeGameLogsToFile) {
+			if(writeGameLogsToFile && !cardSelection.isEmpty()) {
+				//System.out.println(cardSelection);
+				//System.out.println(catChoice);
+				//System.out.println(fw);
 				writeCatAndValues(cardSelection, catChoice, fw);
 			}
 
@@ -268,7 +271,6 @@ public class TopTrumpsCLIApplication {
 	
 	private static void writeCatAndValues(ArrayList<Card> cardSelection, int catChoice, FileWriter fw) {
 		String stringToPrint = "The selected Category was: ";
-		//System.out.println(cardSelection);
 		ArrayList<String> catNames = cardSelection.get(0).getCatNames();
 		String selectedCatName = catNames.get(catChoice);
 		stringToPrint += selectedCatName + ".\n\n";
@@ -408,6 +410,7 @@ public class TopTrumpsCLIApplication {
 	}
 	
 	private static ArrayList<Card> getTopCards(ArrayList<Player> players, ArrayList<Card> cardSelection) {
+
 		try {
 			// running through each player and storing their top card in the dealers deck
 			for (int i = 0; i < players.size(); i++) {
