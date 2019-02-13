@@ -42,7 +42,7 @@ public class TopTrumpsRESTAPI {
 	private int winnerID;
 	private int winningIndex = 0; // current winning index
 	private int catChoice = 0; // current category choice
-	private int currentRoundNumber = 0;
+	private int currentRoundNumber = 1;
 	private boolean hasPlayerSubmitted;
 	public void removePlayer(int i) {
 		players.remove(i);
@@ -288,24 +288,26 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getRoundWinner")
 	public String getRoundWinner() throws IOException{
+		
 		if (players.get(winningIndex).getPlayerID()==1) {
-			System.out.println("YOU WON THE ROUND");
-			return "You won the round!";
+			return "You won the round! You get to choose the category!";
 		}
 		else {
-			System.out.println("YOU DIDNT WIN THE ROUND");
-		return "Round winner is player " + players.get(winningIndex).getPlayerID();
+		return "Round winner is player " + players.get(winningIndex).getPlayerID() +". Click to reveal the new winner!";
 		}
+		
+	}
+	
+	@GET
+	@Path("/getWinningIndex")
+	public int getWinningIndex() throws IOException{
+		
+		return winningIndex;
 	}
 	
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
-			System.out.println();
-			System.out.println();
-			System.out.println("DECK SIZE: " + players.get(0).getPersonalDeck().size());
-			System.out.println();
-			System.out.println();
 			communalPile = getTopCards(this.players);
 			System.out.println("\n\n\n");
 			for (int i = 0; i<communalPile.size(); i++) {
@@ -319,9 +321,7 @@ public class TopTrumpsRESTAPI {
 			
 			while (winningIndex >= players.size()) {
 				winningIndex--;
-			}
-							
-			currentRoundNumber++;
+			}			
 	}
 	
 	private int getWinningIndex(ArrayList<Card> communalPile, int catChoice) {
@@ -377,7 +377,8 @@ public class TopTrumpsRESTAPI {
 		return false;
 	}
 	
-	private static ArrayList<Card> getTopCards(ArrayList<Player> players) {
+	private ArrayList<Card> getTopCards(ArrayList<Player> players) {
+		currentRoundNumber++;
 		ArrayList<Card> communalPile = new ArrayList<Card>();
 		try {
 			// running through each player and storing their top card in the dealers deck

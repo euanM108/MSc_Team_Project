@@ -128,7 +128,8 @@ body {
   padding: 9px 16px;
 }
 
-.cat-buttons{
+#cat-buttons{
+	disabled: true;
 	display: block;
 	width: 100%;
 }
@@ -238,13 +239,13 @@ table.cat-table tfoot td {
 }
 
 
-#btn-default, #btn-next, #btn-submit{
+#btn-default, #btn-submit{
 	margin: 5px;
 	display: block;
 	padding: 5px;
 }
 
-#btn-next, #btn-submit {
+#btn-submit, #btn-reveal-winner {
  	display: none;
 }
 
@@ -272,8 +273,9 @@ table.cat-table tfoot td {
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-	<button id="btn-next"; onclick="nextRound(); this.style.display='none';" this.style.display='none';>Next Turn!</button>
-	<button id="btn-submit"; onclick="submit(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<!-- <button id="btn-next"; onclick="this.style.display='none';" this.style.display='none';>Next Turn!</button> -->
+	<button id="btn-submit"; onclick="submit(); nextRound(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<button id="btn-reveal-winner"; onclick="submit(); nextRound(); getRoundNumber(); getRoundWinner(); this.style.display='none';">Reveal winner!</button>
 </div>
 
 				
@@ -283,10 +285,10 @@ table.cat-table tfoot td {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck();  roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
 	
-				<p id="roundNum"></p> 
+				<p id="roundNum">Round 1: Choose a category and submit!</p> 
 			
             <div class="card-container">
                 <div id="playing-card-1">
@@ -296,7 +298,7 @@ table.cat-table tfoot td {
                             <div class="container">
                                 <h2 id="cardName">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
-                                <div class="cat-buttons">
+                                <div id="cat-buttons">
                                     <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size
                                     </button>
                                     <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed
@@ -540,7 +542,8 @@ table.cat-table tfoot td {
 				}
 			};
 		  }
-
+		
+		
 		function setCategory(clicked_id) {
 			document.getElementById('btn-submit').style.display='block';
 			category_selected = clicked_id;
@@ -578,10 +581,50 @@ table.cat-table tfoot td {
 			
 			xhr.onload = function(e){
 		  		document.getElementById("roundNum").innerHTML = "Round number " + current_round_num + ":  " + xhr.response;
+		  		
+		  		var xhrWinningIndex = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
+				// Message is not sent yet, but we can check that the browser supports CORS
+				if (!xhrWinningIndex) {
+					alert("CORS not supported");
+				}
+				
+				// We have done everything we need to prepare the CORS request, so send it
+				xhrWinningIndex.send()
+				
+				xhrWinningIndex.onload = function(e){
+				
+		  		var winningIndex = xhrWinningIndex.response; // the text of the response
+		  		
+		  		if (winningIndex != 0){
+		  			document.getElementById("btn-reveal-winner").style.display = 'block';
+		  			document.getElementById("btn-next").style.display = 'none';
+		  			document.getElementById("btn-submit").style.display = 'none';
+		  			
+		  			disableButtons();
+		  		}
+		  		else {
+		  			enableButtons();
+		  		}
+		  		}
 		  	} 
-		
-		  	
 		}
+		
+		function disableButtons(){
+			document.getElementById("1").disabled = true;
+			document.getElementById("2").disabled = true;
+			document.getElementById("3").disabled = true;
+			document.getElementById("4").disabled = true;
+			document.getElementById("5").disabled = true;
+		}
+		
+		function enableButtons(){
+			document.getElementById("1").disabled = false;
+			document.getElementById("2").disabled = false;
+			document.getElementById("3").disabled = false;
+			document.getElementById("4").disabled = false;
+			document.getElementById("5").disabled = false;
+		}
+		
 		
         function getDeck(){
 		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
@@ -621,9 +664,8 @@ table.cat-table tfoot td {
 		  		getCategories();
 		  	} 
 		}
-		  
 		
-		
+	
 		
 		
 		
