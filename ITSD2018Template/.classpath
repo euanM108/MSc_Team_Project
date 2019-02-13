@@ -14,7 +14,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="src/Libs/postgresql-42.2.5.jar"/>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="lib" path="/application/dependencies/je-7.5.11.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
