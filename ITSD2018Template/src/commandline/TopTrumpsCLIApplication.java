@@ -137,7 +137,12 @@ public class TopTrumpsCLIApplication {
 		boolean gameInProgress = true; // flag to check whether a game is in progress or not
 
 		// Loop until the current game is over
-		while (gameInProgress) {				
+		while (gameInProgress) {		
+			
+			cardSelection = getTopCards(players, cardSelection);
+			
+			gameWon = checkForOverallGameWin(players);
+
 			
 			if(gameWon) {
 				//logStatistics();
@@ -161,10 +166,7 @@ public class TopTrumpsCLIApplication {
 				s.nextLine(); //stops the menue interface from displaying twice
 				break;
 			}
-			//System.out.println(cardSelection);
-			cardSelection = getTopCards(players, cardSelection);
-			//System.out.println(cardSelection);
-
+			
 
 			// keeps winningIndex under players arrayList size
 			// As players are removed from the game, the index must be reduced
@@ -262,7 +264,6 @@ public class TopTrumpsCLIApplication {
 				}
 			}
 
-			gameWon = checkForOverallGameWin(players);
 		}
 	}
 	
