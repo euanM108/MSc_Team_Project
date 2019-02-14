@@ -314,7 +314,7 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-2">
-                    AI PLAYER 1
+                    PLAYER 2 (AI)
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
@@ -351,7 +351,7 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-3">
-                    AI PLAYER 2
+                    PLAYER 3 (AI)
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -390,7 +390,7 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-4">
-                    AI PLAYER 3
+                    PLAYER 4 (AI)
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -429,7 +429,7 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-5">
-                    AI PLAYER 4
+                    PLAYER 5 (AI)
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
