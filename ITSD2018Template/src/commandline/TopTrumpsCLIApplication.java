@@ -32,6 +32,12 @@ public class TopTrumpsCLIApplication {
 	private static int AI2Wins;
 	private static int AI3Wins;
 	private static int AI4Wins;
+	
+	private static String cat1Name;
+	private static String cat2Name;
+	private static String cat3Name;
+	private static String cat4Name;
+	private static String cat5Name;
 
 
 	public static void main(String[] args) {
@@ -112,7 +118,11 @@ public class TopTrumpsCLIApplication {
 		}
 
 		createPlayers(players, numberOfPlayers);
-
+		
+		ArrayList<String> catNames = new ArrayList<String>(deck.get(0).getCatNames());//get description and cat names from card
+		
+		setCatNames(catNames); //set up the card names for the switch case
+		
 		deck = shuffleDeck(deck);
 		Collections.shuffle(players);//shuffle the players so the starting player is random
 		
@@ -268,7 +278,14 @@ public class TopTrumpsCLIApplication {
 	}
 	
 
-	
+	private static void setCatNames(ArrayList<String> catNames){
+		setCat1Name(catNames.get(1));
+		setCat2Name(catNames.get(2));
+		setCat3Name(catNames.get(3));
+		setCat4Name(catNames.get(4));
+		setCat5Name(catNames.get(5));
+		
+	}
 	
 	private static void writeCatAndValues(ArrayList<Card> cardSelection, int catChoice, FileWriter fw) {
 		String stringToPrint = "The selected Category was: ";
@@ -515,19 +532,19 @@ public class TopTrumpsCLIApplication {
 		String category = "";
 		switch (i) {
 		case 1:
-			category = "Size";
+			category = getCat1Name();
 			break;
 		case 2:
-			category = "Speed";
+			category = getCat2Name();
 			break;
 		case 3:
-			category = "Range";
+			category = getCat3Name();
 			break;
 		case 4:
-			category = "Firepower";
+			category = getCat4Name();
 			break;
 		case 5:
-			category = "Cargo";
+			category = getCat5Name();
 			break;
 
 		}
@@ -585,5 +602,45 @@ public class TopTrumpsCLIApplication {
 						+ "   ╚��    ╚������ ╚��            ╚��   ╚��  ╚�� ╚������ ╚��     ╚��╚��     ╚�������\n"
 						+ "                                                                                   \n" + "\n"
 						+ "");
+	}
+
+	public static String getCat1Name() {
+		return cat1Name;
+	}
+
+	public static void setCat1Name(String cat1Name) {
+		TopTrumpsCLIApplication.cat1Name = cat1Name;
+	}
+
+	public static String getCat2Name() {
+		return cat2Name;
+	}
+
+	public static void setCat2Name(String cat2Name) {
+		TopTrumpsCLIApplication.cat2Name = cat2Name;
+	}
+
+	public static String getCat3Name() {
+		return cat3Name;
+	}
+
+	public static void setCat3Name(String cat3Name) {
+		TopTrumpsCLIApplication.cat3Name = cat3Name;
+	}
+
+	public static String getCat4Name() {
+		return cat4Name;
+	}
+
+	public static void setCat4Name(String cat4Name) {
+		TopTrumpsCLIApplication.cat4Name = cat4Name;
+	}
+
+	public static String getCat5Name() {
+		return cat5Name;
+	}
+
+	public static void setCat5Name(String cat5Name) {
+		TopTrumpsCLIApplication.cat5Name = cat5Name;
 	}
 }
