@@ -183,22 +183,37 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getCardName")
 	public String getCardName() throws IOException{
-		for (int i=0; i<players.size(); i++) {
-			if (players.get(i).getPlayerID()==1) {
-				return players.get(i).getTopCard().getCardName();
-			}
-		}
-		return "no name";
+	
+				return players.get(0).getTopCard().getCardName();
+	
 	}
 	
-	@GET // unused 
-	@Path("/getPlayersCardNames")
-	public ArrayList<String> getPlayersCardNames() throws IOException{
-		ArrayList<String> playersCardNames = null;
-		for (int i = 1; i<players.size(); i++) {
-			playersCardNames.add(players.get(i).getTopCard().getCardName());
-		}
-		return playersCardNames;
+	@GET
+	@Path("/getPlayer2CardName")
+	public String getPlayer2CardName() throws IOException{
+		System.out.println("Player 2 top card is : " + players.get(1).getTopCard().getCardName());
+		return players.get(1).getTopCard().getCardName();
+	}
+	
+	@GET
+	@Path("/getPlayer3CardName")
+	public String getPlayer3CardName() throws IOException{
+		System.out.println("Player 3 top card is : " + players.get(2).getTopCard().getCardName());
+		return players.get(2).getTopCard().getCardName();
+	}
+	
+	@GET
+	@Path("/getPlayer4CardName")
+	public String getPlayer4CardName() throws IOException{
+		System.out.println("Player 4 top card is : " + players.get(3).getTopCard().getCardName());
+		return players.get(3).getTopCard().getCardName();
+	}
+	
+	@GET
+	@Path("/getPlayer5CardName")
+	public String getPlayer5CardName() throws IOException{
+		System.out.println("Player 5 top card is : " + players.get(4).getTopCard().getCardName());
+		return players.get(4).getTopCard().getCardName();
 	}
 	
 	@GET

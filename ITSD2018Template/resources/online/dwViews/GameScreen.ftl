@@ -273,7 +273,7 @@ table.cat-table tfoot td {
 
   <a href="/toptrumps/">Exit</a>
 	<!-- <button id="btn-next"; onclick="this.style.display='none';" this.style.display='none';>Next Turn!</button> -->
-	<button id="btn-submit"; onclick="nextRound(); submit();  document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<button id="btn-submit"; onclick="nextRound(); submit();  disableButtons(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
 	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); getRoundWinner(); this.style.display='none';">Reveal winner!</button>
 </div>
 
@@ -284,7 +284,7 @@ table.cat-table tfoot td {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
 	
 				<p id="roundNum">Round 1: Choose a category and submit!</p> 
@@ -298,15 +298,15 @@ table.cat-table tfoot td {
                                 <h2 id="cardName">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
                                 <div id="cat-buttons">
-                                    <button id="1" onclick=setCategory(this.id) style="width: 100%; display: block;">Size
+                                    <button id="1" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Size
                                     </button>
-                                    <button id="2" onclick=setCategory(this.id) style="width: 100%; display: block;">Speed
+                                    <button id="2" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Speed
                                     </button>
-                                    <button id="3" onclick=setCategory(this.id) style="width: 100%; display: block;">Range
+                                    <button id="3" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Range
                                     </button>
-                                    <button id="4" onclick=setCategory(this.id) style="width: 100%; display: block;">Firepower
+                                    <button id="4" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Firepower
                                     </button>
-                                    <button id="5" onclick=setCategory(this.id) style="width: 100%; display: block;">Cargo
+                                    <button id="5" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Cargo
                                     </button>
                                 </div>
 
@@ -501,7 +501,7 @@ table.cat-table tfoot td {
 		function setNumberOfPlayers() {		
 		
 			// getting numberOfPlayers from dropdown menu and save as variable players
-		  	var number_of_players = document.getElementById('numberOfPlayers').value;
+		  	number_of_players = document.getElementById('numberOfPlayers').value;
 		  	console.log("The total number of players is " + number_of_players)
 		  	
 		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
@@ -523,21 +523,26 @@ table.cat-table tfoot td {
 				
 				if(number_of_players == 1) {
 					    	document.getElementById('playing-card-2').style.display='block';
+					    	
 				}
 				else if(number_of_players == 2){
 					    	document.getElementById('playing-card-2').style.display='block';
 					    	document.getElementById('playing-card-3').style.display='block';
+					  
+					    	
 				}
 				else if(number_of_players == 3){
 					    	document.getElementById('playing-card-2').style.display='block';
 					    	document.getElementById('playing-card-3').style.display='block';
 					    	document.getElementById('playing-card-4').style.display='block';
+					    
 				}
 				else if(number_of_players == 4){
 					    	document.getElementById('playing-card-2').style.display='block';
 					    	document.getElementById('playing-card-3').style.display='block';
 					    	document.getElementById('playing-card-4').style.display='block';
 					  		document.getElementById('playing-card-5').style.display='block';
+					  	
 				}
 			};
 		  }
@@ -600,13 +605,31 @@ table.cat-table tfoot td {
 		  			document.getElementById("btn-next").style.display = 'none';
 		  			document.getElementById("btn-submit").style.display = 'none';
 		  			
-		  			// disable buttons here
+		  			disableButtons();
+		  		}
+		  		else {
+		  			enableButtons();
 		  		}
 		  		
 		  		}
 		  	} 
 		}
 		
+		function disableButtons(){
+			document.getElementById("1").disabled = true;
+			document.getElementById("2").disabled = true;
+			document.getElementById("3").disabled = true;
+			document.getElementById("4").disabled = true;
+			document.getElementById("5").disabled = true;
+		}
+		
+		function enableButtons(){
+			document.getElementById("1").disabled = false;
+			document.getElementById("2").disabled = false;
+			document.getElementById("3").disabled = false;
+			document.getElementById("4").disabled = false;
+			document.getElementById("5").disabled = false;
+		}
 		
         function getDeck(){
 		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
@@ -644,8 +667,32 @@ table.cat-table tfoot td {
 		  		getRoundNumber();
 		  		getCardName();
 		  		getCategories();
+		  		
+		  		if (number_of_players == 1){
+		  			getPlayer2CardName();
+		  			}
+		  		else if(number_of_players == 2){
+		  			getPlayer2CardName();
+		  			getPlayer3CardName();
+		  			}
+		  		else if(number_of_players == 3){
+		  			getPlayer2CardName();
+		  			getPlayer3CardName();
+		  			getPlayer4CardName();
+		  			}
+		  		else if(number_of_players == 4){
+		  			getPlayer2CardName();
+		  			getPlayer3CardName();
+		  			getPlayer4CardName();
+		  			getPlayer5CardName();
+		  			}	
+		  			
+		  
+		  		
 		  	} 
 		}
+		
+		
 		
 		function getRoundNumber(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
@@ -715,6 +762,42 @@ table.cat-table tfoot td {
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
 		  		document.getElementById("cardName").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer2CardName(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardName");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("cardName-p2").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+		function getPlayer3CardName(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("cardName-p3").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer4CardName(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer4CardName");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("cardName-p4").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer5CardName(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer5CardName");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("cardName-p5").innerHTML = responseText;
 		  	} 
 	  	}
 			  
