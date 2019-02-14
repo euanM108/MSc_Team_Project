@@ -305,10 +305,10 @@ public class TopTrumpsRESTAPI {
 	public String getRoundWinner() throws IOException{
 		
 		if (players.get(winningIndex).getPlayerID()==1) {
-			return "You won the round! You get to choose the category!";
+			return "You won round " + (currentRoundNumber -1) + "! You get to choose the category!";
 		}
 		else {
-		return "Round winner is player " + players.get(winningIndex).getPlayerID() +". Click to reveal the new winner!";
+		return "Player " + players.get(winningIndex).getPlayerID() +" was the winner of round " + (currentRoundNumber -1) + ". Click to reveal the winner of round " + currentRoundNumber + "!";
 		}
 		
 	}
@@ -316,7 +316,6 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getWinningIndex")
 	public int getWinningIndex() throws IOException{
-		
 		return winningIndex;
 	}
 	

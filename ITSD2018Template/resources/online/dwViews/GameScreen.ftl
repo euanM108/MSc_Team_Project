@@ -273,8 +273,8 @@ table.cat-table tfoot td {
 
   <a href="/toptrumps/">Exit</a>
 	<!-- <button id="btn-next"; onclick="this.style.display='none';" this.style.display='none';>Next Turn!</button> -->
-	<button id="btn-submit"; onclick="nextRound(); submit();  disableButtons(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
-	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); getRoundWinner(); this.style.display='none';">Reveal winner!</button>
+	<button id="btn-submit"; onclick="nextRound(); submit(); getRoundNumber(); disableButtons(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); this.style.display='none';">Reveal winner!</button>
 </div>
 
 				
