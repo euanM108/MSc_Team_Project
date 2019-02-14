@@ -195,10 +195,76 @@ public class TopTrumpsRESTAPI {
 	}
 	
 	@GET
+	@Path("/getPlayer2CardValue1")
+	public String getPlayer2CardValue1() throws IOException{
+		return "" + players.get(1).getTopCard().getCat1Value();
+	}
+	
+	@GET
+	@Path("/getPlayer2CardValue2")
+	public String getPlayer2CardValue2() throws IOException{
+		return "" + players.get(1).getTopCard().getCat2Value();
+	}
+	
+	@GET
+	@Path("/getPlayer2CardValue3")
+	public String getPlayer2CardValue3() throws IOException{
+		return "" + players.get(1).getTopCard().getCat3Value();
+	}
+	
+	@GET
+	@Path("/getPlayer2CardValue4")
+	public String getPlayer2CardValue4() throws IOException{
+		return "" + players.get(1).getTopCard().getCat4Value();
+	}
+	
+	@GET
+	@Path("/getPlayer2CardValue5")
+	public String getPlayer2CardValue5() throws IOException{
+		return "" + players.get(1).getTopCard().getCat5Value();
+	}
+	
+
+	@GET
 	@Path("/getPlayer3CardName")
 	public String getPlayer3CardName() throws IOException{
 		return players.get(2).getTopCard().getCardName();
 	}
+	
+	@GET
+	@Path("/getPlayer3CardValue1")
+	public String getPlayer3CardValue1() throws IOException{
+		return "" + players.get(2).getTopCard().getCat1Value();
+	}
+	
+	@GET
+	@Path("/getPlayer3CardValue2")
+	public String getPlayer3CardValue2() throws IOException{
+		return "" + players.get(2).getTopCard().getCat2Value();
+	}
+	
+	@GET
+	@Path("/getPlayer3CardValue3")
+	public String getPlayer3CardValue3() throws IOException{
+		return "" + players.get(2).getTopCard().getCat3Value();
+	}
+	
+	@GET
+	@Path("/getPlayer3CardValue4")
+	public String getPlayer3CardValue4() throws IOException{
+		return "" + players.get(2).getTopCard().getCat4Value();
+	}
+	
+	@GET
+	@Path("/getPlayer3CardValue5")
+	public String getPlayer3CardValue5() throws IOException{
+		return "" + players.get(2).getTopCard().getCat5Value();
+	}
+	
+	
+	
+	
+	
 	
 	@GET
 	@Path("/getPlayer4CardName")
@@ -264,11 +330,6 @@ public class TopTrumpsRESTAPI {
 		}
 		
 		winningIndex = getWinningIndex(centralDeck, catChoice);
-		
-		// Giving the winner the cards they won for this round
-		for (int i = 0; i < centralDeck.size(); i++) {
-			players.get(winningIndex).givePlayerCard(centralDeck.get(i));
-		}
 		
 		//if there are cards in the centralDeck give the player those
 		if(centralDeck.size() > 0) {

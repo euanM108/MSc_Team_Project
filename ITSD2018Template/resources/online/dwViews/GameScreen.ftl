@@ -324,23 +324,23 @@ table.cat-table tfoot td {
                                     <tbody>
                                         <tr>
                                             <td>cell1_1</td>
-                                            <td>cell2_1</td>
+                                            <td><p id="p2CardValue1"></p></td>
                                         </tr>
                                         <tr>
                                             <td>cell1_2</td>
-                                            <td>cell2_2</td>
+                                            <td><p id="p2CardValue2"></p></td>
                                         </tr>
                                         <tr>
                                             <td>cell1_3</td>
-                                            <td>cell2_3</td>
+                                            <td><p id="p2CardValue3"></p></td>
                                         </tr>
                                         <tr>
                                             <td>cell1_4</td>
-                                            <td>cell2_4</td>
+                                            <td><p id="p2CardValue4"></p></td>
                                         </tr>
                                         <tr>
                                             <td>cell1_5</td>
-                                            <td>cell2_5</td>
+                                            <td><p id="p2CardValue5"></p></td>
                                         </tr>
                                     </tbody>
                                     </tr>
@@ -363,23 +363,23 @@ table.cat-table tfoot td {
                                             <tbody>
                                                 <tr>
                                                     <td>cell1_1</td>
-                                                    <td>cell2_1</td>
+                                                    <td><p id="p3CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_2</td>
-                                                    <td>cell2_2</td>
+                                                    <td><p id="p3CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_3</td>
-                                                    <td>cell2_3</td>
+                                                    <td><p id="p3CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_4</td>
-                                                    <td>cell2_4</td>
+                                                    <td><p id="p3CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_5</td>
-                                                    <td>cell2_5</td>
+                                                    <td><p id="p3CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
                                             </tr>
@@ -670,30 +670,49 @@ table.cat-table tfoot td {
 		  		
 		  		if (number_of_players == 1){
 		  			getPlayer2CardName();
+		  			getPlayer2CardValues();
 		  			}
 		  		else if(number_of_players == 2){
 		  			getPlayer2CardName();
+		  			getPlayer2CardValues();
 		  			getPlayer3CardName();
+		  			getPlayer3CardValues();
+		  			
 		  			}
 		  		else if(number_of_players == 3){
 		  			getPlayer2CardName();
+		  			getPlayer2CardValues();
 		  			getPlayer3CardName();
+		  			getPlayer3CardValues();
 		  			getPlayer4CardName();
 		  			}
 		  		else if(number_of_players == 4){
 		  			getPlayer2CardName();
+		  			getPlayer2CardValues();
 		  			getPlayer3CardName();
+		  			getPlayer3CardValues();
 		  			getPlayer4CardName();
 		  			getPlayer5CardName();
 		  			}	
-		  			
-		  
-		  		
 		  	} 
 		}
 		
+		function getPlayer2CardValues(){
+			getPlayer2CardValue1();
+  			getPlayer2CardValue2();
+  			getPlayer2CardValue3();
+  			getPlayer2CardValue4();
+  			getPlayer2CardValue5();
+		  }
 		
-		
+		function getPlayer3CardValues(){
+			getPlayer3CardValue1();
+  			getPlayer3CardValue2();
+  			getPlayer3CardValue3();
+  			getPlayer3CardValue4();
+  			getPlayer3CardValue5();
+		  }
+		  
 		function getRoundNumber(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
 			xhr.send();
@@ -716,7 +735,8 @@ table.cat-table tfoot td {
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("1").innerHTML = "Size      " +responseText;
+		  		var b = "&nbsp;";
+		  		document.getElementById("1").innerHTML = "Size" +b+b+b+b+b+b+b+b+b+b+b+responseText;
 		  	} 
 		}
 			  
@@ -725,7 +745,8 @@ table.cat-table tfoot td {
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("2").innerHTML = "Speed     " +responseText;
+		  		var b = "&nbsp;";
+		  		document.getElementById("2").innerHTML = "Speed" +b+b+b+b+b+b +responseText;
 		  	} 
 		}
 		  
@@ -734,7 +755,8 @@ table.cat-table tfoot td {
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("3").innerHTML = "Range     "+responseText;
+		  		var b = "&nbsp;";
+		  		document.getElementById("3").innerHTML = "Range"+b+b+b+b+b+b+responseText;
 		  	} 
 		}
 		  
@@ -743,6 +765,7 @@ table.cat-table tfoot td {
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
+		  		var b = "&nbsp;";
 		  		document.getElementById("4").innerHTML = "Firepower " +responseText;
 		  	} 
 		}
@@ -752,7 +775,8 @@ table.cat-table tfoot td {
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("5").innerHTML = "Cargo     "+responseText;
+		  		var b = "&nbsp;";
+		  		document.getElementById("5").innerHTML = "Cargo"+b+b+b+b+b+b+b+responseText;
 		  	} 
 		}
 		
@@ -765,6 +789,10 @@ table.cat-table tfoot td {
 		  	} 
 	  	}
 	  	
+	  	
+	  	
+	  	// PLAYER 2 CARD NAME AND CARD VALUES
+	  	
 	  	function getPlayer2CardName(){
 	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardName");
 			xhr.send();
@@ -773,6 +801,113 @@ table.cat-table tfoot td {
 		  		document.getElementById("cardName-p2").innerHTML = responseText;
 		  	} 
 	  	}
+	  	
+	  	function getPlayer2CardValue1(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue1");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p2CardValue1").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer2CardValue2(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue2");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p2CardValue2").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer2CardValue3(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue3");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p2CardValue3").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer2CardValue4(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue4");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p2CardValue4").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer2CardValue5(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue5");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p2CardValue5").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	
+	  	
+	  	// PLAYER 3 CARD NAME AND CARD VALUES
+	  	function getPlayer3CardValue1(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue1");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p3CardValue1").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer3CardValue2(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue2");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p3CardValue2").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer3CardValue3(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue3");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p3CardValue3").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer3CardValue4(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue4");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p3CardValue4").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	function getPlayer3CardValue5(){
+	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue5");
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		console.log(responseText);
+		  		document.getElementById("p3CardValue5").innerHTML = responseText;
+		  	} 
+	  	}
+	  	
+	  	
+	  	
+	  	
 	  	
 		function getPlayer3CardName(){
 	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
