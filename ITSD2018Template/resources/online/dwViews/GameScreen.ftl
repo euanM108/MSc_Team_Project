@@ -129,7 +129,6 @@ body {
 }
 
 #cat-buttons{
-	disabled: true;
 	display: block;
 	width: 100%;
 }
@@ -274,8 +273,8 @@ table.cat-table tfoot td {
 
   <a href="/toptrumps/">Exit</a>
 	<!-- <button id="btn-next"; onclick="this.style.display='none';" this.style.display='none';>Next Turn!</button> -->
-	<button id="btn-submit"; onclick="submit(); nextRound(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
-	<button id="btn-reveal-winner"; onclick="submit(); nextRound(); getRoundNumber(); getRoundWinner(); this.style.display='none';">Reveal winner!</button>
+	<button id="btn-submit"; onclick="nextRound(); submit();  document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); getRoundWinner(); this.style.display='none';">Reveal winner!</button>
 </div>
 
 				
@@ -285,7 +284,7 @@ table.cat-table tfoot td {
 					<option value="3">3</option>
 					<option value="4">4</option>
 				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
 					>Begin!</button>
 	
 				<p id="roundNum">Round 1: Choose a category and submit!</p> 
@@ -580,6 +579,7 @@ table.cat-table tfoot td {
 			xhr.send()
 			
 			xhr.onload = function(e){
+				
 		  		document.getElementById("roundNum").innerHTML = "Round number " + current_round_num + ":  " + xhr.response;
 		  		
 		  		var xhrWinningIndex = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
@@ -600,29 +600,11 @@ table.cat-table tfoot td {
 		  			document.getElementById("btn-next").style.display = 'none';
 		  			document.getElementById("btn-submit").style.display = 'none';
 		  			
-		  			disableButtons();
+		  			// disable buttons here
 		  		}
-		  		else {
-		  			enableButtons();
-		  		}
+		  		
 		  		}
 		  	} 
-		}
-		
-		function disableButtons(){
-			document.getElementById("1").disabled = true;
-			document.getElementById("2").disabled = true;
-			document.getElementById("3").disabled = true;
-			document.getElementById("4").disabled = true;
-			document.getElementById("5").disabled = true;
-		}
-		
-		function enableButtons(){
-			document.getElementById("1").disabled = false;
-			document.getElementById("2").disabled = false;
-			document.getElementById("3").disabled = false;
-			document.getElementById("4").disabled = false;
-			document.getElementById("5").disabled = false;
 		}
 		
 		
@@ -664,10 +646,6 @@ table.cat-table tfoot td {
 		  		getCategories();
 		  	} 
 		}
-		
-	
-		
-		
 		
 		function getRoundNumber(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
