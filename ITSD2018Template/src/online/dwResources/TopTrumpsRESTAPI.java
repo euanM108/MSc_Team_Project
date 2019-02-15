@@ -183,9 +183,30 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getCardName")
 	public String getCardName() throws IOException{
+		return players.get(0).getTopCard().getCardName();
+	}
 	
-				return players.get(0).getTopCard().getCardName();
-	
+	@GET
+	@Path("/getPlayer1CardValue")
+	public int getPlayer1CardValue(@QueryParam("i") String i) throws IOException {
+		int category = Integer.parseInt(i);
+		
+		if (category == 1) {
+			return players.get(0).getTopCard().getCat1Value();
+		}
+		else if (category ==2) {
+			return players.get(0).getTopCard().getCat2Value();
+		}
+		else if (category ==3) {
+			return players.get(0).getTopCard().getCat3Value();
+		}
+		else if(category ==4) {
+			return players.get(0).getTopCard().getCat4Value();
+		}
+		else if(category ==5) {
+			return players.get(0).getTopCard().getCat5Value();
+		}
+		return -1;
 	}
 	
 	@GET
@@ -194,34 +215,28 @@ public class TopTrumpsRESTAPI {
 		return players.get(1).getTopCard().getCardName();
 	}
 	
-	@GET
-	@Path("/getPlayer2CardValue1")
-	public String getPlayer2CardValue1() throws IOException{
-		return "" + players.get(1).getTopCard().getCat1Value();
-	}
 	
 	@GET
-	@Path("/getPlayer2CardValue2")
-	public String getPlayer2CardValue2() throws IOException{
-		return "" + players.get(1).getTopCard().getCat2Value();
-	}
-	
-	@GET
-	@Path("/getPlayer2CardValue3")
-	public String getPlayer2CardValue3() throws IOException{
-		return "" + players.get(1).getTopCard().getCat3Value();
-	}
-	
-	@GET
-	@Path("/getPlayer2CardValue4")
-	public String getPlayer2CardValue4() throws IOException{
-		return "" + players.get(1).getTopCard().getCat4Value();
-	}
-	
-	@GET
-	@Path("/getPlayer2CardValue5")
-	public String getPlayer2CardValue5() throws IOException{
-		return "" + players.get(1).getTopCard().getCat5Value();
+	@Path("/getPlayer2CardValue")
+	public int getPlayer2CardValue(@QueryParam("i") String i) throws IOException {
+		int category = Integer.parseInt(i);
+		
+		if (category == 1) {
+			return players.get(1).getTopCard().getCat1Value();
+		}
+		else if (category ==2) {
+			return players.get(1).getTopCard().getCat2Value();
+		}
+		else if (category ==3) {
+			return players.get(1).getTopCard().getCat3Value();
+		}
+		else if(category ==4) {
+			return players.get(1).getTopCard().getCat4Value();
+		}
+		else if(category ==5) {
+			return players.get(1).getTopCard().getCat5Value();
+		}
+		return -1;
 	}
 	
 
@@ -232,40 +247,29 @@ public class TopTrumpsRESTAPI {
 	}
 	
 	@GET
-	@Path("/getPlayer3CardValue1")
-	public String getPlayer3CardValue1() throws IOException{
-		return "" + players.get(2).getTopCard().getCat1Value();
+	@Path("/getPlayer3CardValue")
+	public int getPlayer3CardValue(@QueryParam("i") String i) throws IOException {
+		int category = Integer.parseInt(i);
+		
+		if (category == 1) {
+			return players.get(2).getTopCard().getCat1Value();
+		}
+		else if (category ==2) {
+			return players.get(2).getTopCard().getCat2Value();
+		}
+		else if (category ==3) {
+			return players.get(2).getTopCard().getCat3Value();
+		}
+		else if(category ==4) {
+			return players.get(2).getTopCard().getCat4Value();
+		}
+		else if(category ==5) {
+			return players.get(2).getTopCard().getCat5Value();
+		}
+		return -1;
 	}
 	
-	@GET
-	@Path("/getPlayer3CardValue2")
-	public String getPlayer3CardValue2() throws IOException{
-		return "" + players.get(2).getTopCard().getCat2Value();
-	}
-	
-	@GET
-	@Path("/getPlayer3CardValue3")
-	public String getPlayer3CardValue3() throws IOException{
-		return "" + players.get(2).getTopCard().getCat3Value();
-	}
-	
-	@GET
-	@Path("/getPlayer3CardValue4")
-	public String getPlayer3CardValue4() throws IOException{
-		return "" + players.get(2).getTopCard().getCat4Value();
-	}
-	
-	@GET
-	@Path("/getPlayer3CardValue5")
-	public String getPlayer3CardValue5() throws IOException{
-		return "" + players.get(2).getTopCard().getCat5Value();
-	}
-	
-	
-	
-	
-	
-	
+
 	@GET
 	@Path("/getPlayer4CardName")
 	public String getPlayer4CardName() throws IOException{
@@ -273,40 +277,61 @@ public class TopTrumpsRESTAPI {
 	}
 	
 	@GET
+	@Path("/getPlayer4CardValue")
+	public int getPlayer4CardValue(@QueryParam("i") String i) throws IOException {
+		int category = Integer.parseInt(i);
+		
+		if (category == 1) {
+			return players.get(3).getTopCard().getCat1Value();
+		}
+		else if (category ==2) {
+			return players.get(3).getTopCard().getCat2Value();
+		}
+		else if (category ==3) {
+			return players.get(3).getTopCard().getCat3Value();
+		}
+		else if(category ==4) {
+			return players.get(3).getTopCard().getCat4Value();
+		}
+		else if(category ==5) {
+			return players.get(3).getTopCard().getCat5Value();
+		}
+		return -1;
+	}
+	
+	
+	
+	
+	@GET
 	@Path("/getPlayer5CardName")
 	public String getPlayer5CardName() throws IOException{
 		return players.get(4).getTopCard().getCardName();
 	}
 	
-	@GET
-	@Path("/getCat1")
-	public String getCat1() throws IOException{
-		return players.get(0).getTopCard().getCat1Value() +"";
-	}
 	
 	@GET
-	@Path("/getCat2")
-	public String getCat2() throws IOException{
-		return players.get(0).getTopCard().getCat2Value() +"";
+	@Path("/getPlayer5CardValue")
+	public int getPlayer5CardValue(@QueryParam("i") String i) throws IOException {
+		int category = Integer.parseInt(i);
+		
+		if (category == 1) {
+			return players.get(4).getTopCard().getCat1Value();
+		}
+		else if (category ==2) {
+			return players.get(4).getTopCard().getCat2Value();
+		}
+		else if (category ==3) {
+			return players.get(4).getTopCard().getCat3Value();
+		}
+		else if(category ==4) {
+			return players.get(4).getTopCard().getCat4Value();
+		}
+		else if(category ==5) {
+			return players.get(4).getTopCard().getCat5Value();
+		}
+		return -1;
 	}
 	
-	@GET
-	@Path("/getCat3")
-	public String getCat3() throws IOException{
-		return players.get(0).getTopCard().getCat3Value() +"";
-	}
-	
-	@GET
-	@Path("/getCat4")
-	public String getCat4() throws IOException{
-		return players.get(0).getTopCard().getCat4Value() +"";
-	}
-	
-	@GET
-	@Path("/getCat5")
-	public String getCat5() throws IOException{
-		return players.get(0).getTopCard().getCat5Value() +"";
-	}
 	
 	@GET
 	@Path("/submit_category")

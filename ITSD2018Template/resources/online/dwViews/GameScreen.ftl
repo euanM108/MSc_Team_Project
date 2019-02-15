@@ -272,8 +272,7 @@ table.cat-table tfoot td {
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-	<!-- <button id="btn-next"; onclick="this.style.display='none';" this.style.display='none';>Next Turn!</button> -->
-	<button id="btn-submit"; onclick="nextRound(); submit(); getRoundNumber(); disableButtons(); document.getElementById('btn-next').style.display='block';">Submit you category!</button>
+	<button id="btn-submit"; onclick="nextRound(); submit(); getRoundNumber(); disableButtons();">Submit your category!</button>
 	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); this.style.display='none';">Reveal winner!</button>
 </div>
 
@@ -298,15 +297,15 @@ table.cat-table tfoot td {
                                 <h2 id="cardName">Card Name</h2>
                                 <img src="#" alt="picture of spaceship">
                                 <div id="cat-buttons">
-                                    <button id="1" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Size
+                                    <button id="1" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue1"></p>
                                     </button>
-                                    <button id="2" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Speed
+                                    <button id="2" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue2"></p>
                                     </button>
-                                    <button id="3" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Range
+                                    <button id="3" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue3"></p>
                                     </button>
-                                    <button id="4" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Firepower
+                                    <button id="4" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue4"></p>
                                     </button>
-                                    <button id="5" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;">Cargo
+                                    <button id="5" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue5"></p>
                                     </button>
                                 </div>
 
@@ -402,23 +401,23 @@ table.cat-table tfoot td {
                                             <tbody>
                                                 <tr>
                                                     <td>cell1_1</td>
-                                                    <td>cell2_1</td>
+                                                    <td><p id="p4CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_2</td>
-                                                    <td>cell2_2</td>
+                                                    <td><p id="p4CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_3</td>
-                                                    <td>cell2_3</td>
+                                                    <td><p id="p4CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_4</td>
-                                                    <td>cell2_4</td>
+                                                    <td><p id="p4CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_5</td>
-                                                    <td>cell2_5</td>
+                                                    <td><p id="p4CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
                                             </tr>
@@ -441,23 +440,23 @@ table.cat-table tfoot td {
                                             <tbody>
                                                 <tr>
                                                     <td>cell1_1</td>
-                                                    <td>cell2_1</td>
+                                                    <td><p id="p5CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_2</td>
-                                                    <td>cell2_2</td>
+                                                    <td><p id="p5CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_3</td>
-                                                    <td>cell2_3</td>
+                                                    <td><p id="p5CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_4</td>
-                                                    <td>cell2_4</td>
+                                                    <td><p id="p5CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
                                                     <td>cell1_5</td>
-                                                    <td>cell2_5</td>
+                                                    <td><p id="p5CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
                                             </tr>
@@ -666,7 +665,7 @@ table.cat-table tfoot td {
 		  		var responseText = xhr.response;
 		  		getRoundNumber();
 		  		getCardName();
-		  		getCategories();
+				getPlayer1CardValues();
 		  		
 		  		if (number_of_players == 1){
 		  			getPlayer2CardName();
@@ -685,6 +684,7 @@ table.cat-table tfoot td {
 		  			getPlayer3CardName();
 		  			getPlayer3CardValues();
 		  			getPlayer4CardName();
+		  			getPlayer4CardValues();
 		  			}
 		  		else if(number_of_players == 4){
 		  			getPlayer2CardName();
@@ -692,91 +692,61 @@ table.cat-table tfoot td {
 		  			getPlayer3CardName();
 		  			getPlayer3CardValues();
 		  			getPlayer4CardName();
+		  			getPlayer4CardValues();
 		  			getPlayer5CardName();
-		  			}	
+		  			getPlayer5CardValues();
+		  		}	
 		  	} 
 		}
 		
+		function getPlayer1CardValues(){
+			getPlayer1CardValue(1);
+			getPlayer1CardValue(2);
+			getPlayer1CardValue(3);
+			getPlayer1CardValue(4);
+			getPlayer1CardValue(5);
+			
+		  }
+		  
 		function getPlayer2CardValues(){
-			getPlayer2CardValue1();
-  			getPlayer2CardValue2();
-  			getPlayer2CardValue3();
-  			getPlayer2CardValue4();
-  			getPlayer2CardValue5();
+			getPlayer2CardValue(1);
+			getPlayer2CardValue(2);
+			getPlayer2CardValue(3);
+			getPlayer2CardValue(4);
+			getPlayer2CardValue(5);
+			
 		  }
 		
 		function getPlayer3CardValues(){
-			getPlayer3CardValue1();
-  			getPlayer3CardValue2();
-  			getPlayer3CardValue3();
-  			getPlayer3CardValue4();
-  			getPlayer3CardValue5();
+			getPlayer3CardValue(1);
+  			getPlayer3CardValue(2);
+  			getPlayer3CardValue(3);
+  			getPlayer3CardValue(4);
+  			getPlayer3CardValue(5);
 		  }
+		  
+		function getPlayer4CardValues(){
+			getPlayer4CardValue(1);
+  			getPlayer4CardValue(2);
+  			getPlayer4CardValue(3);
+  			getPlayer4CardValue(4);
+  			getPlayer4CardValue(5);
+		  }
+		
+		function getPlayer5CardValues(){
+			getPlayer5CardValue(1);
+  			getPlayer5CardValue(2);
+  			getPlayer5CardValue(3);
+  			getPlayer5CardValue(4);
+  			getPlayer5CardValue(5);
+		  }
+		  
 		  
 		function getRoundNumber(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
 			xhr.send();
 			xhr.onload = function(e){
 		  		current_round_num =  xhr.response;
-		  	} 
-		}
-			  
-		function getCategories(){
-		  
-		  getCat1();
-		  getCat2();
-		  getCat3();
-		  getCat4();
-		  getCat5();
-		}
-			  
-	 	function getCat1(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat1	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		var b = "&nbsp;";
-		  		document.getElementById("1").innerHTML = "Size" +b+b+b+b+b+b+b+b+b+b+b+responseText;
-		  	} 
-		}
-			  
-		function getCat2(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat2 ");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		var b = "&nbsp;";
-		  		document.getElementById("2").innerHTML = "Speed" +b+b+b+b+b+b +responseText;
-		  	} 
-		}
-		  
-		function getCat3(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat3	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		var b = "&nbsp;";
-		  		document.getElementById("3").innerHTML = "Range"+b+b+b+b+b+b+responseText;
-		  	} 
-		}
-		  
-		function getCat4(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat4	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		var b = "&nbsp;";
-		  		document.getElementById("4").innerHTML = "Firepower " +responseText;
-		  	} 
-		}
-		  	
-		function getCat5(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCat5	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		var b = "&nbsp;";
-		  		document.getElementById("5").innerHTML = "Cargo"+b+b+b+b+b+b+b+responseText;
 		  	} 
 		}
 		
@@ -789,7 +759,34 @@ table.cat-table tfoot td {
 		  	} 
 	  	}
 	  	
-	  	
+	  	function getPlayer1CardValue(i){
+	  		var xhr = createCORSRequest('GET',
+			"http://localhost:7777/toptrumps/getPlayer1CardValue?i="+i); // Request type and URL+parameters
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			xhr.send()
+	
+			xhr.onload = function(e) {
+				var responseText = xhr.response;
+				if (i ==1){
+					document.getElementById("p1CardValue1").innerHTML = "size : " +responseText;
+				}
+				else if (i==2){
+					document.getElementById("p1CardValue2").innerHTML = "speed : " +responseText;
+				}
+				else if (i==3){
+					document.getElementById("p1CardValue3").innerHTML = "range : " + responseText;
+				}
+				else if (i==4){
+		  			document.getElementById("p1CardValue4").innerHTML = "fire-power : " +responseText;
+				}
+				else if (i==5){
+					document.getElementById("p1CardValue5").innerHTML = "cargo : " +responseText;
+				}
+	  		}
+	  	}
 	  	
 	  	// PLAYER 2 CARD NAME AND CARD VALUES
 	  	
@@ -802,112 +799,36 @@ table.cat-table tfoot td {
 		  	} 
 	  	}
 	  	
-	  	function getPlayer2CardValue1(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue1");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p2CardValue1").innerHTML = responseText;
-		  	} 
+	  	function getPlayer2CardValue(i){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue?i="+i); // Request type and URL+parameters
+			
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			xhr.send()
+	
+			xhr.onload = function(e) {
+				var responseText = xhr.response;
+				if (i ==1){
+					document.getElementById("p2CardValue1").innerHTML = responseText;
+				}
+				else if (i==2){
+					document.getElementById("p2CardValue2").innerHTML = responseText;
+				}
+				else if (i==3){
+					document.getElementById("p2CardValue3").innerHTML = responseText;
+				}
+				else if (i==4){
+		  			document.getElementById("p2CardValue4").innerHTML = responseText;
+				}
+				else if (i==5){
+					document.getElementById("p2CardValue5").innerHTML = responseText;
+				}
+	  		}
 	  	}
-	  	
-	  	function getPlayer2CardValue2(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue2");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p2CardValue2").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer2CardValue3(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue3");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p2CardValue3").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer2CardValue4(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue4");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p2CardValue4").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer2CardValue5(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue5");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p2CardValue5").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	
 	  	
 	  	// PLAYER 3 CARD NAME AND CARD VALUES
-	  	function getPlayer3CardValue1(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue1");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p3CardValue1").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer3CardValue2(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue2");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p3CardValue2").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer3CardValue3(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue3");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p3CardValue3").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer3CardValue4(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue4");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p3CardValue4").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer3CardValue5(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardValue5");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		console.log(responseText);
-		  		document.getElementById("p3CardValue5").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	
-	  	
-	  	
 	  	
 		function getPlayer3CardName(){
 	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
@@ -918,6 +839,39 @@ table.cat-table tfoot td {
 		  	} 
 	  	}
 	  	
+	  	
+	  	function getPlayer3CardValue(i){
+	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer3CardValue?i="+i); 
+		
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			xhr.send()
+	
+			xhr.onload = function(e) {
+				var responseText = xhr.response;
+				if (i ==1){
+					document.getElementById("p3CardValue1").innerHTML = responseText;
+				}
+				else if (i==2){
+					document.getElementById("p3CardValue2").innerHTML = responseText;
+				}
+				else if (i==3){
+					document.getElementById("p3CardValue3").innerHTML = responseText;
+				}
+				else if (i==4){
+		  			document.getElementById("p3CardValue4").innerHTML = responseText;
+				}
+				else if (i==5){
+					document.getElementById("p3CardValue5").innerHTML = responseText;
+				}
+	  		}
+	  	}
+	  	
+	  	
+	  	// PLAYER 4 CARD NAME AND CARD VALUES
+	  	
 	  	function getPlayer4CardName(){
 	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer4CardName");
 			xhr.send();
@@ -927,6 +881,37 @@ table.cat-table tfoot td {
 		  	} 
 	  	}
 	  	
+	  	function getPlayer4CardValue(i){
+	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer4CardValue?i="+i); 
+		
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			xhr.send()
+	
+			xhr.onload = function(e) {
+				var responseText = xhr.response;
+				if (i ==1){
+					document.getElementById("p4CardValue1").innerHTML = responseText;
+				}
+				else if (i==2){
+					document.getElementById("p4CardValue2").innerHTML = responseText;
+				}
+				else if (i==3){
+					document.getElementById("p4CardValue3").innerHTML = responseText;
+				}
+				else if (i==4){
+		  			document.getElementById("p4CardValue4").innerHTML = responseText;
+				}
+				else if (i==5){
+					document.getElementById("p4CardValue5").innerHTML = responseText;
+				}
+	  		}
+	  	}
+	  	
+	  	
+	  	// PLAYER 5 CARD NAME AND CARD VALUES
 	  	function getPlayer5CardName(){
 	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer5CardName");
 			xhr.send();
@@ -935,6 +920,40 @@ table.cat-table tfoot td {
 		  		document.getElementById("cardName-p5").innerHTML = responseText;
 		  	} 
 	  	}
+	  	
+	  	function getPlayer5CardValue(i){
+	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer5CardValue?i="+i); 
+		
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			xhr.send()
+	
+			xhr.onload = function(e) {
+				var responseText = xhr.response;
+				if (i ==1){
+					document.getElementById("p5CardValue1").innerHTML = responseText;
+				}
+				else if (i==2){
+					document.getElementById("p5CardValue2").innerHTML = responseText;
+				}
+				else if (i==3){
+					document.getElementById("p5CardValue3").innerHTML = responseText;
+				}
+				else if (i==4){
+		  			document.getElementById("p5CardValue4").innerHTML = responseText;
+				}
+				else if (i==5){
+					document.getElementById("p5CardValue5").innerHTML = responseText;
+				}
+	  		}
+	  	}
+	  	
+	  	
+	  	
+	  	
+	  	
 			  
 		// This is a reusable method for creating a CORS request. Do not edit this.
 		function createCORSRequest(method, url) {
