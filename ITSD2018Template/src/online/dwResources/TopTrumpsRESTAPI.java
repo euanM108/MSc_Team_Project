@@ -39,6 +39,7 @@ public class TopTrumpsRESTAPI {
 	private int numberOfPlayers;
 	private ArrayList<Player> players;
 	private ArrayList<Card> centralDeck = new ArrayList<Card>();
+	private static String categories;
 	private int winnerID;
 	private int winningIndex = 0; // current winning index
 	private int catChoice = 0; // current category choice
@@ -150,10 +151,14 @@ public class TopTrumpsRESTAPI {
 		// to create deck, players and shuffle
 		fl.getFileData();
 		deck = fl.getDeck();
+		categories = fl.getCats();
 		//Collections.shuffle(deck);
 
 		return deck;
 	}
+	
+	
+	
 	
 	
 	
@@ -244,6 +249,12 @@ public class TopTrumpsRESTAPI {
 	@Path("/getPlayer3CardName")
 	public String getPlayer3CardName() throws IOException{
 		return players.get(2).getTopCard().getCardName();
+	}
+	
+	@GET
+	@Path("/getCatDescriptions")
+	public String getCategories() throws IOException{
+		return categories;
 	}
 	
 	@GET
@@ -419,6 +430,9 @@ public class TopTrumpsRESTAPI {
 	
 		int humanCardCount = 0;
 		humanCardCount = players.get(0).getPersonalDeck().size();
+		if (humanCardCount == 0) {
+			return "outTheGame";
+		}
 		return ""+humanCardCount;
 	}
 	

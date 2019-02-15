@@ -1,3 +1,4 @@
+
 <html>
 
 	<head>
@@ -324,23 +325,23 @@ table.cat-table tfoot td {
                                 <table class="cat-table">
                                     <tbody>
                                         <tr>
-                                            <td>cell1_1</td>
+                                           
                                             <td><p id="p2CardValue1"></p></td>
                                         </tr>
                                         <tr>
-                                            <td>cell1_2</td>
+                                           
                                             <td><p id="p2CardValue2"></p></td>
                                         </tr>
                                         <tr>
-                                            <td>cell1_3</td>
+                                            
                                             <td><p id="p2CardValue3"></p></td>
                                         </tr>
                                         <tr>
-                                            <td>cell1_4</td>
+                                            
                                             <td><p id="p2CardValue4"></p></td>
                                         </tr>
                                         <tr>
-                                            <td>cell1_5</td>
+                                           
                                             <td><p id="p2CardValue5"></p></td>
                                         </tr>
                                     </tbody>
@@ -364,23 +365,23 @@ table.cat-table tfoot td {
                                         <table class="cat-table">
                                             <tbody>
                                                 <tr>
-                                                    <td>cell1_1</td>
+                                                    
                                                     <td><p id="p3CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_2</td>
+                                                   
                                                     <td><p id="p3CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_3</td>
+                                                    
                                                     <td><p id="p3CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_4</td>
+                                                   
                                                     <td><p id="p3CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_5</td>
+                                                  
                                                     <td><p id="p3CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
@@ -404,23 +405,23 @@ table.cat-table tfoot td {
                                         <table class="cat-table">
                                             <tbody>
                                                 <tr>
-                                                    <td>cell1_1</td>
+                                                    
                                                     <td><p id="p4CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_2</td>
+                                                   
                                                     <td><p id="p4CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_3</td>
+                                                   
                                                     <td><p id="p4CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_4</td>
+                                                  
                                                     <td><p id="p4CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_5</td>
+                                                    
                                                     <td><p id="p4CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
@@ -444,23 +445,23 @@ table.cat-table tfoot td {
                                         <table class="cat-table">
                                             <tbody>
                                                 <tr>
-                                                    <td>cell1_1</td>
+                                                   
                                                     <td><p id="p5CardValue1"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_2</td>
+                                                    
                                                     <td><p id="p5CardValue2"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_3</td>
+                                                    
                                                     <td><p id="p5CardValue3"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_4</td>
+                                                   
                                                     <td><p id="p5CardValue4"></p></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>cell1_5</td>
+                                                   
                                                     <td><p id="p5CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
@@ -618,6 +619,8 @@ table.cat-table tfoot td {
 		  		}
 		  	} 
 		}
+
+
 		
 		function disableButtons(){
 			document.getElementById("1").disabled = true;
@@ -818,19 +821,19 @@ table.cat-table tfoot td {
 			xhr.onload = function(e) {
 				var responseText = xhr.response;
 				if (i ==1){
-					document.getElementById("p2CardValue1").innerHTML = responseText;
+					document.getElementById("p2CardValue1").innerHTML = "size: " +responseText;
 				}
 				else if (i==2){
-					document.getElementById("p2CardValue2").innerHTML = responseText;
+					document.getElementById("p2CardValue2").innerHTML = "speed: " +responseText;
 				}
 				else if (i==3){
-					document.getElementById("p2CardValue3").innerHTML = responseText;
+					document.getElementById("p2CardValue3").innerHTML = "range; " +responseText;
 				}
 				else if (i==4){
-		  			document.getElementById("p2CardValue4").innerHTML = responseText;
+		  			document.getElementById("p2CardValue4").innerHTML = "fire-power: " +responseText;
 				}
 				else if (i==5){
-					document.getElementById("p2CardValue5").innerHTML = responseText;
+					document.getElementById("p2CardValue5").innerHTML = "cargo: " +responseText;
 				}
 	  		}
 	  	}
@@ -859,19 +862,19 @@ table.cat-table tfoot td {
 			xhr.onload = function(e) {
 				var responseText = xhr.response;
 				if (i ==1){
-					document.getElementById("p3CardValue1").innerHTML = responseText;
+					document.getElementById("p3CardValue1").innerHTML = "size: " +responseText;
 				}
 				else if (i==2){
-					document.getElementById("p3CardValue2").innerHTML = responseText;
+					document.getElementById("p3CardValue2").innerHTML = "speed: "+ responseText;
 				}
 				else if (i==3){
-					document.getElementById("p3CardValue3").innerHTML = responseText;
+					document.getElementById("p3CardValue3").innerHTML = "range: " + responseText;
 				}
 				else if (i==4){
-		  			document.getElementById("p3CardValue4").innerHTML = responseText;
+		  			document.getElementById("p3CardValue4").innerHTML = "fire-power: " + responseText;
 				}
 				else if (i==5){
-					document.getElementById("p3CardValue5").innerHTML = responseText;
+					document.getElementById("p3CardValue5").innerHTML = "cargo: " +responseText;
 				}
 	  		}
 	  	}
@@ -900,19 +903,19 @@ table.cat-table tfoot td {
 			xhr.onload = function(e) {
 				var responseText = xhr.response;
 				if (i ==1){
-					document.getElementById("p4CardValue1").innerHTML = responseText;
+					document.getElementById("p4CardValue1").innerHTML = "size: " +responseText;
 				}
 				else if (i==2){
-					document.getElementById("p4CardValue2").innerHTML = responseText;
+					document.getElementById("p4CardValue2").innerHTML = "speed: " +responseText;
 				}
 				else if (i==3){
-					document.getElementById("p4CardValue3").innerHTML = responseText;
+					document.getElementById("p4CardValue3").innerHTML = "range: " +responseText;
 				}
 				else if (i==4){
-		  			document.getElementById("p4CardValue4").innerHTML = responseText;
+		  			document.getElementById("p4CardValue4").innerHTML = "fire-power: " +responseText;
 				}
 				else if (i==5){
-					document.getElementById("p4CardValue5").innerHTML = responseText;
+					document.getElementById("p4CardValue5").innerHTML = "cargo: " + responseText;
 				}
 	  		}
 	  	}
@@ -940,19 +943,19 @@ table.cat-table tfoot td {
 			xhr.onload = function(e) {
 				var responseText = xhr.response;
 				if (i ==1){
-					document.getElementById("p5CardValue1").innerHTML = responseText;
+					document.getElementById("p5CardValue1").innerHTML = "size: " +responseText;
 				}
 				else if (i==2){
-					document.getElementById("p5CardValue2").innerHTML = responseText;
+					document.getElementById("p5CardValue2").innerHTML = "speed: " +responseText;
 				}
 				else if (i==3){
-					document.getElementById("p5CardValue3").innerHTML = responseText;
+					document.getElementById("p5CardValue3").innerHTML = "range: " +responseText;
 				}
 				else if (i==4){
-		  			document.getElementById("p5CardValue4").innerHTML = responseText;
+		  			document.getElementById("p5CardValue4").innerHTML = "fire-power: " + responseText;
 				}
 				else if (i==5){
-					document.getElementById("p5CardValue5").innerHTML = responseText;
+					document.getElementById("p5CardValue5").innerHTML = "cargo: " +responseText;
 				}
 	  		}
 	  	}
@@ -968,6 +971,7 @@ table.cat-table tfoot td {
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
 		  		document.getElementById("HumanCardCount").innerHTML = responseText;
+
 		  	} 
 		}
 	  	//AI players
@@ -1055,6 +1059,7 @@ table.cat-table tfoot td {
 		
 			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
 			function helloJSONList() {
+			
 			
 				// First create a CORS request, this is the message we are going to send (a get request in this case)
 				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL

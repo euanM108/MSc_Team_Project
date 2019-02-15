@@ -14,6 +14,7 @@ public class FileHandler {
     private static String [] extractedCatArray;
     private ArrayList<Card> deck = new ArrayList<>();
     private ArrayList<String> catNames = new ArrayList<String>();
+    private static String catNamesAsString;
     
     // this method reads the deck, separates the categories into a fixed array
     // of strings and then creates a card object for each card in the deck
@@ -28,6 +29,7 @@ public class FileHandler {
             // creating an array of the titles
             if (s.hasNextLine()){
             	String tempTitles = s.nextLine();
+            	catNamesAsString = tempTitles;
             	String TempArray [] = tempTitles.split(" ");
             	for(int i = 0; i<TempArray.length; i++) {
                 	catNames.add(TempArray[i]);                
@@ -54,6 +56,11 @@ public class FileHandler {
     // getter for deck
     public ArrayList<Card> getDeck(){
         return deck;
+    }
+    
+    // getter for category names as a string
+    public String getCats() {
+    	return catNamesAsString;
     }
     
 
