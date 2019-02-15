@@ -290,7 +290,8 @@ table.cat-table tfoot td {
 			
             <div class="card-container">
                 <div id="playing-card-1">
-                YOU
+                YOU<br>
+                Cards Remaining = <p id="HumanCardCount">Cards</p>
                     <div class="card">
                         <alt="Avatar" style="width:100%">
                             <div class="container">
@@ -313,7 +314,8 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-2">
-                    PLAYER 2 (AI)
+                    PLAYER 2 (AI)<br>
+                	Cards Remaining = <p id="P2CardCount">Cards</p>
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
@@ -350,7 +352,8 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-3">
-                    PLAYER 3 (AI)
+                    PLAYER 3 (AI)<br>
+                	Cards Remaining = <p id="P3CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -389,7 +392,8 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-4">
-                    PLAYER 4 (AI)
+                    PLAYER 4 (AI)<br>
+                	Cards Remaining = <p id="P4CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -428,7 +432,8 @@ table.cat-table tfoot td {
                     </div>
                 </div>
                 <div id="playing-card-5">
-                    PLAYER 5 (AI)
+                    PLAYER 5 (AI)<br>
+                	Cards Remaining = <p id="P5CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -666,6 +671,8 @@ table.cat-table tfoot td {
 		  		getRoundNumber();
 		  		getCardName();
 				getPlayer1CardValues();
+				getHumanCardCount();
+				getCardCounts();
 		  		
 		  		if (number_of_players == 1){
 		  			getPlayer2CardName();
@@ -950,8 +957,74 @@ table.cat-table tfoot td {
 	  		}
 	  	}
 	  	
-	  	
-	  	
+	  	//These functions calculate the cards remaining for the players
+        //Human player
+        function getHumanCardCount(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanCardCount");
+            if (!xhr) {
+  				alert("CORS not supported");
+			}
+			xhr.send();
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("HumanCardCount").innerHTML = responseText;
+		  	} 
+		}
+	  	//AI players
+	  	function getCardCounts(){
+            getP2CardCount();
+            getP3CardCount();
+            getP4CardCount();
+            getP5CardCount();
+        }
+
+        function getP2CardCount(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP2CardCount");
+            if (!xhr) {
+  				alert("CORS not supported");
+			}
+            xhr.send();
+            xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("P2CardCount").innerHTML = responseText;
+		  	}
+        }
+
+        function getP3CardCount(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP3CardCount");
+            if (!xhr) {
+  				alert("CORS not supported");
+			}
+            xhr.send();
+            xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("P3CardCount").innerHTML = responseText;
+		  	}
+        }
+
+        function getP4CardCount(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP4CardCount");
+            if (!xhr) {
+  				alert("CORS not supported");
+			}
+            xhr.send();
+            xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("P4CardCount").innerHTML = responseText;
+		  	}
+        }
+
+        function getP5CardCount(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP5CardCount");
+            if (!xhr) {
+  				alert("CORS not supported");
+			}
+            xhr.send();
+            xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  		document.getElementById("P5CardCount").innerHTML = responseText;
+		  	}
+        }
 	  	
 	  	
 			  

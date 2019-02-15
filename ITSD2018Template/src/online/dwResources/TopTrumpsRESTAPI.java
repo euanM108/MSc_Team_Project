@@ -413,6 +413,51 @@ public class TopTrumpsRESTAPI {
 			}			
 	}
 	
+	@GET
+	@Path("/getHumanCardCount")
+	public String getHumanCardCount() throws IOException{
+	
+		int humanCardCount = 0;
+		humanCardCount = players.get(0).getPersonalDeck().size();
+		return ""+humanCardCount;
+	}
+	
+	@GET
+	@Path("/getP2CardCount")
+	public String getP2CardCount() throws IOException{
+	
+		int cardCount2 = 0;
+		cardCount2 = players.get(1).getPersonalDeck().size();
+		return ""+cardCount2;
+	}
+	
+	@GET
+	@Path("/getP3CardCount")
+	public String getP3CardCount() throws IOException{
+	
+		int cardCount3 = 0;
+		cardCount3 = players.get(2).getPersonalDeck().size();
+		return ""+cardCount3;
+	}
+	
+	@GET
+	@Path("/getP4CardCount")
+	public String getP4CardCount() throws IOException{
+	
+		int cardCount4 = 0;
+		cardCount4 = players.get(3).getPersonalDeck().size();
+		return ""+cardCount4;
+	}
+	
+	@GET
+	@Path("/getP5CardCount")
+	public String getP5CardCount() throws IOException{
+	
+		int cardCount5 = 0;
+		cardCount5 = players.get(4).getPersonalDeck().size();
+		return ""+cardCount5;
+	}
+	
 	private int getWinningIndex(ArrayList<Card> centralDeck, int catChoice) {
 		int winningValue = 0;
 		int winningIndex = 0;
