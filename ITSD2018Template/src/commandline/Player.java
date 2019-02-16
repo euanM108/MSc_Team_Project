@@ -5,26 +5,18 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Player {
+	//this class is used for both player and AI player functionality 
 
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
 	private int playerID;
-	private boolean isActive = true;
 	private static int playerIDCount = 1;
 
 	public Player() {
 		playerID = playerIDCount;
-		playerIDCount++;
+		playerIDCount++; //increment the player ID by 1 for every new player
 	}
 
-	
-	public boolean getIsActive() {
-		return isActive;
-	}
-	
-	public void setIsActive(boolean isActive) {
-		this.isActive = isActive;
-	}
 	public static void resetPlayerIDCount() {
 		playerIDCount = 1;
 	}
@@ -38,8 +30,9 @@ public class Player {
 	}
 
 	public int getAIPlayersCatChoice() {
-		// this will be calculated using IF statements
-		// could use temporary arrays and find the highest value on the card
+		//we select the highest category value for the AI player
+		//if there are two with the highest value it picks the first one
+
 		Card c = personalDeck.get(0);
 		int tempBestChoice = 1;
 		int highestValue = c.getCat1Value();
@@ -59,16 +52,20 @@ public class Player {
 			highestValue = c.getCat5Value();
 			tempBestChoice = 5;
 		}
+		
 		catChoice = tempBestChoice;
 		return catChoice;
 	}
 	
 	public int getHumanPlayersCatChoice() {
-		// this will need system input for the human player
+		//if the player is human ask them for their category choice
+		
 		Card c = personalDeck.get(0);
 		c.viewCard();
 		int tempCatChoice = 0;
 		Scanner keyboard = new Scanner(System.in);
+		
+		
 		// Exception handling for incorrect input by user
 		boolean inputOk = false;
 		while (!inputOk) {

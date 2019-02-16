@@ -34,6 +34,7 @@ public class TopTrumpsCLIApplication {
 	private static int AI3Wins;
 	private static int AI4Wins;
 	
+	//cat names used globally
 	private static String cat1Name;
 	private static String cat2Name;
 	private static String cat3Name;
@@ -46,18 +47,24 @@ public class TopTrumpsCLIApplication {
 		// Welcome message
 		printWelcomeMessage();
 				
-		// Set up scanner for UI and file writer
+		//set up scanner for UI
+		//set up file writer for game log
 		Scanner s = new Scanner(System.in);
 		FileWriter fw = null;
 		
 		
 		boolean writeGameLogsToFile = true; // Should we write game logs to file? REMOVE FOR PRODUCTION
-		DatabaseCommunication.connectToDatabase();
-		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
+		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; //uncomment for production
 		
-		boolean running = true;
+		//connect to the database so we can access and write stats
+		DatabaseCommunication.connectToDatabase();
+		
+		boolean running = true; //main loop for whole system
 
 		while (running) {
+			//loop that displays the selection options
+			//we return to this screen after viewing stats or when a game ends
+			
 			System.out.println("\n\nPlease select from the following options by entering 1, 2, or 3:\n");
 			System.out.println("\t1: Play a new game.");
 			System.out.println("\t2: View statistics about previous games.");
@@ -79,13 +86,16 @@ public class TopTrumpsCLIApplication {
 	// *** METHODS BELOW ***
 	
 	public static void viewStats() {
-		System.out.println("Placeholder for testing when not connected to the database");
+		//prints the stats from the database to the console. 
+		
+		//System.out.println("Placeholder for testing when not connected to the database");
 		DatabaseCommunication.getPreviousStatistics();
 	}
 	
 	public static void playGame(FileWriter fw, boolean writeGameLogsToFile, Scanner s) {
+		//the main loop for setting up the game. (contains the code to play the game)
 		
-		//Game log stuff
+		//initialise the TomTrumps.log file if we have selected to write to the game log
 		if(writeGameLogsToFile) {
 			try {
 				fw = new FileWriter("TomTrumps.log");
@@ -105,35 +115,42 @@ public class TopTrumpsCLIApplication {
 		ArrayList<Player> players = new ArrayList<>();
 		ArrayList<Card> cardSelection = new ArrayList<Card>();
 		ArrayList<Card> communalPile = new ArrayList<Card>();
+		ArrayList<Card> deck = new ArrayList<Card>();
+
+		
 	
 		Player.resetPlayerIDCount(); //since player ID is static and incremented we need to reset it for new games.	
-		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s);
+		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s); //get the number of players from the user
 		System.out.println("Number of players chosen: " + numberOfPlayers);
+		
+		
 
-		// Creating deck, players and shuffling deck
-		ArrayList<Card> deck = new ArrayList<Card>();
+		// Creating deck, players, and shuffling the deck
 		deck = readAndCreateDeck(); // deck is created from .txt file
 		
+		//if we are writing the game log, write the deck here.
 		if(writeGameLogsToFile) {
 			writeDeckToLog(deck, fw);
 		}
 
-		createPlayers(players, numberOfPlayers);
+		createPlayers(players, numberOfPlayers); //create players based on the users selected number of players
 		
-		ArrayList<String> catNames = new ArrayList<String>(deck.get(0).getCatNames());//get description and cat names from card
-		
+		ArrayList<String> catNames = new ArrayList<String>(deck.get(0).getCatNames());//get description and cat names from card	
 		setCatNames(catNames); //set up the card names for the switch case
 		
-		deck = shuffleDeck(deck);
+		deck = shuffleDeck(deck); //shuffle the deck
 		Collections.shuffle(players);//shuffle the players so the starting player is random
 		
+		//if writing to the log, write the shuffled deck
 		if(writeGameLogsToFile) {
 			writeDeckToLog(deck, fw);
 		}
 		
 		// runs through each player giving them cards until the deck runs out
 		distributeCards(deck, players, numberOfPlayers);
-		//**********print to log here
+		
+		
+		//if writing to the log, write every individual players deck.
 		if(writeGameLogsToFile) {
 			//print each players deck here
 			for(Player p: players) {
@@ -141,7 +158,7 @@ public class TopTrumpsCLIApplication {
 			}			
 		}
 
-		resetStatistics(); //sets all the  statistics counters back to 0
+		resetStatistics(); //sets all the  statistics counters back to 0 every new game
 
 		// *** GAMEPLAY BELOW ***		
 		
@@ -151,22 +168,25 @@ public class TopTrumpsCLIApplication {
 		while (gameInProgress) {		
 			
 			System.out.println("\n\n======================================================================\n\n");
-			cardSelection = getTopCards(players, cardSelection);
-			gameWon = checkForOverallGameWin(players);
+			
+			//get the top cards from players. !!!This method also removes players without top cards!!!
+			cardSelection = getTopCards(players, cardSelection); 
+			gameWon = checkForOverallGameWin(players); //if only one player is left then the game is won
 
 			
-			if(gameWon) {
-				logStatistics();
+			//if the game is won then do the following to close out this game
+			if(gameWon) { 
+				logStatistics(); //log the statistics to the database
 				if(writeGameLogsToFile) {
-					writeWinnerToLog(players, fw);
+					writeWinnerToLog(players, fw); //write the winner to the log 
 					try {
-						fw.close();
+						fw.close(); //close the log file
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 
-				gameInProgress = false;
+				gameInProgress = false; //set this to false to end the loop
 			}
 			
 			noRounds++; //increment the number of rounds after the check for a winner
@@ -181,14 +201,15 @@ public class TopTrumpsCLIApplication {
 			
 
 			// keeps winningIndex under players arrayList size
-			// if the winning index was 5 but player 3 was removed from the game then player 5 would now be in a lower
-			// so we must lower the index (more than one can be removed at once so while loop)
-
+			// if the winning index was 4 but player 2 was removed from the game then the players would shift down
+			// so we must lower the index (more than one player can be removed at once so while loop is used)
 			while(winningIndex > players.size() - 1) {
 				winningIndex--;
 			}
 
 
+			
+			//method to get the category choice for the current round and print it to the console
 			// If human player, call human method getHumanPlayersCatChoice()
 			// If AI Player, call AI method getAIPLayersCatChoice()
 			// Printing out a statement regarding their category choice
@@ -221,25 +242,29 @@ public class TopTrumpsCLIApplication {
 				// winning index stays the same
 				// cards are moved to communal pile
 				draws++; //add 1 to the count of draws for the database
+				
 				for (Card tempCard : cardSelection) {
 					communalPile.add(tempCard);
 				}
 				
-				//print communal pile to log here
+				
+				//write the contents of the communal pile to the log
 				if(writeGameLogsToFile) {
-					//write the contents of the communal pile
 					writeCommunalPile(communalPile, fw);
 				}
 				
-			
-				printDraw(players, catChoice, winningIndex);
+				printDraw(players, catChoice, winningIndex); //print the draw message in the console
+				
 			} else {
 				// if there is not a draw
-				winningIndex = getWinningIndex(cardSelection, catChoice);
-				winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
-
-								
 				
+				//get the index of the player who won
+				winningIndex = getWinningIndex(cardSelection, catChoice);
+				
+				//calls the method to increment the database counter for the appropriate winner
+				winnerCount(winningIndex, players); 
+
+												
 				// Giving the winner the cards they won for this round
 				for (int i = 0; i < cardSelection.size(); i++) {
 					players.get(winningIndex).givePlayerCard(cardSelection.get(i));
@@ -250,10 +275,10 @@ public class TopTrumpsCLIApplication {
 					for(int i = 0; i < communalPile.size(); i++){
 						players.get(winningIndex).givePlayerCard(communalPile.get(i));
 					}
-					communalPile.clear();
-					//print communal pile to log here
+					communalPile.clear(); //clear the communal pile after giving the cards
+					
+					//write the contents of the communal pile (it will always be cleared here)
 					if(writeGameLogsToFile) {
-						//write the contents of the communal pile
 						writeCommunalPile(communalPile, fw);
 					}
 				}
@@ -270,7 +295,6 @@ public class TopTrumpsCLIApplication {
 
 			// at the end of each round we write each players deck
 			if (writeGameLogsToFile) {
-				// print each players deck here
 				for (Player p : players) {
 					writePlayerDeckToLog(p, fw);
 				}
@@ -281,6 +305,8 @@ public class TopTrumpsCLIApplication {
 	
 
 	private static void setCatNames(ArrayList<String> catNames){
+		//method which calls setters for the cat names
+		
 		setCat1Name(catNames.get(1));
 		setCat2Name(catNames.get(2));
 		setCat3Name(catNames.get(3));
@@ -289,7 +315,31 @@ public class TopTrumpsCLIApplication {
 		
 	}
 	
+
+
+	
+	
+
+	
+	
+	//====================	METHODS FOR WRITING TO THE GAMEPLAY LOG ==========================
+	
+	private static void writeToLog(String text, FileWriter fw) {
+		//This method is used by all the other methods that write to the log.
+		//It seperates print outs and writes to the file
+		
+		
+		try {
+			fw.write(text + "\n---------------------------------------------\n\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static void writeCatAndValues(ArrayList<Card> cardSelection, int catChoice, FileWriter fw) {
+		//writes the category chosen for the round.
+		//writes each cards in plays value for the categroy
+		
 		String stringToPrint = "The selected Category was: ";
 		ArrayList<String> catNames = cardSelection.get(0).getCatNames();
 		String selectedCatName = catNames.get(catChoice);
@@ -300,9 +350,12 @@ public class TopTrumpsCLIApplication {
 		
 		writeToLog(stringToPrint, fw);
 	}
-
+	
+	
 
 	private static void writeCurrentCards(ArrayList<Card> cardSelection, FileWriter fw) {
+		//writes the current round number and the cards in play
+		
 		String stringToPrint = "Round number: " + noRounds + "\nCards in Play: \n\n";
 		
 		for(Card c: cardSelection) {		
@@ -314,6 +367,8 @@ public class TopTrumpsCLIApplication {
 
 	
 	private static void writeWinnerToLog(ArrayList<Player> players, FileWriter fw) {
+		//writes the game winner the the log.
+		
 		String stringToPrint = "The winner of this game is: ";
 		
 		int winnerID = players.get(0).getPlayerID();
@@ -330,6 +385,8 @@ public class TopTrumpsCLIApplication {
 
 	
 	private static void writeCommunalPile(ArrayList<Card> communalPile, FileWriter fw) {
+		//writes the contents (or lack of) to the log whenever its updated 
+		
 		String stringToPrint = "";
 		
 		if(communalPile.size()>0) {
@@ -347,6 +404,9 @@ public class TopTrumpsCLIApplication {
 
 	
 	private static void writePlayerDeckToLog(Player p, FileWriter fw) {
+		//writes each players deck to the log.
+		//if a players deck is empty it will write the empty deck once on the next turn
+		
 		String stringToPrint = "";
 		
 		//Whos deck is it
@@ -367,6 +427,9 @@ public class TopTrumpsCLIApplication {
 	}
 	
 	private static void writeDeckToLog(ArrayList<Card> deck, FileWriter fw) {
+		//writes the full deck to the log 
+		
+		
 		String stringToPrint = "";
 		for(Card c: deck) {		
 			stringToPrint += c.getCardName() + "\n";
@@ -374,15 +437,18 @@ public class TopTrumpsCLIApplication {
 		writeToLog(stringToPrint, fw);
 	}
 	
-	private static void writeToLog(String text, FileWriter fw) {
-		try {
-			fw.write(text + "\n---------------------------------------------\n\n");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
+	
+	//====================================================================================
+	
+	
+	
+	
+	
 	
 	private static void winnerCount(int winningIndex, ArrayList<Player> players) {
+		//method to update the counter for winning players. These are used in the database
+		
 		int roundWinnerID = players.get(winningIndex).getPlayerID(); //get the ID of the winning player
 		
 		if(roundWinnerID == 1) {
@@ -399,12 +465,17 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static void printDraw(ArrayList<Player> players, int catChoice, int winningIndex) {
+		//if there is a draw print this to the console 
+		
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "+ getCategory(catChoice) + ". Multiple"
 				+ " player's cards had the winning value so the round is a draw.");
 		System.out.println("The cards have been addedd to the communal pile for the next winner!");
 	}
 
 	private static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
+		//method to test for draws.
+		
+		
 		int winningValue = 0;
 		int numberOfHighCards = 0; // counts the number of times the highest cat is seen
 
@@ -430,6 +501,9 @@ public class TopTrumpsCLIApplication {
 	}
 	
 	private static ArrayList<Card> getTopCards(ArrayList<Player> players, ArrayList<Card> cardSelection) {
+		//this method gets the top cards from each of the players decks
+		//it is also responsible for removing players from the game if they are out of cards.
+		
 		ArrayList<Integer> toBeRemoved = new ArrayList<Integer>();
 
 		try {
@@ -447,24 +521,27 @@ public class TopTrumpsCLIApplication {
 			e.printStackTrace();
 		}
 		
-
+		//remove all of the players with no cards left from the players list
 		for(int i = players.size()-1; i >= 0; i--) {
 			if(toBeRemoved.contains(i)) {
 				players.remove(i);
 			}
-			
 		}
 		return cardSelection;
 	}
 	
 	private static void distributeCards(ArrayList<Card> deck, ArrayList<Player> players, int numberOfPlayers) {
+		//deal the cards out 
+		
 		for (int i = 0; i < deck.size(); i++) {
 			players.get(i % numberOfPlayers).givePlayerCard(deck.get(i));
 		}
 	}
 
 	private static void createPlayers(ArrayList<Player> players, int numberOfPlayers) {
-		Player human = new Player();
+		//create a player based on the users number of players choice
+		
+		Player human = new Player(); //there is always a human player
 		players.add(human);
 		for (int i = 1; i < numberOfPlayers; i++) {
 			Player AIPlayer = new Player();
@@ -473,6 +550,8 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static void removeCards(ArrayList<Player> players) {
+		//removes the top cards from the players personal decks at the end of each round 
+		
 		for (int i = 0; i < players.size(); i++) {
 			try {
 				players.get(i).removeTopCard();
@@ -483,6 +562,8 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
+		//gets the index of the winning player
+		
 		int winningValue = 0;
 		int winningIndex = 0;
 
@@ -496,11 +577,15 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static void printCatSelectedStatement(ArrayList<Player> players, int catChoice, int winningIndex) {
+		//statement to print the selected category in the console
+		
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "
 				+ getCategory(catChoice) + " at " + players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
 	}
 
 	private static void printWinStatement(ArrayList<Player> players, int catChoice, int winningIndex) {
+		//print the winner, the card they had, the category selected, and its value
+		
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has won with "
 				+ players.get(winningIndex).getTopCard().getCardName() + "'s " + getCategory(catChoice) + " at "
 				+ players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
@@ -508,18 +593,24 @@ public class TopTrumpsCLIApplication {
 	}
 
 	public static ArrayList<Card> readAndCreateDeck() {
-		// method to tiy up reading the files and getting the deck
+		// method to tidy up reading the files and getting the deck
+		
 		FileHandler filehandler = new FileHandler();
 		filehandler.getFileData();
 		return  filehandler.getDeck();
 	}
 
 	private static ArrayList<Card> shuffleDeck(ArrayList<Card> deck) {
+		//shuffles the deck
+		//this was made a method so that it could be accessed by other classes
+		
 		Collections.shuffle(deck);
 		return deck;
 	}
 
 	private static int getNoPlayers(Scanner s) {
+		//promt the user for the number of players
+		
 		int noPlayers = 0;
 		boolean inputOk = false;
 		while (!inputOk) {
@@ -538,6 +629,9 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static String getCategory(int i) {
+		//get the categoryies
+		//we do this so that any deck can be used.
+		
 		String category = "";
 		switch (i) {
 		case 1:
@@ -561,7 +655,10 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static boolean checkForOverallGameWin(ArrayList<Player> players) {
-		if (players.size() == 1) {
+		//checks if there is a winner
+
+		
+		if (players.size() == 1) { //if there is only one player left then we have a game winner
 			System.out.println();
 			System.out.println("Player " + players.get(0).getPlayerID() + " has won the game.");
 			winnerID = players.get(0).getPlayerID();
@@ -572,11 +669,15 @@ public class TopTrumpsCLIApplication {
 	
 	private static void logStatistics() {
 		//can only test this on university computers
+		//writes all the stats the the database at the end of the game
+		
 		//System.out.println(String.format("%d %d %d %d %d %d %d %d", winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins));
 		DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 	}
 	
 	private static void resetStatistics() {
+		//we need to reset the statistics when a new game is initialised
+		
 		winnerID = 0;
 		draws = 0;
 		noRounds = 0;
@@ -589,6 +690,8 @@ public class TopTrumpsCLIApplication {
 	}
 
 	private static int checkForNumberOfPlayers(int numberOfPlayers, Scanner s) {
+		//checks that the number of players is valid
+		
 		while (numberOfPlayers < 2 || numberOfPlayers > 5) {
 			System.out.println("Incorrect number of players entered.  \b" + "Please enter a number between 2 and 5");
 			try {
@@ -600,6 +703,7 @@ public class TopTrumpsCLIApplication {
 		}
 		return numberOfPlayers;
 	}
+	
 
 	private static void printWelcomeMessage() {
 		System.out.println(
