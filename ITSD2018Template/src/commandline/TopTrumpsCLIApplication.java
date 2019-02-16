@@ -124,7 +124,7 @@ public class TopTrumpsCLIApplication {
 		setCatNames(catNames); //set up the card names for the switch case
 		
 		deck = shuffleDeck(deck);
-		Collections.shuffle(players);//shuffle the players so the starting player is random
+		//Collections.shuffle(players);//shuffle the players so the starting player is random
 		
 		if(writeGameLogsToFile) {
 			writeDeckToLog(deck, fw);
@@ -148,14 +148,12 @@ public class TopTrumpsCLIApplication {
 
 		// Loop until the current game is over
 		while (gameInProgress) {		
-			
 			cardSelection = getTopCards(players, cardSelection);
-			
 			gameWon = checkForOverallGameWin(players);
 
 			
 			if(gameWon) {
-				//logStatistics();
+				logStatistics();
 				if(writeGameLogsToFile) {
 					writeWinnerToLog(players, fw);
 					try {
@@ -179,8 +177,9 @@ public class TopTrumpsCLIApplication {
 			
 
 			// keeps winningIndex under players arrayList size
-			// As players are removed from the game, the index must be reduced
-			while (winningIndex >= players.size()) {
+			// if the winning index was 5 but player 3 was removed from the game then player 5 would now be in a lower
+			// so we must lower the index (more than one can be removed at once so while loop)
+			while(winningIndex > players.size() - 1) {
 				winningIndex--;
 			}
 
@@ -205,9 +204,6 @@ public class TopTrumpsCLIApplication {
 			
 			//print selected category to log
 			if(writeGameLogsToFile && !cardSelection.isEmpty()) {
-				//System.out.println(cardSelection);
-				//System.out.println(catChoice);
-				//System.out.println(fw);
 				writeCatAndValues(cardSelection, catChoice, fw);
 			}
 
@@ -436,9 +432,9 @@ public class TopTrumpsCLIApplication {
 					cardSelection.add(players.get(i).getTopCard()); // adding to cardSelection
 				} else {
 					// if they do not have a top card, they are removed from the game
-					System.out
-							.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
+					System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
 					players.remove(i);
+					System.out.println(players.size());
 				}
 
 			}
