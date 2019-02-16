@@ -9,6 +9,7 @@ public class Player {
 	private ArrayList<Card> personalDeck = new ArrayList<Card>();
 	private int catChoice;
 	private int playerID;
+	private boolean isActive = true;
 	private static int playerIDCount = 1;
 
 	public Player() {
@@ -16,6 +17,14 @@ public class Player {
 		playerIDCount++;
 	}
 
+	
+	public boolean getIsActive() {
+		return isActive;
+	}
+	
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
 	public static void resetPlayerIDCount() {
 		playerIDCount = 1;
 	}

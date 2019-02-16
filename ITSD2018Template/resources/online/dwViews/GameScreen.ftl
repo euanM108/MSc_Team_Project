@@ -275,8 +275,8 @@ table.cat-table tfoot td {
   <a href="/toptrumps/">Exit</a>
 	<button id="btn-submit"; onclick="submit(); getRoundNumber(); disableButtons(); this.style.display='none'">Submit your category!</button>
 	<button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
-	<button id="btn-reveal-winner"; onclick="getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
-	<button id="btn-next-round"; onclick="nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
+	<button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
+	<button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
 </div>
 
 				
@@ -555,6 +555,19 @@ table.cat-table tfoot td {
 			};
 		  }
 		
+		function enableOrDisableButtons(){
+		if (winning_index != 0){
+		 			
+		  			disableButtons();
+		  		}
+		  		else {
+		  			enableButtons();
+		  		}
+		
+		}
+		function displayNextRoundButton(){
+		document.getElementById("btn-next-round").style.display = 'block';
+		}
 		
 		function setCategory(clicked_id) {
 			document.getElementById('btn-submit').style.display='block';
@@ -606,14 +619,6 @@ table.cat-table tfoot td {
 				xhrWinningIndex.onload = function(e){
 				
 		  		winning_index = xhrWinningIndex.response; // the text of the response
-		  		document.getElementById("btn-next-round").style.display = 'block';	
-		  		if (winning_index != 0){
-		 			
-		  			disableButtons();
-		  		}
-		  		else {
-		  			enableButtons();
-		  		}
 		  		
 		  		}
 		  	} 
@@ -627,7 +632,6 @@ table.cat-table tfoot td {
 		}
 
 		function checkActivePlayers(){
-			
 			
 	  		if (number_of_players == 1){
 	  			checkPlayersDeckSize(0);
@@ -671,7 +675,7 @@ table.cat-table tfoot td {
 		  		console.log(responseText);
 		  		if (responseText < 1){
 		  		// this makes the human card disappear
-		  		 	removePlayer(i);
+		  		  removePlayer(i);
 		  		}
 		  	} 
 		
@@ -679,23 +683,24 @@ table.cat-table tfoot td {
 
 
 		function removePlayer(i){
-			if (i==1){
+			if (i==0){
 				document.getElementById("playing-card-1").style.display = 'none';
 			}
-			else if (i==2){
+			else if (i==1){
 				document.getElementById("playing-card-2").style.display = 'none';
 			}
-			else if (i==3){
+			else if (i==2){
 				document.getElementById("playing-card-3").style.display = 'none';
 			}
-			else if (i==4){
+			else if (i==3){
 				document.getElementById("playing-card-4").style.display = 'none';
 			}
-			else if (i==5){
+			else if (i==4){
 				document.getElementById("playing-card-5").style.display = 'none';
 			}
-			
+	
 		}
+			
 		
 		function disableButtons(){
 			document.getElementById("1").disabled = true;

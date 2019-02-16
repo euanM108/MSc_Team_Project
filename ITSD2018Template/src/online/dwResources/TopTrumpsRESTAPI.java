@@ -387,10 +387,6 @@ public class TopTrumpsRESTAPI {
 		
 		winningIndex = getWinningIndex(centralDeck, catChoice);
 		
-		
-		
-		//	 NEED TO FIGURE OUT WHAT TO CHANGE CENTRALDECK.SIZE() TO
-		
 		if(centralDeck.size() > 0) {
 			for(int i = 0; i < centralDeck.size(); i++){
 				players.get(winningIndex).givePlayerCard(centralDeck.get(i));
@@ -500,13 +496,11 @@ public class TopTrumpsRESTAPI {
 	private int getWinningIndex(ArrayList<Card> centralDeck, int catChoice) {
 		int winningValue = 0;
 		int winningIndex = 0;
-
-
 		
-		for (int j = 0; j < centralDeck.size(); j++) {
+		for (int j = 0; j < players.size(); j++) {
 			if (players.get(j).getPersonalDeckSize() > 0) {
-				if (centralDeck.get(j).getRequestedCat(catChoice) > winningValue) {
-					winningValue = centralDeck.get(j).getRequestedCat(catChoice);
+				if (players.get(j).getTopCard().getRequestedCat(catChoice) > winningValue) {
+					winningValue = players.get(j).getTopCard().getRequestedCat(catChoice);
 					winningIndex = j;
 				}
 			}
@@ -574,7 +568,7 @@ public class TopTrumpsRESTAPI {
 					// if they do not have a top card, they are removed from the game
 					System.out
 							.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
-					//players.remove(i);
+		//		    players.remove(i);
 				}
 
 			}
