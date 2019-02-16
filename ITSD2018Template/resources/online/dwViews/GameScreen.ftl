@@ -245,7 +245,7 @@ table.cat-table tfoot td {
 	padding: 5px;
 }
 
-#btn-submit, #btn-reveal-winner {
+#btn-submit, #btn-opponent-submit, #btn-reveal-winner, #btn-next-round {
  	display: none;
 }
 
@@ -273,8 +273,10 @@ table.cat-table tfoot td {
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-	<button id="btn-submit"; onclick="nextRound(); submit(); getRoundNumber(); disableButtons();">Submit your category!</button>
-	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); this.style.display='none';">Reveal winner!</button>
+	<button id="btn-submit"; onclick="submit(); getRoundNumber(); disableButtons(); this.style.display='none'">Submit your category!</button>
+	<button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
+	<button id="btn-reveal-winner"; onclick="getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
+	<button id="btn-next-round"; onclick="nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
 </div>
 
 				
@@ -502,6 +504,7 @@ table.cat-table tfoot td {
 		var category_selected;
 		var current_round_num;
 		var number_of_players;
+		var winning_index;
 		
 		function setNumberOfPlayers() {		
 		
@@ -556,7 +559,6 @@ table.cat-table tfoot td {
 		function setCategory(clicked_id) {
 			document.getElementById('btn-submit').style.display='block';
 			category_selected = clicked_id;
-			console.log("this clicked id is: " + category_selected);
 		}
 			
 		function submit(){		  	
@@ -572,7 +574,7 @@ table.cat-table tfoot td {
 			xhr.send()
 			
 			xhr.onload = function(e){
-		  		getRoundWinner();
+				document.getElementById('btn-reveal-winner').style.display='block';
 		  	} 
 		
 		}
@@ -603,13 +605,10 @@ table.cat-table tfoot td {
 				
 				xhrWinningIndex.onload = function(e){
 				
-		  		var winningIndex = xhrWinningIndex.response; // the text of the response
-		  		
-		  		if (winningIndex != 0){
-		  			document.getElementById("btn-reveal-winner").style.display = 'block';
-		  			document.getElementById("btn-next").style.display = 'none';
-		  			document.getElementById("btn-submit").style.display = 'none';
-		  			
+		  		winning_index = xhrWinningIndex.response; // the text of the response
+		  		document.getElementById("btn-next-round").style.display = 'block';	
+		  		if (winning_index != 0){
+		 			
 		  			disableButtons();
 		  		}
 		  		else {
@@ -618,6 +617,13 @@ table.cat-table tfoot td {
 		  		
 		  		}
 		  	} 
+		}
+		
+		function displayOpponentSubmit(){
+		if (winning_index != 0){
+		 			document.getElementById("btn-opponent-submit").style.display = 'block';
+		  		}
+		
 		}
 
 		function checkActivePlayers(){
@@ -665,12 +671,31 @@ table.cat-table tfoot td {
 		  		console.log(responseText);
 		  		if (responseText < 1){
 		  		// this makes the human card disappear
-		  		// 	document.getElementById("playing-card-1").style.display = 'none';
+		  		 	removePlayer(i);
 		  		}
 		  	} 
 		
 		}
 
+
+		function removePlayer(i){
+			if (i==1){
+				document.getElementById("playing-card-1").style.display = 'none';
+			}
+			else if (i==2){
+				document.getElementById("playing-card-2").style.display = 'none';
+			}
+			else if (i==3){
+				document.getElementById("playing-card-3").style.display = 'none';
+			}
+			else if (i==4){
+				document.getElementById("playing-card-4").style.display = 'none';
+			}
+			else if (i==5){
+				document.getElementById("playing-card-5").style.display = 'none';
+			}
+			
+		}
 		
 		function disableButtons(){
 			document.getElementById("1").disabled = true;
@@ -716,7 +741,6 @@ table.cat-table tfoot td {
 			  
 		function nextRound(){
 			document.getElementById('btn-submit').style.display='none';
-			console.log("initiating gameplay");
 		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
 			xhr.send();
 			xhr.onload = function(e){
