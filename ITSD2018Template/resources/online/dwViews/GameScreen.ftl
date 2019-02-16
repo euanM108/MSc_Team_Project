@@ -273,8 +273,8 @@ table.cat-table tfoot td {
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-	<button id="btn-submit"; onclick="checkActivePlayers(); nextRound(); submit(); getRoundNumber(); disableButtons();">Submit your category!</button>
-	<button id="btn-reveal-winner"; onclick="checkActivePlayers(); nextRound(); submit();  getRoundNumber(); this.style.display='none';">Reveal winner!</button>
+	<button id="btn-submit"; onclick="nextRound(); submit(); getRoundNumber(); disableButtons();">Submit your category!</button>
+	<button id="btn-reveal-winner"; onclick="nextRound(); submit();  getRoundNumber(); this.style.display='none';">Reveal winner!</button>
 </div>
 
 				
@@ -621,47 +621,51 @@ table.cat-table tfoot td {
 		}
 
 		function checkActivePlayers(){
-			checkPlayersDeckSize(1);
+			
 			
 	  		if (number_of_players == 1){
-	  			checkPlayersDeckSize(2);
+	  			checkPlayersDeckSize(0);
+	  			checkPlayersDeckSize(1);
 	  			}
 	  		else if(number_of_players == 2){
-	  			checkPlayersDeckSize(2);
-				checkPlayersDeckSize(3);
+	  			checkPlayersDeckSize(0);
+	  			checkPlayersDeckSize(1);
+				checkPlayersDeckSize(2);
 	  			}
 	  		else if(number_of_players == 3){
-	  			checkPlayersDeckSize(2);
+	  			checkPlayersDeckSize(0);
+	  			checkPlayersDeckSize(1);
+				checkPlayersDeckSize(2);
 				checkPlayersDeckSize(3);
-	  			checkPlayersDeckSize(4);
 	  			}
 	  		else if(number_of_players == 4){
-	  			checkPlayersDeckSize(2);
+	  			checkPlayersDeckSize(0);
+	  			checkPlayersDeckSize(1);
+				checkPlayersDeckSize(2);
 				checkPlayersDeckSize(3);
 	  			checkPlayersDeckSize(4);
-	  			checkPlayersDeckSize(5);
 	  		}	
 		}
 		
 		
 		function checkPlayersDeckSize(i){
 			//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/submit_category?getPlayerDeckSize="+i); // Request type and URL+parameters
+			var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayersDeckSize?i="+i); // Request type and URL+parameters
 			// Message is not sent yet, but we can check that the browser supports CORS
 			if (!xhr) {
 				alert("CORS not supported");
 			}
 			
 			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send()
+			xhr.send();
 			
 			xhr.onload = function(e){
 				var responseText = xhr.response; // the text of the response
 		  		console.log("just checked " + i + " deck size");
 		  		console.log(responseText);
 		  		if (responseText < 1){
-		  			console.log("PLAYER " + (i+1) + " SHOULD BE REMOVED");
+		  		// this makes the human card disappear
+		  		// 	document.getElementById("playing-card-1").style.display = 'none';
 		  		}
 		  	} 
 		
@@ -718,6 +722,7 @@ table.cat-table tfoot td {
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
 		  		getRoundNumber();
+		  		checkActivePlayers();
 		  		getCardName();
 				getPlayer1CardValues();
 				getHumanCardCount();

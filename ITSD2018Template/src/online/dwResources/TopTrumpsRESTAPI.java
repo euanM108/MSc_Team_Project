@@ -45,10 +45,7 @@ public class TopTrumpsRESTAPI {
 	private int catChoice = 0; // current category choice
 	private int currentRoundNumber = 1;
 	private boolean hasPlayerSubmitted;
-	public void removePlayer(int i) {
-		players.remove(i);
-	}
-	
+
 	
 	/**
 	 * A Jackson Object writer. It allows us to turn Java objects into JSON strings
@@ -212,7 +209,7 @@ public class TopTrumpsRESTAPI {
 				return players.get(0).getTopCard().getCat5Value();
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 	@GET
@@ -249,7 +246,7 @@ public class TopTrumpsRESTAPI {
 				return players.get(1).getTopCard().getCat5Value();
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 
@@ -290,14 +287,14 @@ public class TopTrumpsRESTAPI {
 				return players.get(2).getTopCard().getCat5Value();
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 
 	@GET
 	@Path("/getPlayer4CardName")
 	public String getPlayer4CardName() throws IOException{
-		if (players.get(0).getPersonalDeckSize() > 0) {
+		if (players.get(3).getPersonalDeckSize() > 0) {
 			return players.get(3).getTopCard().getCardName();
 		}
 		return "removed";
@@ -325,7 +322,7 @@ public class TopTrumpsRESTAPI {
 				return players.get(3).getTopCard().getCat5Value();
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 	
@@ -334,7 +331,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getPlayer5CardName")
 	public String getPlayer5CardName() throws IOException{
-		if (players.get(0).getPersonalDeckSize() > 0) {
+		if (players.get(4).getPersonalDeckSize() > 0) {
 			return players.get(4).getTopCard().getCardName();
 		}
 		return "removed";
@@ -344,7 +341,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getPlayer5CardValue")
 	public int getPlayer5CardValue(@QueryParam("i") String i) throws IOException {
-		if (players.get(0).getPersonalDeckSize() > 0) {
+		if (players.get(4).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
 				
 			if (category == 1) {
@@ -363,7 +360,7 @@ public class TopTrumpsRESTAPI {
 				return players.get(4).getTopCard().getCat5Value();
 			}
 		}
-		return -1;
+		return 0;
 	}
 	
 	
@@ -390,7 +387,10 @@ public class TopTrumpsRESTAPI {
 		
 		winningIndex = getWinningIndex(centralDeck, catChoice);
 		
-		//if there are cards in the centralDeck give the player those
+		
+		
+		//	 NEED TO FIGURE OUT WHAT TO CHANGE CENTRALDECK.SIZE() TO
+		
 		if(centralDeck.size() > 0) {
 			for(int i = 0; i < centralDeck.size(); i++){
 				players.get(winningIndex).givePlayerCard(centralDeck.get(i));
@@ -407,8 +407,9 @@ public class TopTrumpsRESTAPI {
 	
 	private static void removeCards(ArrayList<Player> players) {
 		for (int i = 0; i < players.size(); i++) {
-			try {
+			try {if (players.get(i).getPersonalDeckSize() > 0) {
 				players.get(i).removeTopCard();
+			}
 			} catch (IndexOutOfBoundsException e) {
 
 			}
@@ -438,13 +439,6 @@ public class TopTrumpsRESTAPI {
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
 			centralDeck = getTopCards(this.players);
-			if (checkForOverallGameWin(players)) {
-				winnerID = players.get(0).getPlayerID();
-			}
-			
-			while (winningIndex >= players.size()) {
-				winningIndex--;
-			}			
 	}
 	
 	@GET
@@ -487,11 +481,10 @@ public class TopTrumpsRESTAPI {
 	}
 	
 	@GET
-	@Path("/getPlayerDeckSize")
-	public int getPlayerDeckSize(String i) throws IOException{
+	@Path("/getPlayersDeckSize")
+	public String getPlayersDeckSize(@QueryParam("i") String i) throws IOException{
 		int index = Integer.parseInt(i);
-		index -= 1;
-		return players.get(index).getPersonalDeckSize();
+		return ""+players.get(index).getPersonalDeckSize();
 		
 	}
 	
@@ -508,10 +501,14 @@ public class TopTrumpsRESTAPI {
 		int winningValue = 0;
 		int winningIndex = 0;
 
+
+		
 		for (int j = 0; j < centralDeck.size(); j++) {
-			if (centralDeck.get(j).getRequestedCat(catChoice) > winningValue) {
-				winningValue = centralDeck.get(j).getRequestedCat(catChoice);
-				winningIndex = j;
+			if (players.get(j).getPersonalDeckSize() > 0) {
+				if (centralDeck.get(j).getRequestedCat(catChoice) > winningValue) {
+					winningValue = centralDeck.get(j).getRequestedCat(catChoice);
+					winningIndex = j;
+				}
 			}
 		}
 		return winningIndex;
