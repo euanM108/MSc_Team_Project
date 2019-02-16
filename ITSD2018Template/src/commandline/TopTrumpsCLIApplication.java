@@ -51,7 +51,7 @@ public class TopTrumpsCLIApplication {
 		
 		
 		boolean writeGameLogsToFile = true; // Should we write game logs to file? REMOVE FOR PRODUCTION
-		//DatabaseCommunication.connectToDatabase();
+		DatabaseCommunication.connectToDatabase();
 		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; // Command
 		
 		boolean running = true;
@@ -79,7 +79,7 @@ public class TopTrumpsCLIApplication {
 	
 	public static void viewStats() {
 		System.out.println("Placeholder for testing when not connected to the database");
-		//DatabaseCommunication.getPreviousStatistics(); USED IN PRODUCTION OR WHEN CONNECTED TO DATABASE.
+		DatabaseCommunication.getPreviousStatistics();
 	}
 	
 	public static void playGame(FileWriter fw, boolean writeGameLogsToFile, Scanner s) {
@@ -563,7 +563,7 @@ public class TopTrumpsCLIApplication {
 	
 	private static void logStatistics() {
 		//can only test this on university computers
-		System.out.println(String.format("%d %d %d %d %d %d %d %d", winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins));
+		//System.out.println(String.format("%d %d %d %d %d %d %d %d", winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins));
 		DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 	}
 	
