@@ -30,7 +30,7 @@ public class DatabaseCommunication {
 				e.printStackTrace(); //do we want to remove this line for production?
 				return;
 			}
-		} else {
+		} else { //stops it from trying to connect to the database repeatedly if it fails.
 			System.out.println("Connection attempts failed, please check credentials or database status.");
 		}
 	}

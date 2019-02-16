@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.InputMismatchException;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 /***
@@ -105,7 +106,7 @@ public class TopTrumpsCLIApplication {
 		ArrayList<Card> cardSelection = new ArrayList<Card>();
 		ArrayList<Card> communalPile = new ArrayList<Card>();
 	
-		Player.resetPlayerIDCount();		
+		Player.resetPlayerIDCount(); //since player ID is static and incremented we need to reset it for new games.	
 		numberOfPlayers = checkForNumberOfPlayers(getNoPlayers(s), s);
 		System.out.println("Number of players chosen: " + numberOfPlayers);
 
@@ -124,7 +125,7 @@ public class TopTrumpsCLIApplication {
 		setCatNames(catNames); //set up the card names for the switch case
 		
 		deck = shuffleDeck(deck);
-		//Collections.shuffle(players);//shuffle the players so the starting player is random
+		Collections.shuffle(players);//shuffle the players so the starting player is random
 		
 		if(writeGameLogsToFile) {
 			writeDeckToLog(deck, fw);
@@ -148,6 +149,8 @@ public class TopTrumpsCLIApplication {
 
 		// Loop until the current game is over
 		while (gameInProgress) {		
+			
+			System.out.println("\n\n======================================================================\n\n");
 			cardSelection = getTopCards(players, cardSelection);
 			gameWon = checkForOverallGameWin(players);
 
@@ -171,6 +174,7 @@ public class TopTrumpsCLIApplication {
 			// there is no longer a game in progress
 			if (!gameInProgress) {
 				System.out.println("\nEnd of game.");
+				System.out.println("\n\n======================================================================\n\n");
 				s.nextLine(); //stops the menue interface from displaying twice
 				break;
 			}
@@ -179,9 +183,11 @@ public class TopTrumpsCLIApplication {
 			// keeps winningIndex under players arrayList size
 			// if the winning index was 5 but player 3 was removed from the game then player 5 would now be in a lower
 			// so we must lower the index (more than one can be removed at once so while loop)
+
 			while(winningIndex > players.size() - 1) {
 				winningIndex--;
 			}
+
 
 			// If human player, call human method getHumanPlayersCatChoice()
 			// If AI Player, call AI method getAIPLayersCatChoice()
@@ -228,7 +234,7 @@ public class TopTrumpsCLIApplication {
 			
 				printDraw(players, catChoice, winningIndex);
 			} else {
-				// if there is not a draw1
+				// if there is not a draw
 				winningIndex = getWinningIndex(cardSelection, catChoice);
 				winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
 
@@ -346,9 +352,9 @@ public class TopTrumpsCLIApplication {
 		//Whos deck is it
 		int playerID = p.getPlayerID();
 		if(playerID == 1) {
-			stringToPrint += "Human Players Deck:\n\n";
+			stringToPrint += "(Human) Player 1's Deck:\n\n";
 		}else {
-			stringToPrint += "AI Player Number " + Integer.toString(playerID-1) + "'s deck:\n\n";
+			stringToPrint += "(AI) Player " + Integer.toString(playerID) + "'s Deck:\n\n";
 		}
 		
 		//Print Their deck
@@ -395,7 +401,7 @@ public class TopTrumpsCLIApplication {
 	private static void printDraw(ArrayList<Player> players, int catChoice, int winningIndex) {
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "+ getCategory(catChoice) + ". Multiple"
 				+ " player's cards had the winning value so the round is a draw.");
-		System.out.println();
+		System.out.println("The cards have been addedd to the communal pile for the next winner!");
 	}
 
 	private static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
@@ -424,6 +430,7 @@ public class TopTrumpsCLIApplication {
 	}
 	
 	private static ArrayList<Card> getTopCards(ArrayList<Player> players, ArrayList<Card> cardSelection) {
+		ArrayList<Integer> toBeRemoved = new ArrayList<Integer>();
 
 		try {
 			// running through each player and storing their top card in the dealers deck
@@ -433,13 +440,19 @@ public class TopTrumpsCLIApplication {
 				} else {
 					// if they do not have a top card, they are removed from the game
 					System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
-					players.remove(i);
-					System.out.println(players.size());
+					toBeRemoved.add(i); //we have to do this in a seperate loop otherwise it messes up the indexing!
 				}
-
 			}
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
+		}
+		
+
+		for(int i = players.size()-1; i >= 0; i--) {
+			if(toBeRemoved.contains(i)) {
+				players.remove(i);
+			}
+			
 		}
 		return cardSelection;
 	}
