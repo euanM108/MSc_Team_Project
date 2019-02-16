@@ -38,14 +38,27 @@ public class TopTrumpsRESTAPI {
 	
 	private int numberOfPlayers;
 	private ArrayList<Player> players;
-	private ArrayList<Card> centralDeck = new ArrayList<Card>();
+	private ArrayList<Card> cardSelection = new ArrayList<Card>();
+	private ArrayList<Card> communalPile = new ArrayList<Card>();
 	private static String categories;
 	private int winnerID;
 	private int winningIndex = 0; // current winning index
 	private int catChoice = 0; // current category choice
 	private int currentRoundNumber = 1;
 	private boolean hasPlayerSubmitted;
+	private boolean draw = false;
 
+	
+	//variables used in database
+	private static int draws;
+	private static int noRounds;
+	private static int playerWins;
+	private static int AI1Wins;
+	private static int AI2Wins;
+	private static int AI3Wins;
+	private static int AI4Wins;
+	
+	
 	
 	/**
 	 * A Jackson Object writer. It allows us to turn Java objects into JSON strings
@@ -95,12 +108,8 @@ public class TopTrumpsRESTAPI {
 	/**
 	 * Setting up the game when game launched
 	 */
-	public ArrayList<Card> launchGame() throws IOException {
-		
-		ArrayList<Card> deck = getDeck();
-		return deck;
-
-
+	public void launchGame() throws IOException {
+		DatabaseCommunication.connectToDatabase();
 	}
 	
 	@GET
@@ -385,20 +394,76 @@ public class TopTrumpsRESTAPI {
 			System.out.println("\n\n\n\n\n");
 		}
 		
-		winningIndex = getWinningIndex(centralDeck, catChoice);
+		draw = testForDraw(cardSelection, catChoice);
 		
-		if(centralDeck.size() > 0) {
-			for(int i = 0; i < centralDeck.size(); i++){
-				players.get(winningIndex).givePlayerCard(centralDeck.get(i));
+		if (draw) {
+			
+			// if the round is a draw
+			// winning index stays the same
+			// cards are moved to communal pile
+			draws++; //add 1 to the count of draws for the database
+			for (Card tempCard : cardSelection) {
+				communalPile.add(tempCard);
 			}
-			centralDeck.clear();			
+			printDraw(players, catChoice, winningIndex);
+
+		} else {
+			// if there is not a draw
+			winningIndex = getWinningIndex(cardSelection, catChoice);
+			winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
+
+			// Giving the winner the cards they won for this round
+			for (int i = 0; i < cardSelection.size(); i++) {
+				players.get(winningIndex).givePlayerCard(cardSelection.get(i));
+			}
+			
+			//if there are cards in the communalPile give the player those
+			if(communalPile.size() > 0) {
+				for(int i = 0; i < communalPile.size(); i++){
+					players.get(winningIndex).givePlayerCard(communalPile.get(i));
+				}
+				communalPile.clear();
+			}
 		}
 		
+		
+//		if(cardSelection.size() > 0) {
+//			for(int i = 0; i < cardSelection.size(); i++){
+//				players.get(winningIndex).givePlayerCard(cardSelection.get(i));
+//			}
+//			cardSelection.clear();			
+//		}
+		cardSelection.clear();
 		// remove top cards after round is finished
 		removeCards(players);
 		
 		System.out.println("winning index is : " + winningIndex);
 		// check players submission against others here
+	}
+	
+	
+	private static void winnerCount(int winningIndex, ArrayList<Player> players) {
+		int roundWinnerID = players.get(winningIndex).getPlayerID(); //get the ID of the winning player
+		
+		if(roundWinnerID == 1) {
+			playerWins++;
+		}else if(roundWinnerID == 2) {
+			AI1Wins++;
+		}else if(roundWinnerID == 3) {
+			AI2Wins++;
+		}else if(roundWinnerID == 4){
+			AI3Wins++;
+		}else {
+			AI4Wins++;
+		}
+	}
+	
+	private static void printDraw(ArrayList<Player> players, int catChoice, int winningIndex) {
+		System.out.println("\n\n\n\n");
+		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "+ getCategory(catChoice) + ". Multiple"
+				+ " player's cards had the winning value so the round is a draw.");
+		System.out.println("The cards have been addedd to the communal pile for the next winner!");
+		System.out.println("\n\n\n\n");
 	}
 	
 	private static void removeCards(ArrayList<Player> players) {
@@ -409,6 +474,32 @@ public class TopTrumpsRESTAPI {
 			} catch (IndexOutOfBoundsException e) {
 
 			}
+		}
+	}
+	
+	
+	private static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
+		int winningValue = 0;
+		int numberOfHighCards = 0; // counts the number of times the highest cat is seen
+
+		// find the winning Value
+		for (int j = 0; j < cardSelection.size(); j++) {
+			if (cardSelection.get(j).getRequestedCat(catChoice) > winningValue) {
+				winningValue = cardSelection.get(j).getRequestedCat(catChoice);
+			}
+		}
+
+		// check if the winning value occurs more than once
+		for (int i = 0; i < cardSelection.size(); i++) {
+			if (cardSelection.get(i).getRequestedCat(catChoice) == winningValue) {
+				numberOfHighCards++;
+			}
+		}
+
+		if (numberOfHighCards > 1) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -434,7 +525,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
-			centralDeck = getTopCards(this.players);
+			cardSelection = getTopCards(this.players);
 	}
 	
 	@GET
@@ -493,7 +584,7 @@ public class TopTrumpsRESTAPI {
 		return ""+cardCount5;
 	}
 	
-	private int getWinningIndex(ArrayList<Card> centralDeck, int catChoice) {
+	private int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
 		int winningValue = 0;
 		int winningIndex = 0;
 		
@@ -502,6 +593,9 @@ public class TopTrumpsRESTAPI {
 				if (players.get(j).getTopCard().getRequestedCat(catChoice) > winningValue) {
 					winningValue = players.get(j).getTopCard().getRequestedCat(catChoice);
 					winningIndex = j;
+				}
+				else if (players.get(j).getTopCard().getRequestedCat(catChoice) == winningValue) {
+					
 				}
 			}
 		}
@@ -538,6 +632,8 @@ public class TopTrumpsRESTAPI {
 		return category;
 	}
 	
+	
+	
 	private static boolean checkForOverallGameWin(ArrayList<Player> players) {
 		int count = 0;
 		int winner = -1;
@@ -549,7 +645,9 @@ public class TopTrumpsRESTAPI {
 		}
 		
 		if (count ==1) {
+			System.out.println("\n\n\n\n\n");
 			System.out.println("Player " + players.get(winner).getPlayerID() + " has won the game.");
+			System.out.println("\n\n\n\n\n");
 			return true;
 		}
 		count = 0;
@@ -558,25 +656,43 @@ public class TopTrumpsRESTAPI {
 	
 	private ArrayList<Card> getTopCards(ArrayList<Player> players) {
 		currentRoundNumber++;
-		ArrayList<Card> centralDeck = new ArrayList<Card>();
+		ArrayList<Card> cardSelection = new ArrayList<Card>();
 		try {
 			// running through each player and storing their top card in the dealers deck
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i).getPersonalDeckSize() > 0) {
-					centralDeck.add(players.get(i).getTopCard()); // adding to centralDeck
+					cardSelection.add(players.get(i).getTopCard()); // adding to cardSelection
 				} else {
 					// if they do not have a top card, they are removed from the game
 					System.out
 							.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
 		//		    players.remove(i);
+					
 				}
-
+				
+				if (checkForOverallGameWin(players)) {
+					// FINISH GAME AND DO FINAL STUFF HERE
+					
+					// write to database
+					// notify winner 
+					
+				}
 			}
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
-		return centralDeck;
+		return cardSelection;
 	} 
+	
+	@GET
+	@Path("/checkForGameWin")
+	public boolean checkForGameWin() throws IOException {
+			if (checkForOverallGameWin(players)) {
+				return true;
+			}
+		return false;
+	}
+	
 	
 	@GET
 	@Path("/helloWord")

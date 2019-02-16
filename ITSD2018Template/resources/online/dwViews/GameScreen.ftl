@@ -9,7 +9,7 @@
     	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
     	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
     	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/flick/jquery-ui.css">
-
+		<link href='https://fonts.googleapis.com/css?family=Atma' rel='stylesheet'>
 		<!-- Optional Styling of the Website, for the demo I used Bootstrap (see https://getbootstrap.com/docs/4.0/getting-started/introduction/) -->
 		<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/TREC_IS/bootstrap.min.css">
     	<script src="http://dcs.gla.ac.uk/~richardm/vex.combined.min.js"></script>
@@ -258,6 +258,34 @@ table.cat-table tfoot td {
   text-align: center;
 }
 
+#overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+#win-text {
+	font-family: Atma, Arial, Helvetica, sans-serif;
+	font-size: 150px;
+	text-align: center;
+    margin: 10%;
+
+}
+
+#winning-popup-box {
+margin: 10%;
+background-color: white;
+border-style: dashed;
+border-color: red;
+}
 
 </style>
 </head>
@@ -268,6 +296,11 @@ table.cat-table tfoot td {
 
     <p>Please select the number of opponents below and press <b>begin</b></p>
 
+</div>
+
+<div id="overlay">
+	<div id="winning-popup-box"><h1 id="win-text">YOU WON!!!</h1>
+    </div>
 </div>
 
 <div class="navbar">
@@ -506,11 +539,27 @@ table.cat-table tfoot td {
 		var number_of_players;
 		var winning_index;
 		
+		function launchGame(){
+			// getting numberOfPlayers from dropdown menu and save as variable players
+		  	console.log("LET THE GAME BEGIN");
+		  	
+		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
+			var xhr = createCORSRequest('GET',
+			"http://localhost:7777/toptrumps/launchGame"); // Request type and URL+parameters
+		
+			// Message is not sent yet, but we can check that the browser supports CORS
+			if (!xhr) {
+				alert("CORS not supported");
+			}
+			
+			// We have done everything we need to prepare the CORS request, so send it
+			xhr.send()
+		}
+		
 		function setNumberOfPlayers() {		
 		
 			// getting numberOfPlayers from dropdown menu and save as variable players
 		  	number_of_players = document.getElementById('numberOfPlayers').value;
-		  	console.log("The total number of players is " + number_of_players)
 		  	
 		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
 			var xhr = createCORSRequest('GET',
@@ -671,8 +720,6 @@ table.cat-table tfoot td {
 			
 			xhr.onload = function(e){
 				var responseText = xhr.response; // the text of the response
-		  		console.log("just checked " + i + " deck size");
-		  		console.log(responseText);
 		  		if (responseText < 1){
 		  		// this makes the human card disappear
 		  		  removePlayer(i);
@@ -736,7 +783,7 @@ table.cat-table tfoot td {
 		  		alert("CORS not supported");
 	  		}
 	  		xhr.send();
-	 		console.log("distributing deck");
+	 	
 	  		xhr.onload = function(e){
 	  			var responseText = xhr.response;
 	  			nextRound();			  			
@@ -787,6 +834,37 @@ table.cat-table tfoot td {
 		  			getPlayer5CardValues();
 		  		}	
 		  	} 
+		  	
+		  	checkForOverallGameWin();
+		}
+		
+		function checkForOverallGameWin(){
+			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin ");
+			xhr.send();
+			var playerID = winning_index+1;
+			xhr.onload = function(e){
+		  		var responseText = xhr.response;
+		  			if (responseText=="true"){
+		  				
+		  				if (winning_index == 0){
+		  					document.getElementById("win-text").innerHTML = "YOU WON!!!";
+		  					document.getElementById("overlay").style.display = "block";
+		  					
+		  					// CONFETTI CAUSE YOU WON
+		  					
+		  				}
+		  				else {
+		  				
+		  					// PLAYERID NEEDS TO BE USED AS INTEGER AND NOT STRING 
+		  					
+		  					document.getElementById("win-text").innerHTML = "YOU LOSE!<br />PLAYER " + playerID + " WINS!";
+		  					document.getElementById("overlay").style.display = "block";
+		  					// UNLUCKY BECAUSE YOU DIDN'T WIN
+		  					
+		  				}
+		  			}
+		  	} 
+		
 		}
 		
 		function getPlayer1CardValues(){
