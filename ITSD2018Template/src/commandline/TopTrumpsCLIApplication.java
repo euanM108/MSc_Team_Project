@@ -320,7 +320,7 @@ public class TopTrumpsCLIApplication {
 		if(winnerID == 1) {
 			stringToPrint += "the human player!";
 		}else {
-			stringToPrint += "AI Player " + Integer.toString(winnerID-1);
+			stringToPrint += "(AI) Player " + Integer.toString(winnerID);
 		}
 		
 		writeToLog(stringToPrint, fw);
