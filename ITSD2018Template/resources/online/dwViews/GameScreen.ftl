@@ -367,7 +367,7 @@ display: none;
     	margin-left: 50%;
     	font-family: sans-serif;
     	color: white;
-    	font-size: 10px;
+    	font-size: 30px;
     }
     
     #replay-button{
@@ -403,7 +403,7 @@ display: none;
     <button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
     <button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
     <button id="btn-finish-game"; onclick="finishGame(); this.style.display='none';">FINISH GAME</button>
-    <p id="select-numberOfPlayer"> Select No. of player -</p>
+    <p id="select-numberOfPlayer"> Select No. of opponents -</p>
     <select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
                     <option value="1">1</option>
                     <option value="2">2</option>

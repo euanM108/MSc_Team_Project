@@ -150,7 +150,7 @@ public class TopTrumpsRESTAPI {
 		
 		this.players = players;
 	
-		return "total number of players is " + numberOfPlayers;
+		return "total number of opponents is " + numberOfPlayers;
 	}
 	
 	@GET
