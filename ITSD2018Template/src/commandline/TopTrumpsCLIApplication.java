@@ -472,7 +472,7 @@ public class TopTrumpsCLIApplication {
 		System.out.println("The cards have been addedd to the communal pile for the next winner!");
 	}
 
-	private static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
+	public static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
 		//method to test for draws.
 		
 		
@@ -500,7 +500,7 @@ public class TopTrumpsCLIApplication {
 		}
 	}
 	
-	private static ArrayList<Card> getTopCards(ArrayList<Player> players, ArrayList<Card> cardSelection) {
+	public static ArrayList<Card> getTopCards(ArrayList<Player> players, ArrayList<Card> cardSelection) {
 		//this method gets the top cards from each of the players decks
 		//it is also responsible for removing players from the game if they are out of cards.
 		
@@ -530,7 +530,7 @@ public class TopTrumpsCLIApplication {
 		return cardSelection;
 	}
 	
-	private static void distributeCards(ArrayList<Card> deck, ArrayList<Player> players, int numberOfPlayers) {
+	public static void distributeCards(ArrayList<Card> deck, ArrayList<Player> players, int numberOfPlayers) {
 		//deal the cards out 
 		
 		for (int i = 0; i < deck.size(); i++) {
@@ -549,7 +549,7 @@ public class TopTrumpsCLIApplication {
 		}
 	}
 
-	private static void removeCards(ArrayList<Player> players) {
+	public static void removeCards(ArrayList<Player> players) {
 		//removes the top cards from the players personal decks at the end of each round 
 		
 		for (int i = 0; i < players.size(); i++) {
@@ -561,7 +561,7 @@ public class TopTrumpsCLIApplication {
 		}
 	}
 
-	private static int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
+	public static int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
 		//gets the index of the winning player
 		
 		int winningValue = 0;

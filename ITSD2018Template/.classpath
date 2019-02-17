@@ -15,6 +15,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="src/Libs/postgresql-42.2.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="src/Libs/je-7.5.11.jar.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Michael/Downloads/je-7.5.11.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
