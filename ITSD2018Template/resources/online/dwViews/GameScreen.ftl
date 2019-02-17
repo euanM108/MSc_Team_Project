@@ -128,7 +128,7 @@ body {
 
 /* Padding inside the card container */
 .container {
-  padding: 9px 16px;
+  padding: 4% 7%;
 }
 
 #cat-buttons{
@@ -142,12 +142,11 @@ img {
 
 .card-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: ". . ."". . .";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: ". . .";
     grid-template-areas:
-        "a b c"
-        "d e f";
+        "a b c e f";
 }
 
 .card {
@@ -375,7 +374,7 @@ border-color: red;
             <div class="card-container">
                 <div id="playing-card-1">
                 YOU<br>
-                Cards Remaining = <p id="HumanCardCount">Cards</p>
+               <p id="HumanCardCount">Cards</p>
                     <div class="card">
                         <alt="Avatar" style="width:100%">
                             <div class="container">
@@ -399,7 +398,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-2">
                     PLAYER 2 (AI)<br>
-                	Cards Remaining = <p id="P2CardCount">Cards</p>
+                	<p id="P2CardCount">Cards</p>
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
@@ -437,7 +436,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-3">
                     PLAYER 3 (AI)<br>
-                	Cards Remaining = <p id="P3CardCount">Cards</p>
+                	<p id="P3CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -477,7 +476,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-4">
                     PLAYER 4 (AI)<br>
-                	Cards Remaining = <p id="P4CardCount">Cards</p>
+                	<p id="P4CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -517,7 +516,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-5">
                     PLAYER 5 (AI)<br>
-                	Cards Remaining = <p id="P5CardCount">Cards</p>
+                	<p id="P5CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -885,7 +884,7 @@ border-color: red;
 		function checkForOverallGameWin(){
 			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin ");
 			xhr.send();
-			var playerID = winning_index+1;
+			var playerID = parseInt(winning_index)+1;
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
 		  			if (responseText=="true"){
@@ -1172,7 +1171,7 @@ border-color: red;
 			xhr.send();
 			xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("HumanCardCount").innerHTML = responseText;
+		  		document.getElementById("HumanCardCount").innerHTML = "Deck Size: " +responseText;
 
 		  	} 
 		}
@@ -1192,7 +1191,7 @@ border-color: red;
             xhr.send();
             xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("P2CardCount").innerHTML = responseText;
+		  		document.getElementById("P2CardCount").innerHTML = "Deck Size: " +responseText;
 		  	}
         }
 
@@ -1204,7 +1203,7 @@ border-color: red;
             xhr.send();
             xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("P3CardCount").innerHTML = responseText;
+		  		document.getElementById("P3CardCount").innerHTML = "Deck Size: " +responseText;
 		  	}
         }
 
@@ -1216,7 +1215,7 @@ border-color: red;
             xhr.send();
             xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("P4CardCount").innerHTML = responseText;
+		  		document.getElementById("P4CardCount").innerHTML = "Deck Size: " +responseText;
 		  	}
         }
 
@@ -1228,7 +1227,7 @@ border-color: red;
             xhr.send();
             xhr.onload = function(e){
 		  		var responseText = xhr.response;
-		  		document.getElementById("P5CardCount").innerHTML = responseText;
+		  		document.getElementById("P5CardCount").innerHTML = "Deck Size: " +responseText;
 		  	}
         }
 	  	

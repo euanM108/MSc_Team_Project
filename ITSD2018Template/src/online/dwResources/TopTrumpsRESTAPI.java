@@ -125,7 +125,7 @@ public class TopTrumpsRESTAPI {
 	 * Setting the number of players
 	 */
 	public String numberOfPlayers(@QueryParam("Number") String Number) throws IOException {
-		currentRoundNumber=0;
+		currentRoundNumber=1;
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.clear();
 		for (int i=0; i<players.size(); i++) {
