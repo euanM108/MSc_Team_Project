@@ -112,6 +112,7 @@ public class TopTrumpsRESTAPI {
 		DatabaseCommunication.connectToDatabase();
 	}
 	
+	
 	@GET
 	@Path("/getRoundNumber")
 	public String getRoundNumber() throws IOException {

@@ -83,7 +83,7 @@ public class DatabaseCommunication {
 		int noGames = 0;
 		try {
 			Statement SQLStatement = connection.createStatement();
-			String SQLQuery = "SELECT MAX(id)\r\n" + 
+			String SQLQuery = "SELECT COUNT(*)\r\n" + 
 					"FROM game_statistics";
 			ResultSet queryResult = SQLStatement.executeQuery(SQLQuery);
 			queryResult.next();

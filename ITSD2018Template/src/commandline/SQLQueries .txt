@@ -3,7 +3,7 @@ INSERT INTO game_statistics (winnerid, nodraws, totalrounds, playerwins, aiplaye
 VALUES (, , , , , , , )
 
 --get number of games played overall
-SELECT MAX(id)
+SELECT COUNT(*)
 FROM game_statistics
 
 --number of times computer has won
