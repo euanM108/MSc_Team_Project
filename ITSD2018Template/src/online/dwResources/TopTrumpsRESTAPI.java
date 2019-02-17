@@ -112,7 +112,6 @@ public class TopTrumpsRESTAPI {
 		DatabaseCommunication.connectToDatabase();
 	}
 	
-	
 	@GET
 	@Path("/getRoundNumber")
 	public String getRoundNumber() throws IOException {
@@ -585,6 +584,22 @@ public class TopTrumpsRESTAPI {
 		return ""+cardCount5;
 	}
 	
+	
+	@GET
+	@Path("/finishGame")
+	public void finishGame() throws IOException {
+		while ((!checkForOverallGameWin(players))) {
+			submit_category("0");
+	
+			nextRound();
+
+			checkForGameWin();
+		}
+		
+	
+	}
+	
+	
 	private int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
 		int winningValue = 0;
 		int winningIndex = 0;
@@ -754,6 +769,5 @@ public class TopTrumpsRESTAPI {
 	public void wipeDatabase() throws IOException {
 		DatabaseCommunication.clearHistory();
 	}
-	
 
 }

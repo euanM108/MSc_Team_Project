@@ -1,32 +1,32 @@
 
 <html>
 
-	<head>
-		<!-- Web page title -->
-    	<title>Top Trumps</title>
-    	
-    	<!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
-    	<script src="https://code.jquery.com/jquery-2.1.1.js"></script>
-    	<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-    	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/flick/jquery-ui.css">
-		<link href='https://fonts.googleapis.com/css?family=Atma' rel='stylesheet'>
-		<!-- Optional Styling of the Website, for the demo I used Bootstrap (see https://getbootstrap.com/docs/4.0/getting-started/introduction/) -->
-		<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/TREC_IS/bootstrap.min.css">
-    	<script src="http://dcs.gla.ac.uk/~richardm/vex.combined.min.js"></script>
-    	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
-    	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex.css"/>
-    	<link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
-    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <head>
+        <!-- Web page title -->
+        <title>Top Trumps</title>
+        
+        <!-- Import JQuery, as it provides functions you will probably find useful (see https://jquery.com/) -->
+        <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/flick/jquery-ui.css">
+        <link href='https://fonts.googleapis.com/css?family=Atma' rel='stylesheet'>
+        <!-- Optional Styling of the Website, for the demo I used Bootstrap (see https://getbootstrap.com/docs/4.0/getting-started/introduction/) -->
+        <link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/TREC_IS/bootstrap.min.css">
+        <script src="http://dcs.gla.ac.uk/~richardm/vex.combined.min.js"></script>
+        <script>vex.defaultOptions.className = 'vex-theme-os';</script>
+        <link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex.css"/>
+        <link rel="stylesheet" href="http://dcs.gla.ac.uk/~richardm/assets/stylesheets/vex-theme-os.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-	</head>
+    </head>
 
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
-    	
-    	<div class="main-container">
+        
+        <div class="main-container">
 
-			<!-- Add your HTML Here -->
-	<!DOCTYPE html>
+            <!-- Add your HTML Here -->
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Home Page</title>
@@ -132,8 +132,8 @@ body {
 }
 
 #cat-buttons{
-	display: block;
-	width: 100%;
+    display: block;
+    width: 100%;
 }
 
 img {
@@ -163,14 +163,14 @@ img {
 }
 
 #playing-card-1 {
-	display: none;
+    display: none;
     grid-area: a;
     align-self: center;
-	text-align: center;
+    text-align: center;
 }
 
 #playing-card-2 {
-	display: none;
+    display: none;
     grid-area: b;
     align-self: center;
     text-align: center;
@@ -178,7 +178,7 @@ img {
 
 
 #playing-card-3 {
-	display: none;
+    display: none;
     grid-area: c;
     align-self: center;
     text-align: center;
@@ -187,7 +187,7 @@ img {
 
 
 #playing-card-4 {
- 	display: none;
+    display: none;
     grid-area: e;
     align-self: center;
     text-align: center;
@@ -195,7 +195,7 @@ img {
 }
 
 #playing-card-5 {
-	display: none;
+    display: none;
     grid-area: f;
     align-self: center;
     text-align: center;
@@ -242,15 +242,15 @@ table.cat-table tfoot td {
 
 
 #btn-submit{
-	margin: 5px;
-	display: block;
-	padding: 5px;
+    margin: 5px;
+    display: block;
+    padding: 5px;
 }
 
 
 
 #btn-submit, #btn-opponent-submit, #btn-reveal-winner, #btn-next-round {
- 	display: none;
+    display: none;
 }
 
 #roundNum {
@@ -277,9 +277,9 @@ table.cat-table tfoot td {
 }
 
 #win-text {
-	font-family: Atma, Arial, Helvetica, sans-serif;
-	font-size: 150px;
-	text-align: center;
+    font-family: Atma, Arial, Helvetica, sans-serif;
+    font-size: 100px;
+    text-align: center;
     margin: 10%;
 
 }
@@ -331,6 +331,9 @@ border-style: dashed;
 border-color: red;
 }
 
+#btn-finish-game{
+display: none;
+}
 </style>
 </head>
 <body>
@@ -343,35 +346,35 @@ border-color: red;
 </div>
 
 <div id="overlay">
-	<div id="winning-popup-box"><h1 id="win-text">YOU WON!!!</h1>
+    <div id="winning-popup-box"><h1 id="win-text">YOU WON!!!</h1>
     </div>
 </div>
 
 <div class="navbar">
 
   <a href="/toptrumps/">Exit</a>
-	<button id="btn-submit"; onclick="submit(); getRoundNumber(); disableButtons(); this.style.display='none'">Submit your category!</button>
-	<button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
-	<button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
-	<button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
-	
-	<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-	</select>
-	<a href="/toptrumps/game/">Replay</a>
-				
+    <button id="btn-submit"; onclick="submit(); getRoundNumber(); disableButtons(); this.style.display='none'">Submit your category!</button>
+    <button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
+    <button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
+    <button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
+    <button id="btn-finish-game"; onclick="finishGame(); this.style.display='none';">FINISH GAME</button>
+    <select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+    </select>
+    <a href="/toptrumps/game/">Replay</a>
+                
 </div>
 
-				
-				
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
-					>Begin!</button>
-	
-				<p id="roundNum">Round 1: Choose a category and submit!</p> 
-			
+                
+                
+                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
+                    >Begin!</button>
+    
+                <p id="roundNum">Round 1: Choose a category and submit!</p> 
+            
             <div class="card-container">
                 <div id="playing-card-1">
                 YOU<br>
@@ -399,7 +402,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-2">
                     PLAYER 2 (AI)<br>
-                	<p id="P2CardCount">Cards</p>
+                    <p id="P2CardCount">Cards</p>
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
@@ -437,7 +440,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-3">
                     PLAYER 3 (AI)<br>
-                	<p id="P3CardCount">Cards</p>
+                    <p id="P3CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -477,7 +480,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-4">
                     PLAYER 4 (AI)<br>
-                	<p id="P4CardCount">Cards</p>
+                    <p id="P4CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -517,7 +520,7 @@ border-color: red;
                 </div>
                 <div id="playing-card-5">
                     PLAYER 5 (AI)<br>
-                	<p id="P5CardCount">Cards</p>
+                    <p id="P5CardCount">Cards</p>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -556,628 +559,654 @@ border-color: red;
                     </div>
                 </div>
             </div>
-		
-			
+        
+            
 
 
 
-		<script type="text/javascript">
-		
-		// Method that is called on page load
-		function initalize() {
-			launchGame();
-		
-			// --------------------------------------------------------------------------
-			// You can call other methods you want to run when the page first loads here
-			// --------------------------------------------------------------------------
-			
-			// For example, lets call our sample methods
-			// helloJSONList();
-			// helloWord("Student");
-				
-		}
-			
-		// -----------------------------------------
-		// Add your other Javascript methods Here
-		// -----------------------------------------
-		
-		// Global variables
-		var category_selected;
-		var current_round_num;
-		var number_of_players;
-		var winning_index;
-		
-		function launchGame(){
-			// getting numberOfPlayers from dropdown menu and save as variable players
-		  	console.log("LET THE GAME BEGIN");
-		  	
-		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/launchGame"); // Request type and URL+parameters
-		
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send()
-		}
-		
-		function setNumberOfPlayers() {		
-		
-			// getting numberOfPlayers from dropdown menu and save as variable players
-		  	number_of_players = document.getElementById('numberOfPlayers').value;
-		  	
-		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/numberOfPlayers?Number="+number_of_players); // Request type and URL+parameters
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send()
-	
-			// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-			// to do when the response arrives 
-			xhr.onload = function(e) {
-				var responseText = xhr.response; // the text of the response
-				alert(responseText);
-				document.getElementById('playing-card-1').style.display='block';
-				document.getElementById('playing-card-2').style.display='block';
-				
-				if(number_of_players == 2){
-					    	document.getElementById('playing-card-3').style.display='block';
-				}
-				else if(number_of_players == 3){
-					    	document.getElementById('playing-card-3').style.display='block';
-					    	document.getElementById('playing-card-4').style.display='block';
-					    
-				}
-				else if(number_of_players == 4){
-					    	document.getElementById('playing-card-3').style.display='block';
-					    	document.getElementById('playing-card-4').style.display='block';
-					  		document.getElementById('playing-card-5').style.display='block';	  	
-				}
-			};
-		  }
-		
-		function removeHeader(){
-			document.getElementById('header').style.display='none';
-		}
-		
-		function enableOrDisableButtons(){
-		if (winning_index != 0){
-		 			
-		  			disableButtons();
-		  		}
-		  		else {
-		  			enableButtons();
-		  		}
-		
-		}
-		function displayNextRoundButton(){
-		document.getElementById("btn-next-round").style.display = 'block';
-		}
-		
-		function setCategory(clicked_id) {
-			document.getElementById('btn-submit').style.display='block';
-			category_selected = clicked_id;
-		}
-			
-		function submit(){		  	
-		  	//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/submit_category?categoryChoice="+category_selected); // Request type and URL+parameters
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send()
-			
-			xhr.onload = function(e){
-				document.getElementById('btn-reveal-winner').style.display='block';
-		  	} 
-		
-		}
-		
-		function getRoundWinner(){
-			//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundWinner"); // Request type and URL+parameters
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send()
-			
-			xhr.onload = function(e){
-				
-		  		document.getElementById("roundNum").innerHTML = "Round number " + current_round_num + ":  " + xhr.response;
-		  		
-		  		var xhrWinningIndex = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhrWinningIndex) {
-					alert("CORS not supported");
-				}
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhrWinningIndex.send()
-				
-				xhrWinningIndex.onload = function(e){
-				
-		  		winning_index = xhrWinningIndex.response; // the text of the response
-		  		
-		  		}
-		  	} 
-		}
-		
-		function displayOpponentSubmit(){
-		if (winning_index != 0){
-		 			document.getElementById("btn-opponent-submit").style.display = 'block';
-		  		}
-		
-		}
+        <script type="text/javascript">
+        
+        // Method that is called on page load
+        function initalize() {
+            launchGame();
+        
+            // --------------------------------------------------------------------------
+            // You can call other methods you want to run when the page first loads here
+            // --------------------------------------------------------------------------
+            
+            // For example, lets call our sample methods
+            // helloJSONList();
+            // helloWord("Student");
+                
+        }
+            
+        // -----------------------------------------
+        // Add your other Javascript methods Here
+        // -----------------------------------------
+        
+        // Global variables
+        var category_selected;
+        var current_round_num;
+        var number_of_players;
+        var winning_index;
+        var isThereAWinner = false;
+        
+        function launchGame(){
+            // getting numberOfPlayers from dropdown menu and save as variable players
+            console.log("LET THE GAME BEGIN");
+            
+            //  create a CORS request, this is the message we are going to send (a get request in this case)
+            var xhr = createCORSRequest('GET',
+            "http://localhost:7777/toptrumps/launchGame"); // Request type and URL+parameters
+        
+            // Message is not sent yet, but we can check that the browser supports CORS
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            // We have done everything we need to prepare the CORS request, so send it
+            xhr.send()
+        }
+        
+        function setNumberOfPlayers() {     
+        
+            // getting numberOfPlayers from dropdown menu and save as variable players
+            number_of_players = document.getElementById('numberOfPlayers').value;
+            
+            //  create a CORS request, this is the message we are going to send (a get request in this case)
+            var xhr = createCORSRequest('GET',
+            "http://localhost:7777/toptrumps/numberOfPlayers?Number="+number_of_players); // Request type and URL+parameters
+            // Message is not sent yet, but we can check that the browser supports CORS
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            // We have done everything we need to prepare the CORS request, so send it
+            xhr.send()
+    
+            // CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+            // to do when the response arrives 
+            xhr.onload = function(e) {
+                var responseText = xhr.response; // the text of the response
+                alert(responseText);
+                document.getElementById('playing-card-1').style.display='block';
+                document.getElementById('playing-card-2').style.display='block';
+                
+                if(number_of_players == 2){
+                            document.getElementById('playing-card-3').style.display='block';
+                }
+                else if(number_of_players == 3){
+                            document.getElementById('playing-card-3').style.display='block';
+                            document.getElementById('playing-card-4').style.display='block';
+                        
+                }
+                else if(number_of_players == 4){
+                            document.getElementById('playing-card-3').style.display='block';
+                            document.getElementById('playing-card-4').style.display='block';
+                            document.getElementById('playing-card-5').style.display='block';        
+                }
+            };
+          }
+        
+        function removeHeader(){
+            document.getElementById('header').style.display='none';
+        }
+        
+        function enableOrDisableButtons(){
+        if (winning_index != 0){
+                    
+                    disableButtons();
+                }
+                else {
+                    enableButtons();
+                }
+        
+        }
+        function displayNextRoundButton(){
+        document.getElementById("btn-next-round").style.display = 'block';
+        }
+        
+        function setCategory(clicked_id) {
+            document.getElementById('btn-submit').style.display='block';
+            category_selected = clicked_id;
+        }
+            
+        function submit(){          
+            //  create a CORS request, this is the message we are going to send (a get request in this case)
+            var xhr = createCORSRequest('GET',
+            "http://localhost:7777/toptrumps/submit_category?categoryChoice="+category_selected); // Request type and URL+parameters
+            // Message is not sent yet, but we can check that the browser supports CORS
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            // We have done everything we need to prepare the CORS request, so send it
+            xhr.send()
+            
+            xhr.onload = function(e){
+                document.getElementById('btn-reveal-winner').style.display='block';
+            } 
+        
+        }
+        
+        function getRoundWinner(){
+            //  create a CORS request, this is the message we are going to send (a get request in this case)
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundWinner"); // Request type and URL+parameters
+            // Message is not sent yet, but we can check that the browser supports CORS
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            // We have done everything we need to prepare the CORS request, so send it
+            xhr.send()
+            
+            xhr.onload = function(e){
+                
+                document.getElementById("roundNum").innerHTML = "Round number " + current_round_num + ":  " + xhr.response;
+                
+                var xhrWinningIndex = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
+                // Message is not sent yet, but we can check that the browser supports CORS
+                if (!xhrWinningIndex) {
+                    alert("CORS not supported");
+                }
+                
+                // We have done everything we need to prepare the CORS request, so send it
+                xhrWinningIndex.send()
+                
+                xhrWinningIndex.onload = function(e){
+                
+                winning_index = xhrWinningIndex.response; // the text of the response
+                checkForOverallGameWin();
+                }
+            } 
+        }
+        
+        function displayOpponentSubmit(){
+        if (winning_index != 0){
+                    document.getElementById("btn-opponent-submit").style.display = 'block';
+                }
+        
+        }
 
-		function checkActivePlayers(){
-			
-	  		if (number_of_players == 1){
-	  			checkPlayersDeckSize(0);
-	  			checkPlayersDeckSize(1);
-	  			}
-	  		else if(number_of_players == 2){
-	  			checkPlayersDeckSize(0);
-	  			checkPlayersDeckSize(1);
-				checkPlayersDeckSize(2);
-	  			}
-	  		else if(number_of_players == 3){
-	  			checkPlayersDeckSize(0);
-	  			checkPlayersDeckSize(1);
-				checkPlayersDeckSize(2);
-				checkPlayersDeckSize(3);
-	  			}
-	  		else if(number_of_players == 4){
-	  			checkPlayersDeckSize(0);
-	  			checkPlayersDeckSize(1);
-				checkPlayersDeckSize(2);
-				checkPlayersDeckSize(3);
-	  			checkPlayersDeckSize(4);
-	  		}	
-		}
-		
-		
-		function checkPlayersDeckSize(i){
-			//  create a CORS request, this is the message we are going to send (a get request in this case)
-			var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayersDeckSize?i="+i); // Request type and URL+parameters
-			// Message is not sent yet, but we can check that the browser supports CORS
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			// We have done everything we need to prepare the CORS request, so send it
-			xhr.send();
-			
-			xhr.onload = function(e){
-				var responseText = xhr.response; // the text of the response
-		  		if (responseText < 1){
-		  		// this makes the human card disappear
-		  		  removePlayer(i);
-		  		}
-		  	} 
-		
-		}
+        function checkActivePlayers(){
+            
+            if (number_of_players == 1){
+                checkPlayersDeckSize(0);
+                checkPlayersDeckSize(1);
+                }
+            else if(number_of_players == 2){
+                checkPlayersDeckSize(0);
+                checkPlayersDeckSize(1);
+                checkPlayersDeckSize(2);
+                }
+            else if(number_of_players == 3){
+                checkPlayersDeckSize(0);
+                checkPlayersDeckSize(1);
+                checkPlayersDeckSize(2);
+                checkPlayersDeckSize(3);
+                }
+            else if(number_of_players == 4){
+                checkPlayersDeckSize(0);
+                checkPlayersDeckSize(1);
+                checkPlayersDeckSize(2);
+                checkPlayersDeckSize(3);
+                checkPlayersDeckSize(4);
+            }   
+        }
+        
+        
+        function checkPlayersDeckSize(i){
+            //  create a CORS request, this is the message we are going to send (a get request in this case)
+            var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayersDeckSize?i="+i); // Request type and URL+parameters
+            // Message is not sent yet, but we can check that the browser supports CORS
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            // We have done everything we need to prepare the CORS request, so send it
+            xhr.send();
+            
+            xhr.onload = function(e){
+                var responseText = xhr.response; // the text of the response
+                if (responseText < 1){
+                // this makes the human card disappear
+                  removePlayer(i);
+                }
+            } 
+        
+        }
 
 
-		function removePlayer(i){
-			if (i==0){
-				document.getElementById("playing-card-1").style.display = 'none';
-			}
-			else if (i==1){
-				document.getElementById("playing-card-2").style.display = 'none';
-			}
-			else if (i==2){
-				document.getElementById("playing-card-3").style.display = 'none';
-			}
-			else if (i==3){
-				document.getElementById("playing-card-4").style.display = 'none';
-			}
-			else if (i==4){
-				document.getElementById("playing-card-5").style.display = 'none';
-			}
-	
-		}
-			
-		
-		function disableButtons(){
-			document.getElementById("1").disabled = true;
-			document.getElementById("2").disabled = true;
-			document.getElementById("3").disabled = true;
-			document.getElementById("4").disabled = true;
-			document.getElementById("5").disabled = true;
-		}
-		
-		function enableButtons(){
-			document.getElementById("1").disabled = false;
-			document.getElementById("2").disabled = false;
-			document.getElementById("3").disabled = false;
-			document.getElementById("4").disabled = false;
-			document.getElementById("5").disabled = false;
-		}
-		
+        function removePlayer(i){
+            if (i==0){
+                document.getElementById("playing-card-1").style.display = 'none';
+                document.getElementById("btn-finish-game").style.display = 'block';
+                document.getElementById('btn-opponent-submit').style.display = 'none';                
+            }
+            else if (i==1){
+                document.getElementById("playing-card-2").style.display = 'none';
+            }
+            else if (i==2){
+                document.getElementById("playing-card-3").style.display = 'none';
+            }
+            else if (i==3){
+                document.getElementById("playing-card-4").style.display = 'none';
+            }
+            else if (i==4){
+                document.getElementById("playing-card-5").style.display = 'none';
+            }
+    
+        }
+            
+        
+        function disableButtons(){
+            document.getElementById("1").disabled = true;
+            document.getElementById("2").disabled = true;
+            document.getElementById("3").disabled = true;
+            document.getElementById("4").disabled = true;
+            document.getElementById("5").disabled = true;
+        }
+        
+        function enableButtons(){
+            document.getElementById("1").disabled = false;
+            document.getElementById("2").disabled = false;
+            document.getElementById("3").disabled = false;
+            document.getElementById("4").disabled = false;
+            document.getElementById("5").disabled = false;
+        }
+        
         function getDeck(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck	");
-		  	if(!xhr){
-		  		alert("CORS not supported");
-		  	}
-		  	xhr.send();
-		  	xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		distributeDeck();
-		  	}  	
-		  }
-			  
-		function distributeDeck(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/distributeCards	");
-	  		if(!xhr){
-		  		alert("CORS not supported");
-	  		}
-	  		xhr.send();
-	 	
-	  		xhr.onload = function(e){
-	  			var responseText = xhr.response;
-	  			nextRound();			  			
-			}
-		}
-		
-			  
-		function nextRound(){
-			document.getElementById('btn-submit').style.display='none';
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		getRoundNumber();
-		  		checkActivePlayers();
-		  		getCardName();
-				getPlayer1CardValues();
-				getHumanCardCount();
-				getCardCounts();
-		  		
-		  		if (number_of_players == 1){
-		  			getPlayer2CardName();
-		  			getPlayer2CardValues();
-		  			}
-		  		else if(number_of_players == 2){
-		  			getPlayer2CardName();
-		  			getPlayer2CardValues();
-		  			getPlayer3CardName();
-		  			getPlayer3CardValues();
-		  			
-		  			}
-		  		else if(number_of_players == 3){
-		  			getPlayer2CardName();
-		  			getPlayer2CardValues();
-		  			getPlayer3CardName();
-		  			getPlayer3CardValues();
-		  			getPlayer4CardName();
-		  			getPlayer4CardValues();
-		  			}
-		  		else if(number_of_players == 4){
-		  			getPlayer2CardName();
-		  			getPlayer2CardValues();
-		  			getPlayer3CardName();
-		  			getPlayer3CardValues();
-		  			getPlayer4CardName();
-		  			getPlayer4CardValues();
-		  			getPlayer5CardName();
-		  			getPlayer5CardValues();
-		  		}	
-		  	} 
-		  	
-		  	checkForOverallGameWin();
-		}
-		
-		function checkForOverallGameWin(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin ");
-			xhr.send();
-			var playerID = parseInt(winning_index)+1;
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  			if (responseText=="true"){
-		  				
-		  				if (winning_index == 0){
-		  					document.getElementById("win-text").innerHTML = "YOU WON!!!";
-		  					document.getElementById("overlay").style.display = "block";
-		  					
-		  					// CONFETTI CAUSE YOU WON
-		  					
-		  				}
-		  				else {
-		  				
-		  					// PLAYERID NEEDS TO BE USED AS INTEGER AND NOT STRING 
-		  					
-		  					document.getElementById("win-text").innerHTML = "YOU LOSE!<br />PLAYER " + playerID + " WINS!";
-		  					document.getElementById("overlay").style.display = "block";
-		  					// UNLUCKY BECAUSE YOU DIDN'T WIN
-		  					
-		  				}
-		  			}
-		  	} 
-		
-		}
-		
-		function getPlayer1CardValues(){
-			getPlayer1CardValue(1);
-			getPlayer1CardValue(2);
-			getPlayer1CardValue(3);
-			getPlayer1CardValue(4);
-			getPlayer1CardValue(5);
-			
-		  }
-		  
-		function getPlayer2CardValues(){
-			getPlayer2CardValue(1);
-			getPlayer2CardValue(2);
-			getPlayer2CardValue(3);
-			getPlayer2CardValue(4);
-			getPlayer2CardValue(5);
-			
-		  }
-		
-		function getPlayer3CardValues(){
-			getPlayer3CardValue(1);
-  			getPlayer3CardValue(2);
-  			getPlayer3CardValue(3);
-  			getPlayer3CardValue(4);
-  			getPlayer3CardValue(5);
-		  }
-		  
-		function getPlayer4CardValues(){
-			getPlayer4CardValue(1);
-  			getPlayer4CardValue(2);
-  			getPlayer4CardValue(3);
-  			getPlayer4CardValue(4);
-  			getPlayer4CardValue(5);
-		  }
-		
-		function getPlayer5CardValues(){
-			getPlayer5CardValue(1);
-  			getPlayer5CardValue(2);
-  			getPlayer5CardValue(3);
-  			getPlayer5CardValue(4);
-  			getPlayer5CardValue(5);
-		  }
-		  
-		  
-		function getRoundNumber(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
-			xhr.send();
-			xhr.onload = function(e){
-		  		current_round_num =  xhr.response;
-		  	} 
-		}
-		
-		function getCardName(){
-		  	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName	");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("cardName").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer1CardValue(i){
-	  		var xhr = createCORSRequest('GET',
-			"http://localhost:7777/toptrumps/getPlayer1CardValue?i="+i); // Request type and URL+parameters
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			xhr.send()
-	
-			xhr.onload = function(e) {
-				var responseText = xhr.response;
-				if (i ==1){
-					document.getElementById("p1CardValue1").innerHTML = "size : " +responseText;
-				}
-				else if (i==2){
-					document.getElementById("p1CardValue2").innerHTML = "speed : " +responseText;
-				}
-				else if (i==3){
-					document.getElementById("p1CardValue3").innerHTML = "range : " + responseText;
-				}
-				else if (i==4){
-		  			document.getElementById("p1CardValue4").innerHTML = "fire-power : " +responseText;
-				}
-				else if (i==5){
-					document.getElementById("p1CardValue5").innerHTML = "cargo : " +responseText;
-				}
-	  		}
-	  	}
-	  	
-	  	// PLAYER 2 CARD NAME AND CARD VALUES
-	  	
-	  	function getPlayer2CardName(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardName");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("cardName-p2").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer2CardValue(i){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue?i="+i); // Request type and URL+parameters
-			
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			xhr.send()
-	
-			xhr.onload = function(e) {
-				var responseText = xhr.response;
-				if (i ==1){
-					document.getElementById("p2CardValue1").innerHTML = "size: " +responseText;
-				}
-				else if (i==2){
-					document.getElementById("p2CardValue2").innerHTML = "speed: " +responseText;
-				}
-				else if (i==3){
-					document.getElementById("p2CardValue3").innerHTML = "range; " +responseText;
-				}
-				else if (i==4){
-		  			document.getElementById("p2CardValue4").innerHTML = "fire-power: " +responseText;
-				}
-				else if (i==5){
-					document.getElementById("p2CardValue5").innerHTML = "cargo: " +responseText;
-				}
-	  		}
-	  	}
-	  	
-	  	// PLAYER 3 CARD NAME AND CARD VALUES
-	  	
-		function getPlayer3CardName(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("cardName-p3").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	
-	  	function getPlayer3CardValue(i){
-	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer3CardValue?i="+i); 
-		
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			xhr.send()
-	
-			xhr.onload = function(e) {
-				var responseText = xhr.response;
-				if (i ==1){
-					document.getElementById("p3CardValue1").innerHTML = "size: " +responseText;
-				}
-				else if (i==2){
-					document.getElementById("p3CardValue2").innerHTML = "speed: "+ responseText;
-				}
-				else if (i==3){
-					document.getElementById("p3CardValue3").innerHTML = "range: " + responseText;
-				}
-				else if (i==4){
-		  			document.getElementById("p3CardValue4").innerHTML = "fire-power: " + responseText;
-				}
-				else if (i==5){
-					document.getElementById("p3CardValue5").innerHTML = "cargo: " +responseText;
-				}
-	  		}
-	  	}
-	  	
-	  	
-	  	// PLAYER 4 CARD NAME AND CARD VALUES
-	  	
-	  	function getPlayer4CardName(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer4CardName");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("cardName-p4").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer4CardValue(i){
-	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer4CardValue?i="+i); 
-		
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			xhr.send()
-	
-			xhr.onload = function(e) {
-				var responseText = xhr.response;
-				if (i ==1){
-					document.getElementById("p4CardValue1").innerHTML = "size: " +responseText;
-				}
-				else if (i==2){
-					document.getElementById("p4CardValue2").innerHTML = "speed: " +responseText;
-				}
-				else if (i==3){
-					document.getElementById("p4CardValue3").innerHTML = "range: " +responseText;
-				}
-				else if (i==4){
-		  			document.getElementById("p4CardValue4").innerHTML = "fire-power: " +responseText;
-				}
-				else if (i==5){
-					document.getElementById("p4CardValue5").innerHTML = "cargo: " + responseText;
-				}
-	  		}
-	  	}
-	  	
-	  	
-	  	// PLAYER 5 CARD NAME AND CARD VALUES
-	  	function getPlayer5CardName(){
-	  		var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer5CardName");
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("cardName-p5").innerHTML = responseText;
-		  	} 
-	  	}
-	  	
-	  	function getPlayer5CardValue(i){
-	  		var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer5CardValue?i="+i); 
-		
-			if (!xhr) {
-				alert("CORS not supported");
-			}
-			
-			xhr.send()
-	
-			xhr.onload = function(e) {
-				var responseText = xhr.response;
-				if (i ==1){
-					document.getElementById("p5CardValue1").innerHTML = "size: " +responseText;
-				}
-				else if (i==2){
-					document.getElementById("p5CardValue2").innerHTML = "speed: " +responseText;
-				}
-				else if (i==3){
-					document.getElementById("p5CardValue3").innerHTML = "range: " +responseText;
-				}
-				else if (i==4){
-		  			document.getElementById("p5CardValue4").innerHTML = "fire-power: " + responseText;
-				}
-				else if (i==5){
-					document.getElementById("p5CardValue5").innerHTML = "cargo: " +responseText;
-				}
-	  		}
-	  	}
-	  	
-	  	//These functions calculate the cards remaining for the players
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getDeck ");
+            if(!xhr){
+                alert("CORS not supported");
+            }
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                distributeDeck();
+            }   
+          }
+              
+        function distributeDeck(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/distributeCards ");
+            if(!xhr){
+                alert("CORS not supported");
+            }
+            xhr.send();
+        
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                nextRound();                        
+            }
+        }
+        
+              
+        function nextRound(){
+        
+            document.getElementById('btn-submit').style.display='none';
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/nextRound   ");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                getRoundNumber();
+                checkActivePlayers();
+                getCardName();
+                getPlayer1CardValues();
+                getHumanCardCount();
+                getCardCounts();
+                getCardNamesAndValues();
+                
+            } 
+            
+            checkForOverallGameWin();
+        }
+        
+        function getCardNamesAndValues(){
+        if (number_of_players == 1){
+                    getPlayer2CardName();
+                    getPlayer2CardValues();
+                    }
+                else if(number_of_players == 2){
+                    getPlayer2CardName();
+                    getPlayer2CardValues();
+                    getPlayer3CardName();
+                    getPlayer3CardValues();
+                    
+                    }
+                else if(number_of_players == 3){
+                    getPlayer2CardName();
+                    getPlayer2CardValues();
+                    getPlayer3CardName();
+                    getPlayer3CardValues();
+                    getPlayer4CardName();
+                    getPlayer4CardValues();
+                    }
+                else if(number_of_players == 4){
+                    getPlayer2CardName();
+                    getPlayer2CardValues();
+                    getPlayer3CardName();
+                    getPlayer3CardValues();
+                    getPlayer4CardName();
+                    getPlayer4CardValues();
+                    getPlayer5CardName();
+                    getPlayer5CardValues();
+                }   
+        }
+        
+        function checkForOverallGameWin(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin ");
+            xhr.send();
+            var playerID = parseInt(winning_index)+1;
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                    if (responseText=="true"){
+                        
+                        if (winning_index == 0){
+                            document.getElementById("win-text").innerHTML = "YOU WON!!!";
+                            document.getElementById("overlay").style.display = "block";
+                            
+                            // CONFETTI CAUSE YOU WON
+                            
+                        }
+                        else {
+                        
+                            // PLAYERID NEEDS TO BE USED AS INTEGER AND NOT STRING 
+                            
+                            document.getElementById("win-text").innerHTML = "YOU LOSE!<br />PLAYER " + playerID + " WINS!";
+                            document.getElementById("overlay").style.display = "block";
+                            // UNLUCKY BECAUSE YOU DIDN'T WIN
+                            
+                        }
+                    }
+            } 
+        
+        }
+        
+        function getPlayer1CardValues(){
+            getPlayer1CardValue(1);
+            getPlayer1CardValue(2);
+            getPlayer1CardValue(3);
+            getPlayer1CardValue(4);
+            getPlayer1CardValue(5);
+            
+          }
+          
+        function getPlayer2CardValues(){
+            getPlayer2CardValue(1);
+            getPlayer2CardValue(2);
+            getPlayer2CardValue(3);
+            getPlayer2CardValue(4);
+            getPlayer2CardValue(5);
+            
+          }
+        
+        function getPlayer3CardValues(){
+            getPlayer3CardValue(1);
+            getPlayer3CardValue(2);
+            getPlayer3CardValue(3);
+            getPlayer3CardValue(4);
+            getPlayer3CardValue(5);
+          }
+          
+        function getPlayer4CardValues(){
+            getPlayer4CardValue(1);
+            getPlayer4CardValue(2);
+            getPlayer4CardValue(3);
+            getPlayer4CardValue(4);
+            getPlayer4CardValue(5);
+          }
+        
+        function getPlayer5CardValues(){
+            getPlayer5CardValue(1);
+            getPlayer5CardValue(2);
+            getPlayer5CardValue(3);
+            getPlayer5CardValue(4);
+            getPlayer5CardValue(5);
+          }
+          
+          
+        function finishGame(){
+        console.log("finishGame() called");
+        var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/finishGame ");
+            xhr.send();
+            xhr.onload = function(e){
+                getRoundWinner();
+                getRoundNumber();
+                
+                getCardCounts();
+                getCardNamesAndValues();
+                checkActivePlayers();
+                
+                getRoundWinner();
+                getRoundNumber();
+         
+            } 
+        }
+          
+        function getRoundNumber(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getRoundNumber ");
+            xhr.send();
+            xhr.onload = function(e){
+                current_round_num =  xhr.response;
+            } 
+        }
+        
+        function getCardName(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName ");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("cardName").innerHTML = responseText;
+            } 
+        }
+        
+        function getPlayer1CardValue(i){
+            var xhr = createCORSRequest('GET',
+            "http://localhost:7777/toptrumps/getPlayer1CardValue?i="+i); // Request type and URL+parameters
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p1CardValue1").innerHTML = "size : " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p1CardValue2").innerHTML = "speed : " +responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p1CardValue3").innerHTML = "range : " + responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p1CardValue4").innerHTML = "fire-power : " +responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p1CardValue5").innerHTML = "cargo : " +responseText;
+                }
+            }
+        }
+        
+        // PLAYER 2 CARD NAME AND CARD VALUES
+        
+        function getPlayer2CardName(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardName");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("cardName-p2").innerHTML = responseText;
+            } 
+        }
+        
+        function getPlayer2CardValue(i){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue?i="+i); // Request type and URL+parameters
+            
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p2CardValue1").innerHTML = "size: " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p2CardValue2").innerHTML = "speed: " +responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p2CardValue3").innerHTML = "range; " +responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p2CardValue4").innerHTML = "fire-power: " +responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p2CardValue5").innerHTML = "cargo: " +responseText;
+                }
+            }
+        }
+        
+        // PLAYER 3 CARD NAME AND CARD VALUES
+        
+        function getPlayer3CardName(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("cardName-p3").innerHTML = responseText;
+            } 
+        }
+        
+        
+        function getPlayer3CardValue(i){
+            var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer3CardValue?i="+i); 
+        
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p3CardValue1").innerHTML = "size: " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p3CardValue2").innerHTML = "speed: "+ responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p3CardValue3").innerHTML = "range: " + responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p3CardValue4").innerHTML = "fire-power: " + responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p3CardValue5").innerHTML = "cargo: " +responseText;
+                }
+            }
+        }
+        
+        
+        // PLAYER 4 CARD NAME AND CARD VALUES
+        
+        function getPlayer4CardName(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer4CardName");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("cardName-p4").innerHTML = responseText;
+            } 
+        }
+        
+        function getPlayer4CardValue(i){
+            var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer4CardValue?i="+i); 
+        
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p4CardValue1").innerHTML = "size: " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p4CardValue2").innerHTML = "speed: " +responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p4CardValue3").innerHTML = "range: " +responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p4CardValue4").innerHTML = "fire-power: " +responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p4CardValue5").innerHTML = "cargo: " + responseText;
+                }
+            }
+        }
+        
+        
+        // PLAYER 5 CARD NAME AND CARD VALUES
+        function getPlayer5CardName(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer5CardName");
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("cardName-p5").innerHTML = responseText;
+            } 
+        }
+        
+        function getPlayer5CardValue(i){
+            var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer5CardValue?i="+i); 
+        
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p5CardValue1").innerHTML = "size: " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p5CardValue2").innerHTML = "speed: " +responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p5CardValue3").innerHTML = "range: " +responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p5CardValue4").innerHTML = "fire-power: " + responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p5CardValue5").innerHTML = "cargo: " +responseText;
+                }
+            }
+        }
+        
+        //These functions calculate the cards remaining for the players
         //Human player
         function getHumanCardCount(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanCardCount");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getHumanCardCount");
             if (!xhr) {
-  				alert("CORS not supported");
-			}
-			xhr.send();
-			xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("HumanCardCount").innerHTML = "Deck Size: " +responseText;
+                alert("CORS not supported");
+            }
+            xhr.send();
+            xhr.onload = function(e){
+                var responseText = xhr.response;
+                document.getElementById("HumanCardCount").innerHTML = "Deck Size: " +responseText;
 
-		  	} 
-		}
-	  	//AI players
-	  	function getCardCounts(){
+            } 
+        }
+        //AI players
+        function getCardCounts(){
             getP2CardCount();
             getP3CardCount();
             getP4CardCount();
@@ -1185,126 +1214,126 @@ border-color: red;
         }
 
         function getP2CardCount(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP2CardCount");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP2CardCount");
             if (!xhr) {
-  				alert("CORS not supported");
-			}
+                alert("CORS not supported");
+            }
             xhr.send();
             xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("P2CardCount").innerHTML = "Deck Size: " +responseText;
-		  	}
+                var responseText = xhr.response;
+                document.getElementById("P2CardCount").innerHTML = "Deck Size: " +responseText;
+            }
         }
 
         function getP3CardCount(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP3CardCount");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP3CardCount");
             if (!xhr) {
-  				alert("CORS not supported");
-			}
+                alert("CORS not supported");
+            }
             xhr.send();
             xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("P3CardCount").innerHTML = "Deck Size: " +responseText;
-		  	}
+                var responseText = xhr.response;
+                document.getElementById("P3CardCount").innerHTML = "Deck Size: " +responseText;
+            }
         }
 
         function getP4CardCount(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP4CardCount");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP4CardCount");
             if (!xhr) {
-  				alert("CORS not supported");
-			}
+                alert("CORS not supported");
+            }
             xhr.send();
             xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("P4CardCount").innerHTML = "Deck Size: " +responseText;
-		  	}
+                var responseText = xhr.response;
+                document.getElementById("P4CardCount").innerHTML = "Deck Size: " +responseText;
+            }
         }
 
         function getP5CardCount(){
-			var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP5CardCount");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getP5CardCount");
             if (!xhr) {
-  				alert("CORS not supported");
-			}
+                alert("CORS not supported");
+            }
             xhr.send();
             xhr.onload = function(e){
-		  		var responseText = xhr.response;
-		  		document.getElementById("P5CardCount").innerHTML = "Deck Size: " +responseText;
-		  	}
+                var responseText = xhr.response;
+                document.getElementById("P5CardCount").innerHTML = "Deck Size: " +responseText;
+            }
         }
-	  	
-	  	
-			  
-		// This is a reusable method for creating a CORS request. Do not edit this.
-		function createCORSRequest(method, url) {
-			var xhr = new XMLHttpRequest();
-			if ("withCredentials" in xhr) {
-				// Check if the XMLHttpRequest object has a "withCredentials" property.
-				// "withCredentials" only exists on XMLHTTPRequest2 objects.
-				xhr.open(method, url, true);
+        
+        
+              
+        // This is a reusable method for creating a CORS request. Do not edit this.
+        function createCORSRequest(method, url) {
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                // Check if the XMLHttpRequest object has a "withCredentials" property.
+                // "withCredentials" only exists on XMLHTTPRequest2 objects.
+                xhr.open(method, url, true);
 
-  			} else if (typeof XDomainRequest != "undefined") {
-				// Otherwise, check if XDomainRequest.
-				// XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-				xhr = new XDomainRequest();
-				xhr.open(method, url);
-			 } else {
-   				// Otherwise, CORS is not supported by the browser.
-   				xhr = null;
-			 }
-			 return xhr;
-		}
-		
-		</script>
-		
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
-		
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloJSONList() {
-			
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-					}
+            } else if (typeof XDomainRequest != "undefined") {
+                // Otherwise, check if XDomainRequest.
+                // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+                xhr = new XDomainRequest();
+                xhr.open(method, url);
+             } else {
+                // Otherwise, CORS is not supported by the browser.
+                xhr = null;
+             }
+             return xhr;
+        }
+        
+        </script>
+        
+        <!-- Here are examples of how to call REST API Methods -->
+        <script type="text/javascript">
+        
+            // This calls the helloJSONList REST method from TopTrumpsRESTAPI
+            function helloJSONList() {
+            
+            
+                // First create a CORS request, this is the message we are going to send (a get request in this case)
+                var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
+                
+                // Message is not sent yet, but we can check that the browser supports CORS
+                if (!xhr) {
+                    alert("CORS not supported");
+                    }
 
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
-			
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
+                // CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+                // to do when the response arrives 
+                xhr.onload = function(e) {
+                    var responseText = xhr.response; // the text of the response
+                    alert(responseText); // lets produce an alert
+                };
+                
+                // We have done everything we need to prepare the CORS request, so send it
+                xhr.send();     
+            }
+            
+            // This calls the helloJSONList REST method from TopTrumpsRESTAPI
+            function helloWord(word) {
+            
+                // First create a CORS request, this is the message we are going to send (a get request in this case)
+                var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
+                
+                // Message is not sent yet, but we can check that the browser supports CORS
+                if (!xhr) {
+                    alert("CORS not supported");
+                }
 
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
+                // CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
+                // to do when the response arrives 
+                xhr.onload = function(e) {
+                    var responseText = xhr.response; // the text of the response
+                    alert(responseText); // lets produce an alert
+                };
+                
+                // We have done everything we need to prepare the CORS request, so send it
+                xhr.send();     
+            }
 
-		</script>
-		
-		</body>
+        </script>
+        
+        </body>
 </html>
