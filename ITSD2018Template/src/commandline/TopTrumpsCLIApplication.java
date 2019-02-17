@@ -53,8 +53,8 @@ public class TopTrumpsCLIApplication {
 		FileWriter fw = null;
 		
 		
-		boolean writeGameLogsToFile = true; // Should we write game logs to file? REMOVE FOR PRODUCTION
-		//if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; //uncomment for production
+		boolean writeGameLogsToFile = false; 
+		if (args[0].equalsIgnoreCase("true")) writeGameLogsToFile=true; //uncomment for production
 		
 		//connect to the database so we can access and write stats
 		DatabaseCommunication.connectToDatabase();
