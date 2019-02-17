@@ -894,7 +894,7 @@ display: none;
         }
         
         function checkForOverallGameWin(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin ");
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/checkForGameWin");
             xhr.send();
             var playerID = parseInt(winning_index)+1;
             xhr.onload = function(e){

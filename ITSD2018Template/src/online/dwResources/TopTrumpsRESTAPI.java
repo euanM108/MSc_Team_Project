@@ -57,6 +57,7 @@ public class TopTrumpsRESTAPI {
 	private static int AI2Wins;
 	private static int AI3Wins;
 	private static int AI4Wins;
+	private static int check = 0;
 	private int winnerID;
 	
 	
@@ -525,6 +526,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
+			noRounds ++;
 			cardSelection = getTopCards(this.players);
 	}
 	
@@ -704,9 +706,11 @@ public class TopTrumpsRESTAPI {
 	@Path("/checkForGameWin")
 	public boolean checkForGameWin() throws IOException {
 			if (checkForOverallGameWin(players)) {
-				DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
-				
-				
+				check ++;
+				if(check == 3) {
+					winnerID = players.get(winningIndex).getPlayerID();
+					DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
+				}
 				
 				
 				return true;
