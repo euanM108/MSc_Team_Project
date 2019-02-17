@@ -654,7 +654,7 @@ public class TopTrumpsCLIApplication {
 		return category;
 	}
 
-	private static boolean checkForOverallGameWin(ArrayList<Player> players) {
+	public static boolean checkForOverallGameWin(ArrayList<Player> players) {
 		//checks if there is a winner
 
 		
