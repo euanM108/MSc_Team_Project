@@ -41,7 +41,7 @@ public class TopTrumpsRESTAPI {
 	private ArrayList<Card> cardSelection = new ArrayList<Card>();
 	private ArrayList<Card> communalPile = new ArrayList<Card>();
 	private static String categories;
-	private int winnerID;
+	
 	private int winningIndex = 0; // current winning index
 	private int catChoice = 0; // current category choice
 	private int currentRoundNumber = 1;
@@ -57,7 +57,7 @@ public class TopTrumpsRESTAPI {
 	private static int AI2Wins;
 	private static int AI3Wins;
 	private static int AI4Wins;
-	
+	private int winnerID;
 	
 	
 	/**
@@ -704,6 +704,11 @@ public class TopTrumpsRESTAPI {
 	@Path("/checkForGameWin")
 	public boolean checkForGameWin() throws IOException {
 			if (checkForOverallGameWin(players)) {
+				DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
+				
+				
+				
+				
 				return true;
 			}
 		return false;
