@@ -23,7 +23,7 @@
 
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
-    	<div class="container">
+    	<div class="main-container">
 
 			<!-- Add your HTML Here -->
 	<!DOCTYPE html>
@@ -44,7 +44,7 @@ body {
 }
 
 /* Header/logo Title */
-.header {
+#header {
   padding: 80px;
   text-align: center;
   background: #1abc9c;
@@ -52,12 +52,14 @@ body {
 }
 
 /* Increase the font size of the heading */
-.header h1 {
+#header h1 {
   font-size: 40px;
 }
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
 .navbar {
+  font-family: sans-serif;
+ 
   overflow: hidden;
   background-color: #333;
   position: sticky;
@@ -162,6 +164,7 @@ img {
 }
 
 #playing-card-1 {
+	display: none;
     grid-area: a;
     align-self: center;
 	text-align: center;
@@ -239,11 +242,13 @@ table.cat-table tfoot td {
 }
 
 
-#btn-default, #btn-submit{
+#btn-submit{
 	margin: 5px;
 	display: block;
 	padding: 5px;
 }
+
+
 
 #btn-submit, #btn-opponent-submit, #btn-reveal-winner, #btn-next-round {
  	display: none;
@@ -280,6 +285,46 @@ table.cat-table tfoot td {
 
 }
 
+#btn-default{
+    margin: 5%;
+  background: #1abc9c;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:20%;
+  width: 90%;
+  font-size: 50px;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#btn-default:hover{
+  background:#fff;
+  color:#1abc9c;
+}
+#btn-default:before,#btn-default:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1abc9c;
+  transition:400ms ease all;
+}
+#btn-default:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#btn-default:hover:before,#btn-default:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 #winning-popup-box {
 margin: 10%;
 background-color: white;
@@ -291,7 +336,7 @@ border-color: red;
 </head>
 <body>
 
-<div class="header">
+<div id="header">
   <h1>Top Trumps Game</h1>
 
     <p>Please select the number of opponents below and press <b>begin</b></p>
@@ -310,16 +355,19 @@ border-color: red;
 	<button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
 	<button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
 	<button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
-</div>
-
-				
-				<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
+	
+	<select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
 					<option value="1">1</option>
 					<option value="2">2</option>
 					<option value="3">3</option>
 					<option value="4">4</option>
-				</select>
-					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none';"
+	</select>
+				
+</div>
+
+				
+				
+					<button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
 					>Begin!</button>
 	
 				<p id="roundNum">Round 1: Choose a category and submit!</p> 
@@ -577,32 +625,28 @@ border-color: red;
 			xhr.onload = function(e) {
 				var responseText = xhr.response; // the text of the response
 				alert(responseText);
+				document.getElementById('playing-card-1').style.display='block';
+				document.getElementById('playing-card-2').style.display='block';
 				
-				if(number_of_players == 1) {
-					    	document.getElementById('playing-card-2').style.display='block';
-					    	
-				}
-				else if(number_of_players == 2){
-					    	document.getElementById('playing-card-2').style.display='block';
+				if(number_of_players == 2){
 					    	document.getElementById('playing-card-3').style.display='block';
-					  
-					    	
 				}
 				else if(number_of_players == 3){
-					    	document.getElementById('playing-card-2').style.display='block';
 					    	document.getElementById('playing-card-3').style.display='block';
 					    	document.getElementById('playing-card-4').style.display='block';
 					    
 				}
 				else if(number_of_players == 4){
-					    	document.getElementById('playing-card-2').style.display='block';
 					    	document.getElementById('playing-card-3').style.display='block';
 					    	document.getElementById('playing-card-4').style.display='block';
-					  		document.getElementById('playing-card-5').style.display='block';
-					  	
+					  		document.getElementById('playing-card-5').style.display='block';	  	
 				}
 			};
 		  }
+		
+		function removeHeader(){
+			document.getElementById('header').style.display='none';
+		}
 		
 		function enableOrDisableButtons(){
 		if (winning_index != 0){

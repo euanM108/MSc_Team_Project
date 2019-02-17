@@ -22,7 +22,7 @@
 
     <body onload="initalize()"> <!-- Call the initalize method when the page loads -->
     	
-    	<div class="container">
+    	<div class="main-container">
 
 			<!-- Add your HTML Here -->
 			
@@ -50,10 +50,10 @@ body {
 /* Header */
 
 .header {
-  padding: 60px;
+  padding-top: 5%;
   text-align: center;
   background: #1abc9c;
-
+  height: 100%;
 }
 
 /* Top Trumps Logo */
@@ -61,7 +61,7 @@ body {
 h1 {
   position: relative;
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 10%;
   font-size: 5vw;
   font-weight: 900;
   text-decoration: none;
@@ -95,6 +95,8 @@ h1 {
 
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
 .navbar {
+  font-family: sans-serif;
+  font-size: 30px;
   overflow: hidden;
   background-color: #333;
   position: sticky;
@@ -177,46 +179,25 @@ h1 {
   }
 }
 </style>
-</head>
-<body>
-
-<div class="header">
-  <p>Welcome to</p>
-  <h1>Top Trumps!</h1>
-  <p>Your favourite card game just went <b><i>digital</i></b></p>
-</div>
-
-<div class="navbar">
-  <a href="/toptrumps/game">New Game</a>
-  <a href="/toptrumps/stats">Game Stats</a>
-
-</div>
-
-</div>
-
-
-
-</body>
-</html>
-
-
-		
-		</div>
+	</head>
+		<body>
+	
+			<div class="header">
+			  <p>Welcome to</p>
+			  <h1>Top Trumps!</h1>
+			  <p>Your favourite card game just went <b><i>digital</i></b></p>
+			
+	
+				<div class="navbar">
+				  <a href="/toptrumps/game">NEW GAME!</a>
+				  <a href="/toptrumps/stats">GAME STATS</a>
+				
+				</div>
+			</div>
+			
 		
 		<script type="text/javascript">
 		
-			// Method that is called on page load
-			function initalize() {
-			
-				// --------------------------------------------------------------------------
-				// You can call other methods you want to run when the page first loads here
-				// --------------------------------------------------------------------------
-				
-				// For example, lets call our sample methods
-				// helloJSONList();
-				// helloWord("Student");
-				
-			}
 			
 			// -----------------------------------------
 			// Add your other Javascript methods Here
@@ -245,55 +226,6 @@ h1 {
 
   				 }
   				 return xhr;
-			}
-		
-		</script>
-		
-		<!-- Here are examples of how to call REST API Methods -->
-		<script type="text/javascript">
-		
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloJSONList() {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloJSONList"); // Request type and URL
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
-			}
-			
-			// This calls the helloJSONList REST method from TopTrumpsRESTAPI
-			function helloWord(word) {
-			
-				// First create a CORS request, this is the message we are going to send (a get request in this case)
-				var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/helloWord?Word="+word); // Request type and URL+parameters
-				
-				// Message is not sent yet, but we can check that the browser supports CORS
-				if (!xhr) {
-  					alert("CORS not supported");
-				}
-
-				// CORS requests are Asynchronous, i.e. we do not wait for a response, instead we define an action
-				// to do when the response arrives 
-				xhr.onload = function(e) {
- 					var responseText = xhr.response; // the text of the response
-					alert(responseText); // lets produce an alert
-				};
-				
-				// We have done everything we need to prepare the CORS request, so send it
-				xhr.send();		
 			}
 
 		</script>
