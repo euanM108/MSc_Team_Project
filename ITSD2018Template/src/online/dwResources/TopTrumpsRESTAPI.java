@@ -2,6 +2,7 @@ package online.dwResources;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -41,13 +42,13 @@ public class TopTrumpsRESTAPI {
 	private ArrayList<Card> cardSelection = new ArrayList<Card>();
 	private ArrayList<Card> communalPile = new ArrayList<Card>();
 	private static String categories;
-	
-	private int winningIndex = 0; // current winning index
+	private int winningIndex; // current winning index
 	private int catChoice = 0; // current category choice
 	private int currentRoundNumber = 1;
 	private boolean hasPlayerSubmitted;
 	private boolean draw = false;
-
+	private ArrayList<Integer> randomStartingIndex = new ArrayList<Integer>();
+	private int count = 0;
 	
 	//variables used in database
 	private static int draws;
@@ -132,6 +133,7 @@ public class TopTrumpsRESTAPI {
 		for (int i=0; i<players.size(); i++) {
 			players.get(i).getPersonalDeck().clear();
 		}
+		
 		Player.resetPlayerIDCount();
 		// cast number received as an int
 		numberOfPlayers = Integer.parseInt(Number);
@@ -139,13 +141,15 @@ public class TopTrumpsRESTAPI {
 		// create the players
 		Player human = new Player();
 		players.add(human);
+		randomStartingIndex.add(0);
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player AIPlayer = new Player();
 			players.add(AIPlayer);
+			randomStartingIndex.add(i+1);
 		}
+		
 		this.players = players;
-		// Commented out until gameplay is complete
-		// Collections.shuffle(players);
+	
 		return "total number of players is " + numberOfPlayers;
 	}
 	
@@ -159,8 +163,8 @@ public class TopTrumpsRESTAPI {
 		fl.getFileData();
 		deck = fl.getDeck();
 		categories = fl.getCats();
-		//Collections.shuffle(deck);
-
+		Collections.shuffle(deck);
+		
 		return deck;
 	}
 		
@@ -173,10 +177,10 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/distributeCards")
 	public String distributeCards() throws IOException{	
+		
 		for (int i = 0; i < players.size(); i++) {
 			this.players.get(i).getPersonalDeck().clear();
 		}
-		
 		for (int i = 0; i < deck.size(); i++) {
 			this.players.get(i % players.size()).givePlayerCard(deck.get(i));
 			System.out.println(players.get(i % players.size()).getPlayerID() + " has been given " + deck.get(i));
@@ -508,26 +512,38 @@ public class TopTrumpsRESTAPI {
 	@Path("/getRoundWinner")
 	public String getRoundWinner() throws IOException{
 		
-		if (players.get(winningIndex).getPlayerID()==1) {
-			return "You won round " + (currentRoundNumber -1) + "! You get to choose the category!";
+	
+		
+		if (communalPile.size() > 0) {
+			return "DRAW! Player " + players.get(winningIndex).getPlayerID() + " has to go again!";
 		}
 		else {
-		return "Player " + players.get(winningIndex).getPlayerID() +" was the winner of round " + (currentRoundNumber -1) + ". Click to reveal the winner of round " + currentRoundNumber + "!";
+			if (players.get(winningIndex).getPlayerID()==1) {
+				return "You won round " + (currentRoundNumber -1) + "! You get to choose the category!";
+			}
+			else {
+				return "Player " + players.get(winningIndex).getPlayerID() +" was the winner of round " + (currentRoundNumber -1) + ". Click to reveal the winner of round " + currentRoundNumber + "!";
+			}
 		}
-		
 	}
 	
 	@GET
 	@Path("/getWinningIndex")
 	public int getWinningIndex() throws IOException{
+
+		if (count==0) {
+		Collections.shuffle(randomStartingIndex);
+		winningIndex = randomStartingIndex.get(0);
+		}
+		count = 1;
 		return winningIndex;
 	}
 	
 	@GET
 	@Path("/nextRound")
 	public void nextRound() throws IOException{
-			noRounds ++;
-			cardSelection = getTopCards(this.players);
+		noRounds ++;
+		cardSelection = getTopCards(this.players);
 	}
 	
 	@GET
@@ -603,6 +619,7 @@ public class TopTrumpsRESTAPI {
 	
 	
 	private int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
+		
 		int winningValue = 0;
 		int winningIndex = 0;
 		
@@ -711,8 +728,6 @@ public class TopTrumpsRESTAPI {
 					winnerID = players.get(winningIndex).getPlayerID();
 					DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
 				}
-				
-				
 				return true;
 			}
 		return false;
@@ -743,7 +758,7 @@ public class TopTrumpsRESTAPI {
 	@GET
 	@Path("/getCompWins")
 	public String getCompWins() throws IOException {
-		int AIwins = DatabaseCommunication.getNoAIWins();
+		int AIwins = DatabaseCommunication.getNoAIWins();;
 		return ""+AIwins;
 	}
 	

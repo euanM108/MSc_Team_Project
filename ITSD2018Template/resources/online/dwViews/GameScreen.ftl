@@ -150,56 +150,59 @@ img {
 }
 
 .card {
-
+    border-top: 0px;
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     width: 90%;
     /* 15 pixel rounded corners */
     border-radius: 15px;
-    margin: 5% 5% 5% 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
     background: #1abc9c;
     font-family: Helvetica;
 }
 
 #playing-card-1 {
+    background-color: rgba(55, 142, 125, 0.4);
     display: none;
     grid-area: a;
     align-self: center;
     text-align: center;
+    margin-top: 0%;
+    
 }
 
 #playing-card-2 {
     display: none;
     grid-area: b;
-    align-self: center;
     text-align: center;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 
 
 #playing-card-3 {
     display: none;
     grid-area: c;
-    align-self: center;
     text-align: center;
-
+    margin-top: 0%;
 }
 
 
 #playing-card-4 {
     display: none;
     grid-area: e;
-    align-self: center;
     text-align: center;
-
+    margin-top: 0%;
 }
 
 #playing-card-5 {
     display: none;
     grid-area: f;
-    align-self: center;
     text-align: center;
-
+    margin-top: 0%;
 }
 
 table.cat-table {
@@ -256,9 +259,9 @@ table.cat-table tfoot td {
 #roundNum {
   display: none;
   transition: 0.3s;
-  height: 5%;
   background: #1abc9c;
-  font-family: Helvetica;
+  font-family: sans-serif;
+font-size: 30px;
   text-align: center;
 }
 
@@ -281,11 +284,10 @@ table.cat-table tfoot td {
     font-size: 100px;
     text-align: center;
     margin: 10%;
-
 }
 
 #btn-default{
-    margin: 5%;
+  margin: 5%;
   background: #1abc9c;
   color:#fff;
   border:none;
@@ -334,6 +336,43 @@ border-color: red;
 #btn-finish-game{
 display: none;
 }
+    #column-design{
+        background-color: #333;
+        font-family: sans-serif;
+        color: white;
+        width: 50%;
+        height: 30%;
+        margin-left: 25%;
+        margin-top: 0%;
+        margin-bottom: 0%;
+    }
+    
+    #HumanCardCount, #P2CardCount, #P3CardCount, #P4CardCount, #P5CardCount{
+        margin: 0%;
+    }
+    
+    #roundNum{
+        margin: 0%;
+    }
+    
+    #pop-up-buttons {
+    	margin: 5%;
+    	font-family: sans-serif;
+    	color: white;
+    	background-color: #333;
+    	width: 10%;
+    }
+    
+    #select-numberOfPlayer{
+    	margin-left: 50%;
+    	font-family: sans-serif;
+    	color: white;
+    	font-size: 10px;
+    }
+    
+    #replay-button{
+    display: none;
+    }
 </style>
 </head>
 <body>
@@ -346,7 +385,13 @@ display: none;
 </div>
 
 <div id="overlay">
-    <div id="winning-popup-box"><h1 id="win-text">YOU WON!!!</h1>
+    <div id="winning-popup-box">
+    	<div id="pop-up-buttons">
+    	 <a href="/toptrumps/game/">Replay</a>
+    	 <br>
+    	 <a href="/toptrumps/">Exit</a>
+    	</div>
+    	<h1 id="win-text">YOU WON!!!</h1>
     </div>
 </div>
 
@@ -358,27 +403,34 @@ display: none;
     <button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
     <button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
     <button id="btn-finish-game"; onclick="finishGame(); this.style.display='none';">FINISH GAME</button>
+    <p id="select-numberOfPlayer"> Select No. of player -</p>
     <select id="numberOfPlayers" style="font-size: 20px; padding: 10px;">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
     </select>
-    <a href="/toptrumps/game/">Replay</a>
+    <div id="replay-button";> <a href="/toptrumps/game/">Replay</a> </div>
                 
 </div>
 
                 
                 
-                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); enableButtons(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
+                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
                     >Begin!</button>
     
-                <p id="roundNum">Round 1: Choose a category and submit!</p> 
+                <p id="roundNum">Round 1: The active player is highlighted red!</p> 
             
             <div class="card-container">
+                
                 <div id="playing-card-1">
-                YOU<br>
+                    <div id="column-design">
+                        <br>
+                    YOU<br>
+                        
                <p id="HumanCardCount">Cards</p>
+                        <br>
+                    </div>
                     <div class="card">
                         <alt="Avatar" style="width:100%">
                             <div class="container">
@@ -398,11 +450,17 @@ display: none;
                                 </div>
 
                             </div>
+                        </alt>
                     </div>
-                </div>
+                    </div>
+                
                 <div id="playing-card-2">
+                    <div id="column-design">
+                        <br>
                     PLAYER 2 (AI)<br>
                     <p id="P2CardCount">Cards</p>
+                        <br>
+                    </div>
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
@@ -431,16 +489,18 @@ display: none;
                                             <td><p id="p2CardValue5"></p></td>
                                         </tr>
                                     </tbody>
-                                    </tr>
                                 </table>
                             </div>
-
                         </div>
                     </div>
                 </div>
                 <div id="playing-card-3">
+                    <div id="column-design">
+                        <br>
                     PLAYER 3 (AI)<br>
                     <p id="P3CardCount">Cards</p>
+                        <br>
+                    </div>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -471,16 +531,20 @@ display: none;
                                                     <td><p id="p3CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
-                                            </tr>
+                                           
                                         </table>
                                     </div>
-
                             </div>
+                        </alt>
                     </div>
                 </div>
-                <div id="playing-card-4">
+                 <div id="playing-card-4">
+                    <div id="column-design">
+                        <br>
                     PLAYER 4 (AI)<br>
                     <p id="P4CardCount">Cards</p>
+                        <br>
+                    </div>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -511,16 +575,20 @@ display: none;
                                                     <td><p id="p4CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
-                                            </tr>
                                         </table>
                                     </div>
 
                             </div>
+                        </alt>
                     </div>
                 </div>
-                <div id="playing-card-5">
+                 <div id="playing-card-5">
+                    <div id="column-design">
+                        <br>
                     PLAYER 5 (AI)<br>
                     <p id="P5CardCount">Cards</p>
+                        <br>
+                    </div>
                     <div class="card">
 
                         <alt="Avatar" style="width:100%">
@@ -551,11 +619,11 @@ display: none;
                                                     <td><p id="p5CardValue5"></p></td>
                                                 </tr>
                                             </tbody>
-                                            </tr>
                                         </table>
                                     </div>
 
                             </div>
+                        </alt>
                     </div>
                 </div>
             </div>
@@ -585,12 +653,12 @@ display: none;
         // -----------------------------------------
         
         // Global variables
-        var category_selected;
+        var category_selected = 1;
         var current_round_num;
         var number_of_players;
         var winning_index;
         var isThereAWinner = false;
-        
+     
         function launchGame(){
             // getting numberOfPlayers from dropdown menu and save as variable players
             console.log("LET THE GAME BEGIN");
@@ -608,11 +676,39 @@ display: none;
             xhr.send()
         }
         
+        function checkWhoStarts(){
+            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
+                    // Message is not sent yet, but we can check that the browser supports CORS
+                    if (!xhr) {
+                        alert("CORS not supported");
+                    }
+                    
+                    // We have done everything we need to prepare the CORS request, so send it
+                    xhr.send()
+                    
+                    xhr.onload = function(e){
+                        winning_index = xhr.response;
+                        console.log("winning index is " + winning_index);
+                        if (winning_index != 0){
+                              document.getElementById("btn-opponent-submit").style.display = 'block';
+                              highlightCurrentPlayer();
+                              enableOrDisableButtons();
+                        }
+                        else if (winning_index == 0){
+                             highlightCurrentPlayer();
+                             enableOrDisableButtons();
+                             
+                        }
+                    
+                    }
+        }
+        
+        
         function setNumberOfPlayers() {     
         
             // getting numberOfPlayers from dropdown menu and save as variable players
             number_of_players = document.getElementById('numberOfPlayers').value;
-            
+          	document.getElementById('replay-button').style.display='block';
             //  create a CORS request, this is the message we are going to send (a get request in this case)
             var xhr = createCORSRequest('GET',
             "http://localhost:7777/toptrumps/numberOfPlayers?Number="+number_of_players); // Request type and URL+parameters
@@ -645,6 +741,8 @@ display: none;
                             document.getElementById('playing-card-4').style.display='block';
                             document.getElementById('playing-card-5').style.display='block';        
                 }
+                checkWhoStarts(); 
+           
             };
           }
         
@@ -716,6 +814,7 @@ display: none;
                 xhrWinningIndex.onload = function(e){
                 
                 winning_index = xhrWinningIndex.response; // the text of the response
+                highlightCurrentPlayer();
                 checkForOverallGameWin();
                 }
             } 
@@ -753,7 +852,45 @@ display: none;
                 checkPlayersDeckSize(4);
             }   
         }
-        
+        function highlightCurrentPlayer(){
+            if (winning_index == 0){
+                document.getElementById("playing-card-1").style.backgroundColor = "rgba(173, 46, 46, 0.4)";
+                document.getElementById("playing-card-2").style.backgroundColor = "white";
+                document.getElementById("playing-card-3").style.backgroundColor = "white";
+                document.getElementById("playing-card-4").style.backgroundColor = "white";
+                document.getElementById("playing-card-5").style.backgroundColor = "white";
+            }
+            else if (winning_index == 1){
+                document.getElementById("playing-card-1").style.backgroundColor = "rgba(55, 142, 125, 0.4)";
+                document.getElementById("playing-card-2").style.backgroundColor = "rgba(173, 46, 46, 0.4)";
+                document.getElementById("playing-card-3").style.backgroundColor = "white";
+                document.getElementById("playing-card-4").style.backgroundColor = "white";
+                document.getElementById("playing-card-5").style.backgroundColor = "white";
+                
+            }
+            else if (winning_index == 2){
+                document.getElementById("playing-card-1").style.backgroundColor = "rgba(55, 142, 125, 0.4)";
+                document.getElementById("playing-card-3").style.backgroundColor = "rgba(173, 46, 46, 0.4)";
+                document.getElementById("playing-card-2").style.backgroundColor = "white";
+                document.getElementById("playing-card-4").style.backgroundColor = "white";
+                document.getElementById("playing-card-5").style.backgroundColor = "white";
+            }
+            else if (winning_index == 3){
+                document.getElementById("playing-card-1").style.backgroundColor = "rgba(55, 142, 125, 0.4)";
+                document.getElementById("playing-card-4").style.backgroundColor = "rgba(173, 46, 46, 0.4)";
+                document.getElementById("playing-card-2").style.backgroundColor = "white";
+                document.getElementById("playing-card-3").style.backgroundColor = "white";
+                document.getElementById("playing-card-5").style.backgroundColor = "white";
+            }
+            else if (winning_index == 4){
+                document.getElementById("playing-card-1").style.backgroundColor = "rgba(55, 142, 125, 0.4)";
+                document.getElementById("playing-card-5").style.backgroundColor = "rgba(173, 46, 46, 0.4)";
+                document.getElementById("playing-card-2").style.backgroundColor = "white";
+                document.getElementById("playing-card-3").style.backgroundColor = "white";
+                document.getElementById("playing-card-4").style.backgroundColor = "white";
+            }
+           
+        }
         
         function checkPlayersDeckSize(i){
             //  create a CORS request, this is the message we are going to send (a get request in this case)
