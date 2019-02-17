@@ -218,18 +218,5 @@ public class CLIJUnitTests {
 		assertEquals(winningIndex, cardSelection.size()-1);
 		
 	}
-	
-	@Test
-	public void finalGameWinnerTest() {
-		//checks that the method to see if there is a game winner
-		//the getPlayersList returns a list of 2 players
-		//1 is then removed and then checkForOverallGameWin method detects this.
-		
-		//as per the specification, the event of a game ending draw is not implimented. 
-		
-		ArrayList<Player> players = new ArrayList<Player>(getPlayersList());
-		players.remove(1);
-		assertTrue(TopTrumpsCLIApplication.checkForOverallGameWin(players));
-	}
 
 }
