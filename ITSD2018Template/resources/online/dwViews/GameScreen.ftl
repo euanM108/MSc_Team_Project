@@ -800,18 +800,14 @@ display: none;
                 document.getElementById('playing-card-1').style.display='block';
                 document.getElementById('playing-card-2').style.display='block';
                 
-                if(number_of_players == 2){
-                            document.getElementById('playing-card-3').style.display='block';
+                if(number_of_players > 1 ){
+                	document.getElementById('playing-card-3').style.display='block';
                 }
-                else if(number_of_players == 3){
-                            document.getElementById('playing-card-3').style.display='block';
-                            document.getElementById('playing-card-4').style.display='block';
-                        
+                if(number_of_players > 2){
+                	document.getElementById('playing-card-4').style.display='block';
                 }
-                else if(number_of_players == 4){
-                            document.getElementById('playing-card-3').style.display='block';
-                            document.getElementById('playing-card-4').style.display='block';
-                            document.getElementById('playing-card-5').style.display='block';        
+                if(number_of_players > 3){
+                	document.getElementById('playing-card-5').style.display='block';        
                 }
                 checkWhoStarts(); 
            
@@ -833,8 +829,9 @@ display: none;
                 }
         
         }
+        
         function displayNextRoundButton(){
-        document.getElementById("btn-next-round").style.display = 'block';
+        	document.getElementById("btn-next-round").style.display = 'block';
         }
         
         function setCategory(clicked_id) {
@@ -1085,7 +1082,7 @@ display: none;
         			getPlayerCardName(3);
                     getPlayer4CardValues();
                     }
-                if(number_of_players > 4){
+                if(number_of_players > 3){
               		
               		getP5CardCount();
         			getPlayerCardName(4);           
