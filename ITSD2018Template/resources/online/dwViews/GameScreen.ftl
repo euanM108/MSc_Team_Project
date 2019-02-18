@@ -168,6 +168,7 @@ h1 {
 img {
   border-radius: 15px 15px 0 0;
   width: 100%;
+  height: 110px;
 }
 
 .card-container {
@@ -1393,7 +1394,7 @@ display: none;
             xhr.send();
             xhr.onload = function(e){
                 var responseText = xhr.response;
-                document.getElementById("HumanCardCount").innerHTML = "Deck Size: " +responseText;
+                document.getElementById("HumanCardCount").innerHTML = "DECK SIZE: " +responseText;
 
             } 
         }
@@ -1410,7 +1411,7 @@ display: none;
             xhr.send();
             xhr.onload = function(e){
                 var responseText = xhr.response;
-                document.getElementById("P2CardCount").innerHTML = "Deck Size: " +responseText;
+                document.getElementById("P2CardCount").innerHTML = "DECK SIZE: " +responseText;
             }
         }
 
@@ -1422,7 +1423,7 @@ display: none;
             xhr.send();
             xhr.onload = function(e){
                 var responseText = xhr.response;
-                document.getElementById("P3CardCount").innerHTML = "Deck Size: " +responseText;
+                document.getElementById("P3CardCount").innerHTML = "DECK SIZE: " +responseText;
             }
         }
 
@@ -1434,7 +1435,7 @@ display: none;
             xhr.send();
             xhr.onload = function(e){
                 var responseText = xhr.response;
-                document.getElementById("P4CardCount").innerHTML = "Deck Size: " +responseText;
+                document.getElementById("P4CardCount").innerHTML = "DECK SIZE: " +responseText;
             }
         }
 
@@ -1446,7 +1447,7 @@ display: none;
             xhr.send();
             xhr.onload = function(e){
                 var responseText = xhr.response;
-                document.getElementById("P5CardCount").innerHTML = "Deck Size: " +responseText;
+                document.getElementById("P5CardCount").innerHTML = "DECK SIZE: " +responseText;
             }
         }
         
