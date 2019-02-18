@@ -56,6 +56,42 @@ body {
   font-size: 40px;
 }
 
+h1 {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 10%;
+  font-size: 5vw;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  background-size: 120% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-image: linear-gradient(45deg, 
+                    #7794ff, 
+                    #44107A,
+                    #FF1361,
+                    #FFF800);
+  animation: .8s shake infinite alternate;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
+}
+
+
 /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
 .navbar {
   font-family: sans-serif;
@@ -392,7 +428,7 @@ display: none;
     	 <br>
     	 <a href="/toptrumps/">Exit</a>
     	</div>
-    	<h1 id="win-text">YOU WON!!!</h1>
+    	<h2 id="win-text">YOU WON!!!</h2>
     </div>
 </div>
 
@@ -419,7 +455,7 @@ display: none;
 
                 
                 
-                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; numberOfPlayers.style.display='none'; this.style.display = 'none'; removeHeader();"
+                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; this.style.display = 'none'; removeHeader();"
                     >Begin!</button>
     
                 <p id="roundNum">Round 1: The active player is highlighted red!</p> 
@@ -750,6 +786,7 @@ display: none;
           }
         
         function removeHeader(){
+        	document.getElementById('select-numberOfPlayers-box').style.display='none';
             document.getElementById('header').style.display='none';
         }
         
