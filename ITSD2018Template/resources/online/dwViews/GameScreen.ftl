@@ -312,7 +312,7 @@ font-size: 30px;
 
 #win-text {
     font-family: Atma, Arial, Helvetica, sans-serif;
-    font-size: 100px;
+    font-size: 80px;
     text-align: center;
     margin: 10%;
 }
@@ -358,7 +358,9 @@ font-size: 30px;
 
 
 #winning-popup-box {
-margin: 10%;
+margin: 15%;
+width: 70%;
+height: relative;
 background-color: white;
 border-style: dashed;
 border-color: red;
@@ -391,8 +393,7 @@ display: none;
     	font-family: sans-serif;
     	color: white;
     	background-color: #333;
-    	width: 10%;
-    }
+	}
     
     #select-numberOfPlayer{
 
@@ -418,9 +419,8 @@ display: none;
 
 <div id="overlay">
     <div id="winning-popup-box">
-    	<div id="pop-up-buttons">
+    	<div class="navbar">
     	 <a href="/toptrumps/game/">Replay</a>
-    	 <br>
     	 <a href="/toptrumps/">Exit</a>
     	</div>
     	<h2 id="win-text">YOU WON!!!</h2>

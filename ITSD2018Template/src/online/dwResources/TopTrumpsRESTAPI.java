@@ -325,10 +325,6 @@ public class TopTrumpsRESTAPI {
 
 		if (players.get(winningIndex).getPlayerID() != 1) {
 			catChoice = players.get(winningIndex).getAIPlayersCatChoice();
-			System.out.println("\n\n\n\n\n");
-			printCatSelectedStatement(players, catChoice, winningIndex);
-			System.out.println("\n\n\n\n\n");
-
 		} 
 		
 		draw = testForDraw(cardSelection, catChoice);
@@ -546,10 +542,6 @@ public class TopTrumpsRESTAPI {
 		return winningIndex;
 	}
 
-	private static void printCatSelectedStatement(ArrayList<Player> players, int catChoice, int winningIndex) {
-		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "
-				+ getCategory(catChoice) + " at " + players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
-	}
 
 	private static String getCategory(int i) {
 		String category = "";
