@@ -36,7 +36,7 @@ import online.configuration.TopTrumpsJSONConfiguration;
  */
 public class TopTrumpsRESTAPI {
 	private static ArrayList<Card> deck = new ArrayList<Card>();
-	
+
 	private int numberOfPlayers;
 	private ArrayList<Player> players;
 	private ArrayList<Card> cardSelection = new ArrayList<Card>();
@@ -49,8 +49,8 @@ public class TopTrumpsRESTAPI {
 	private boolean draw = false;
 	private ArrayList<Integer> randomStartingIndex = new ArrayList<Integer>();
 	private int count = 0;
-	
-	//variables used in database
+
+	// variables used in database
 	private static int draws;
 	private static int noRounds;
 	private static int playerWins;
@@ -60,8 +60,7 @@ public class TopTrumpsRESTAPI {
 	private static int AI4Wins;
 	private static int check = 0;
 	private int winnerID;
-	
-	
+
 	/**
 	 * A Jackson Object writer. It allows us to turn Java objects into JSON strings
 	 * easily.
@@ -76,7 +75,7 @@ public class TopTrumpsRESTAPI {
 	 * @param conf
 	 */
 	public TopTrumpsRESTAPI(TopTrumpsJSONConfiguration conf) {
-			
+
 	}
 
 	// ----------------------------------------------------
@@ -113,27 +112,26 @@ public class TopTrumpsRESTAPI {
 	public void launchGame() throws IOException {
 		DatabaseCommunication.connectToDatabase();
 	}
-	
+
 	@GET
 	@Path("/getRoundNumber")
 	public String getRoundNumber() throws IOException {
-		return ""+currentRoundNumber;
+		return "" + currentRoundNumber;
 	}
-	
-	
+
 	@GET
 	@Path("/numberOfPlayers")
 	/**
 	 * Setting the number of players
 	 */
 	public String numberOfPlayers(@QueryParam("Number") String Number) throws IOException {
-		currentRoundNumber=1;
+		currentRoundNumber = 1;
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.clear();
-		for (int i=0; i<players.size(); i++) {
+		for (int i = 0; i < players.size(); i++) {
 			players.get(i).getPersonalDeck().clear();
 		}
-		
+
 		Player.resetPlayerIDCount();
 		// cast number received as an int
 		numberOfPlayers = Integer.parseInt(Number);
@@ -145,18 +143,18 @@ public class TopTrumpsRESTAPI {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			Player AIPlayer = new Player();
 			players.add(AIPlayer);
-			randomStartingIndex.add(i+1);
+			randomStartingIndex.add(i + 1);
 		}
-		
+
 		this.players = players;
-	
+
 		return "total number of opponents is " + numberOfPlayers;
 	}
-	
+
 	@GET
 	@Path("/getDeck")
-	// Method that will return deck 
-	public ArrayList<Card> getDeck()throws IOException{
+	// Method that will return deck
+	public ArrayList<Card> getDeck() throws IOException {
 		FileHandler fl = new FileHandler();
 		// Create File Handler reference
 		// to create deck, players and shuffle
@@ -164,20 +162,20 @@ public class TopTrumpsRESTAPI {
 		deck = fl.getDeck();
 		categories = fl.getCats();
 		Collections.shuffle(deck);
-		
+
 		return deck;
 	}
-		
+
 	@GET
 	@Path("/getPlayers")
-	public ArrayList<Player> getPlayers() throws IOException{
+	public ArrayList<Player> getPlayers() throws IOException {
 		return players;
 	}
-	
+
 	@GET
 	@Path("/distributeCards")
-	public String distributeCards() throws IOException{	
-		
+	public String distributeCards() throws IOException {
+
 		for (int i = 0; i < players.size(); i++) {
 			this.players.get(i).getPersonalDeck().clear();
 		}
@@ -185,272 +183,221 @@ public class TopTrumpsRESTAPI {
 			this.players.get(i % players.size()).givePlayerCard(deck.get(i));
 			System.out.println(players.get(i % players.size()).getPlayerID() + " has been given " + deck.get(i));
 		}
-		
+
 		return "cards distributed";
 	}
-	
 
 	@GET
 	@Path("/getCardName")
-	public String getCardName() throws IOException{
+	public String getCardName() throws IOException {
 		if (players.get(0).getPersonalDeckSize() > 0) {
 			return players.get(0).getTopCard().getCardName();
-		}
-		else {
+		} else {
 			return "removed";
 		}
 	}
-	
+
 	@GET
 	@Path("/getPlayer1CardValue")
 	public int getPlayer1CardValue(@QueryParam("i") String i) throws IOException {
 		if (players.get(0).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
-		
+
 			if (category == 1) {
 				return players.get(0).getTopCard().getCat1Value();
-			}
-			else if (category ==2) {
+			} else if (category == 2) {
 				return players.get(0).getTopCard().getCat2Value();
-			}
-			else if (category ==3) {
+			} else if (category == 3) {
 				return players.get(0).getTopCard().getCat3Value();
-			}
-			else if(category ==4) {
+			} else if (category == 4) {
 				return players.get(0).getTopCard().getCat4Value();
-			}
-			else if(category ==5) {
+			} else if (category == 5) {
 				return players.get(0).getTopCard().getCat5Value();
 			}
 		}
 		return 0;
 	}
-	
-	
+
 	@GET
 	@Path("/getPlayerCardName")
-	public String getPlayerCardName(@QueryParam("i") String i) throws IOException{
+	public String getPlayerCardName(@QueryParam("i") String i) throws IOException {
 		int playerIndex = Integer.parseInt(i);
-		return players.get(playerIndex).getTopCard().getCardName();		
+		return players.get(playerIndex).getTopCard().getCardName();
 	}
-	
-	
+
 	@GET
 	@Path("/getPlayer2CardValue")
 	public int getPlayer2CardValue(@QueryParam("i") String i) throws IOException {
 		if (players.get(1).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
-			
+
 			if (category == 1) {
 				return players.get(1).getTopCard().getCat1Value();
-			}
-			else if (category ==2) {
+			} else if (category == 2) {
 				return players.get(1).getTopCard().getCat2Value();
-			}
-			else if (category ==3) {
+			} else if (category == 3) {
 				return players.get(1).getTopCard().getCat3Value();
-			}
-			else if(category ==4) {
+			} else if (category == 4) {
 				return players.get(1).getTopCard().getCat4Value();
-			}
-			else if(category ==5) {
+			} else if (category == 5) {
 				return players.get(1).getTopCard().getCat5Value();
 			}
 		}
 		return 0;
 	}
-	
-	
+
 	@GET
 	@Path("/getCatDescriptions")
-	public String getCategories() throws IOException{
+	public String getCategories() throws IOException {
 		return categories;
 	}
-	
+
 	@GET
 	@Path("/getPlayer3CardValue")
 	public int getPlayer3CardValue(@QueryParam("i") String i) throws IOException {
 		if (players.get(2).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
-		
+
 			if (category == 1) {
 				return players.get(2).getTopCard().getCat1Value();
-			}
-			else if (category ==2) {
+			} else if (category == 2) {
 				return players.get(2).getTopCard().getCat2Value();
-			}
-			else if (category ==3) {
+			} else if (category == 3) {
 				return players.get(2).getTopCard().getCat3Value();
-			}
-			else if(category ==4) {
+			} else if (category == 4) {
 				return players.get(2).getTopCard().getCat4Value();
-			}
-			else if(category ==5) {
+			} else if (category == 5) {
 				return players.get(2).getTopCard().getCat5Value();
 			}
 		}
 		return 0;
 	}
-	
-	
+
 	@GET
 	@Path("/getPlayer4CardValue")
 	public int getPlayer4CardValue(@QueryParam("i") String i) throws IOException {
 		if (players.get(3).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
-		
+
 			if (category == 1) {
 				return players.get(3).getTopCard().getCat1Value();
-			}
-			else if (category ==2) {
+			} else if (category == 2) {
 				return players.get(3).getTopCard().getCat2Value();
-			}
-			else if (category ==3) {
+			} else if (category == 3) {
 				return players.get(3).getTopCard().getCat3Value();
-			}
-			else if(category ==4) {
+			} else if (category == 4) {
 				return players.get(3).getTopCard().getCat4Value();
-			}
-			else if(category ==5) {
+			} else if (category == 5) {
 				return players.get(3).getTopCard().getCat5Value();
 			}
 		}
 		return 0;
 	}
-	
-	
-	
+
 	@GET
 	@Path("/getPlayer5CardValue")
 	public int getPlayer5CardValue(@QueryParam("i") String i) throws IOException {
 		if (players.get(4).getPersonalDeckSize() > 0) {
 			int category = Integer.parseInt(i);
-				
+
 			if (category == 1) {
 				return players.get(4).getTopCard().getCat1Value();
-			}
-			else if (category ==2) {
+			} else if (category == 2) {
 				return players.get(4).getTopCard().getCat2Value();
-			}
-			else if (category ==3) {
+			} else if (category == 3) {
 				return players.get(4).getTopCard().getCat3Value();
-			}
-			else if(category ==4) {
+			} else if (category == 4) {
 				return players.get(4).getTopCard().getCat4Value();
-			}
-			else if(category ==5) {
+			} else if (category == 5) {
 				return players.get(4).getTopCard().getCat5Value();
 			}
 		}
 		return 0;
 	}
-	
-	
+
 	@GET
 	@Path("/submit_category")
 	public void submit_category(@QueryParam("categoryChoice") String categoryChoice) {
-		
+
 		catChoice = Integer.parseInt(categoryChoice);
-		
+
 		hasPlayerSubmitted = true;
-		
+
 		if (players.get(winningIndex).getPlayerID() != 1) {
 			catChoice = players.get(winningIndex).getAIPlayersCatChoice();
 			System.out.println("\n\n\n\n\n");
 			printCatSelectedStatement(players, catChoice, winningIndex);
 			System.out.println("\n\n\n\n\n");
-			
-		} 	else {			
-			System.out.println("\n\n\n\n\n");
-			// need to wait for players category submission
-			printCatSelectedStatement(players, catChoice, winningIndex);
-			System.out.println("\n\n\n\n\n");
-		}
+
+		} 
 		
 		draw = testForDraw(cardSelection, catChoice);
-		
+
 		if (draw) {
-			
+
 			// if the round is a draw
 			// winning index stays the same
 			// cards are moved to communal pile
-			draws++; //add 1 to the count of draws for the database
+			draws++; // add 1 to the count of draws for the database
 			for (Card tempCard : cardSelection) {
 				communalPile.add(tempCard);
 			}
-			printDraw(players, catChoice, winningIndex);
 
 		} else {
 			// if there is not a draw
 			winningIndex = getWinningIndex(cardSelection, catChoice);
-			winnerCount(winningIndex, players); //calls the method to increment the database counter for the winner
+			winnerCount(winningIndex, players); // calls the method to increment the database counter for the winner
 
 			// Giving the winner the cards they won for this round
 			for (int i = 0; i < cardSelection.size(); i++) {
 				players.get(winningIndex).givePlayerCard(cardSelection.get(i));
 			}
-			
-			//if there are cards in the communalPile give the player those
-			if(communalPile.size() > 0) {
-				for(int i = 0; i < communalPile.size(); i++){
+
+			// if there are cards in the communalPile give the player those
+			if (communalPile.size() > 0) {
+				for (int i = 0; i < communalPile.size(); i++) {
 					players.get(winningIndex).givePlayerCard(communalPile.get(i));
 				}
 				communalPile.clear();
 			}
 		}
-		
-		
-//		if(cardSelection.size() > 0) {
-//			for(int i = 0; i < cardSelection.size(); i++){
-//				players.get(winningIndex).givePlayerCard(cardSelection.get(i));
-//			}
-//			cardSelection.clear();			
-//		}
+
 		cardSelection.clear();
 		// remove top cards after round is finished
 		removeCards(players);
-		
+
 		System.out.println("winning index is : " + winningIndex);
 		// check players submission against others here
 	}
-	
-	
+
 	private static void winnerCount(int winningIndex, ArrayList<Player> players) {
-		int roundWinnerID = players.get(winningIndex).getPlayerID(); //get the ID of the winning player
-		
-		if(roundWinnerID == 1) {
+		int roundWinnerID = players.get(winningIndex).getPlayerID(); // get the ID of the winning player
+
+		if (roundWinnerID == 1) {
 			playerWins++;
-		}else if(roundWinnerID == 2) {
+		} else if (roundWinnerID == 2) {
 			AI1Wins++;
-		}else if(roundWinnerID == 3) {
+		} else if (roundWinnerID == 3) {
 			AI2Wins++;
-		}else if(roundWinnerID == 4){
+		} else if (roundWinnerID == 4) {
 			AI3Wins++;
-		}else {
+		} else {
 			AI4Wins++;
 		}
 	}
-	
-	private static void printDraw(ArrayList<Player> players, int catChoice, int winningIndex) {
-		System.out.println("\n\n\n\n");
-		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "+ getCategory(catChoice) + ". Multiple"
-				+ " player's cards had the winning value so the round is a draw.");
-		System.out.println("The cards have been addedd to the communal pile for the next winner!");
-		System.out.println("\n\n\n\n");
-	}
-	
+
 	private static void removeCards(ArrayList<Player> players) {
 		for (int i = 0; i < players.size(); i++) {
-			try {if (players.get(i).getPersonalDeckSize() > 0) {
-				players.get(i).removeTopCard();
-			}
+			try {
+				if (players.get(i).getPersonalDeckSize() > 0) {
+					players.get(i).removeTopCard();
+				}
 			} catch (IndexOutOfBoundsException e) {
 
 			}
 		}
 	}
-	
-	
+
 	private static boolean testForDraw(ArrayList<Card> cardSelection, int catChoice) {
 		int winningValue = 0;
 		int numberOfHighCards = 0; // counts the number of times the highest cat is seen
@@ -475,143 +422,135 @@ public class TopTrumpsRESTAPI {
 			return false;
 		}
 	}
-	
+
 	@GET
 	@Path("/getRoundWinner")
-	public String getRoundWinner() throws IOException{
-		
-	
-		
+	public String getRoundWinner() throws IOException {
+
 		if (communalPile.size() > 0) {
 			return "DRAW! Player " + players.get(winningIndex).getPlayerID() + " has to go again!";
-		}
-		else {
-			if (players.get(winningIndex).getPlayerID()==1) {
-				return "You won round " + (currentRoundNumber -1) + "! You get to choose the category!";
-			}
-			else {
-				return "Player " + players.get(winningIndex).getPlayerID() +" was the winner of round " + (currentRoundNumber -1) + ". Click to reveal the winner of round " + currentRoundNumber + "!";
+		} else {
+			if (players.get(winningIndex).getPlayerID() == 1) {
+				return "You won round " + (currentRoundNumber - 1) + "! You get to choose the category!";
+			} else {
+				return "Player " + players.get(winningIndex).getPlayerID() + " was the winner of round "
+						+ (currentRoundNumber - 1) + ". Click to reveal the winner of round " + currentRoundNumber
+						+ "!";
 			}
 		}
 	}
-	
+
 	@GET
 	@Path("/getWinningIndex")
-	public int getWinningIndex() throws IOException{
+	public int getWinningIndex() throws IOException {
 
-		if (count==0) {
-		Collections.shuffle(randomStartingIndex);
-		winningIndex = randomStartingIndex.get(0);
+		if (count == 0) {
+			Collections.shuffle(randomStartingIndex);
+			winningIndex = randomStartingIndex.get(0);
 		}
 		count = 1;
 		return winningIndex;
 	}
-	
+
 	@GET
 	@Path("/nextRound")
-	public void nextRound() throws IOException{
-		noRounds ++;
+	public void nextRound() throws IOException {
+		noRounds++;
 		cardSelection = getTopCards(this.players);
 	}
-	
+
 	@GET
 	@Path("/getHumanCardCount")
-	public String getHumanCardCount() throws IOException{
-	
+	public String getHumanCardCount() throws IOException {
+
 		int humanCardCount = 0;
 		humanCardCount = players.get(0).getPersonalDeck().size();
 		if (humanCardCount == 0) {
 			return "outTheGame";
 		}
-		return ""+humanCardCount;
+		return "" + humanCardCount;
 	}
-	
+
 	@GET
 	@Path("/getP2CardCount")
-	public String getP2CardCount() throws IOException{
-	
+	public String getP2CardCount() throws IOException {
+
 		int cardCount2 = 0;
 		cardCount2 = players.get(1).getPersonalDeck().size();
-		return ""+cardCount2;
+		return "" + cardCount2;
 	}
-	
+
 	@GET
 	@Path("/getP3CardCount")
-	public String getP3CardCount() throws IOException{
-	
+	public String getP3CardCount() throws IOException {
+
 		int cardCount3 = 0;
 		cardCount3 = players.get(2).getPersonalDeck().size();
-		return ""+cardCount3;
+		return "" + cardCount3;
 	}
-	
+
 	@GET
 	@Path("/getP4CardCount")
-	public String getP4CardCount() throws IOException{
-	
+	public String getP4CardCount() throws IOException {
+
 		int cardCount4 = 0;
 		cardCount4 = players.get(3).getPersonalDeck().size();
-		return ""+cardCount4;
+		return "" + cardCount4;
 	}
-	
+
 	@GET
 	@Path("/getPlayersDeckSize")
-	public String getPlayersDeckSize(@QueryParam("i") String i) throws IOException{
+	public String getPlayersDeckSize(@QueryParam("i") String i) throws IOException {
 		int index = Integer.parseInt(i);
-		return ""+players.get(index).getPersonalDeckSize();
-		
+		return "" + players.get(index).getPersonalDeckSize();
+
 	}
-	
+
 	@GET
 	@Path("/getP5CardCount")
-	public String getP5CardCount() throws IOException{
-	
+	public String getP5CardCount() throws IOException {
+
 		int cardCount5 = 0;
 		cardCount5 = players.get(4).getPersonalDeck().size();
-		return ""+cardCount5;
+		return "" + cardCount5;
 	}
-	
-	
+
 	@GET
 	@Path("/finishGame")
 	public void finishGame() throws IOException {
 		while ((!checkForOverallGameWin(players))) {
 			submit_category("0");
-	
+
 			nextRound();
 
 			checkForGameWin();
 		}
-		
-	
+
 	}
-	
-	
+
 	private int getWinningIndex(ArrayList<Card> cardSelection, int catChoice) {
-		
+
 		int winningValue = 0;
 		int winningIndex = 0;
-		
+
 		for (int j = 0; j < players.size(); j++) {
 			if (players.get(j).getPersonalDeckSize() > 0) {
 				if (players.get(j).getTopCard().getRequestedCat(catChoice) > winningValue) {
 					winningValue = players.get(j).getTopCard().getRequestedCat(catChoice);
 					winningIndex = j;
-				}
-				else if (players.get(j).getTopCard().getRequestedCat(catChoice) == winningValue) {
-					
+				} else if (players.get(j).getTopCard().getRequestedCat(catChoice) == winningValue) {
+
 				}
 			}
 		}
 		return winningIndex;
 	}
-	
-	
-	
+
 	private static void printCatSelectedStatement(ArrayList<Player> players, int catChoice, int winningIndex) {
 		System.out.println("Player " + players.get(winningIndex).getPlayerID() + " has selected "
 				+ getCategory(catChoice) + " at " + players.get(winningIndex).getTopCard().getRequestedCat(catChoice));
 	}
-	
+
 	private static String getCategory(int i) {
 		String category = "";
 		switch (i) {
@@ -634,29 +573,24 @@ public class TopTrumpsRESTAPI {
 		}
 		return category;
 	}
-	
-	
-	
+
 	private static boolean checkForOverallGameWin(ArrayList<Player> players) {
 		int count = 0;
 		int winner = -1;
-		for (int i=0; i<players.size(); i++) {
+		for (int i = 0; i < players.size(); i++) {
 			if (players.get(i).getPersonalDeckSize() > 0) {
 				count++;
 				winner = i;
 			}
 		}
-		
-		if (count ==1) {
-			System.out.println("\n\n\n\n\n");
-			System.out.println("Player " + players.get(winner).getPlayerID() + " has won the game.");
-			System.out.println("\n\n\n\n\n");
+
+		if (count == 1) {
 			return true;
 		}
 		count = 0;
 		return false;
 	}
-	
+
 	private ArrayList<Card> getTopCards(ArrayList<Player> players) {
 		currentRoundNumber++;
 		ArrayList<Card> cardSelection = new ArrayList<Card>();
@@ -667,94 +601,70 @@ public class TopTrumpsRESTAPI {
 					cardSelection.add(players.get(i).getTopCard()); // adding to cardSelection
 				} else {
 					// if they do not have a top card, they are removed from the game
-					System.out
-							.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
-		//		    players.remove(i);
-					
+					System.out.println("Player " + players.get(i).getPlayerID() + " has been removed from the game.");
+
 				}
-				
+
 				if (checkForOverallGameWin(players)) {
-					// FINISH GAME AND DO FINAL STUFF HERE
-					
-					// write to database
-					// notify winner 
-					
+
 				}
 			}
 		} catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
 		return cardSelection;
-	} 
-	
+	}
+
 	@GET
 	@Path("/checkForGameWin")
 	public boolean checkForGameWin() throws IOException {
-			if (checkForOverallGameWin(players)) {
-				check ++;
-				if(check == 3) {
-					winnerID = players.get(winningIndex).getPlayerID();
-					DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins, AI4Wins);
-				}
-				return true;
+		if (checkForOverallGameWin(players)) {
+			check++;
+			if (check == 3) {
+				winnerID = players.get(winningIndex).getPlayerID();
+				DatabaseCommunication.writeGameResults(winnerID, draws, noRounds, playerWins, AI1Wins, AI2Wins, AI3Wins,
+						AI4Wins);
 			}
+			return true;
+		}
 		return false;
 	}
-	
-	
-	@GET
-	@Path("/helloWord")
-	/**
-	 * Here is an example of how to read parameters provided in an HTML Get request.
-	 * 
-	 * @param Word - A word
-	 * @return - A String
-	 * @throws IOException
-	 */
-	public String helloWord(@QueryParam("Word") String Word) throws IOException {
-		return "Hello " + Word;
-	}
-	
-	///******** Database API methods ********///
+
+	/// ******** Database API methods ********///
 	@GET
 	@Path("/getTotalGames")
 	public String getTotalGames() throws IOException {
 		int games = DatabaseCommunication.getNoGames();
-		return ""+games;
+		return "" + games;
 	}
-	
+
 	@GET
 	@Path("/getCompWins")
 	public String getCompWins() throws IOException {
-		int AIwins = DatabaseCommunication.getNoAIWins();;
-		return ""+AIwins;
+		int AIwins = DatabaseCommunication.getNoAIWins();
+		;
+		return "" + AIwins;
 	}
-	
+
 	@GET
 	@Path("/getHumanWins")
 	public String getHumanWins() throws IOException {
 		int humanWins = DatabaseCommunication.getNoHumanWins();
-		return ""+humanWins;
+		return "" + humanWins;
 	}
-	
+
 	@GET
 	@Path("/getAveDraws")
 	public String getAveDraws() throws IOException {
 		double drawAvg = DatabaseCommunication.getAVGDraws();
-		return ""+drawAvg;
+		return "" + drawAvg;
 	}
-	
+
 	@GET
 	@Path("/getBigRound")
 	public String getBigRound() throws IOException {
 		int roundMax = DatabaseCommunication.getLargestNoRounds();
-		return ""+roundMax;
-	}
-	
-	@GET
-	@Path("/wipeDatabase")
-	public void wipeDatabase() throws IOException {
-		DatabaseCommunication.clearHistory();
+		return "" + roundMax;
 	}
 
 }

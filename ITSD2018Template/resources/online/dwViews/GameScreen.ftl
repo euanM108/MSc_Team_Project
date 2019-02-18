@@ -1102,18 +1102,12 @@ display: none;
                         if (winning_index == 0){
                             document.getElementById("win-text").innerHTML = "YOU WON!!!";
                             document.getElementById("overlay").style.display = "block";
-                            
-                            // CONFETTI CAUSE YOU WON
-                            
+
                         }
                         else {
-                        
-                            // PLAYERID NEEDS TO BE USED AS INTEGER AND NOT STRING 
-                            
                             document.getElementById("win-text").innerHTML = "YOU LOSE!<br />PLAYER " + playerID + " WINS!";
                             document.getElementById("overlay").style.display = "block";
-                            // UNLUCKY BECAUSE YOU DIDN'T WIN
-                            
+
                         }
                     }
             } 
