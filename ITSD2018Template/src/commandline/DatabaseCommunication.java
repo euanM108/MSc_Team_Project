@@ -161,33 +161,5 @@ public class DatabaseCommunication {
 		return largestNoRounds;
 	}
 	
-	public static void clearHistory() {
-		// this method completely clears the database table
-		if (connection == null) {
-			System.out.println("No database connection, attempting to connect.");
-			connectToDatabase();
-		} else {
-			try {
-				Statement SQLStatement = connection.createStatement();
-				String SQLQuery = "DELETE FROM game_statistics";
-				SQLStatement.executeUpdate(SQLQuery);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-/*	public static void main(String[] args) {
-		//the main can be used for testing and will be removed when 
-		//implemented into the full programme
-		System.out.println("1");
-		writeGameResults(3, 1, 1, 4, 6, 1, 4, 8);
-		System.out.println("2");
-		getPreviousStatistics();
-		System.out.println("3");
-		clearHistory();
-		System.out.println("4");
-		getPreviousStatistics();
-	}*/
 
 }
