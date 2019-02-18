@@ -670,15 +670,6 @@ display: none;
         
         // Method that is called on page load
         function initalize() {
-            launchGame();
-        
-            // --------------------------------------------------------------------------
-            // You can call other methods you want to run when the page first loads here
-            // --------------------------------------------------------------------------
-            
-            // For example, lets call our sample methods
-            // helloJSONList();
-            // helloWord("Student");
                 
         }
             
@@ -693,22 +684,7 @@ display: none;
         var winning_index;
         var isThereAWinner = false;
      
-        function launchGame(){
-            // getting numberOfPlayers from dropdown menu and save as variable players
-            console.log("LET THE GAME BEGIN");
-            
-            //  create a CORS request, this is the message we are going to send (a get request in this case)
-            var xhr = createCORSRequest('GET',
-            "http://localhost:7777/toptrumps/launchGame"); // Request type and URL+parameters
-        
-            // Message is not sent yet, but we can check that the browser supports CORS
-            if (!xhr) {
-                alert("CORS not supported");
-            }
-            
-            // We have done everything we need to prepare the CORS request, so send it
-            xhr.send()
-        }
+       
         
         function checkWhoStarts(){
             var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getWinningIndex"); // Request type and URL+parameters
