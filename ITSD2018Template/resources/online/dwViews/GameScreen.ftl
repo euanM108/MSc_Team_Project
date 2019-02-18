@@ -150,13 +150,6 @@ h1 {
   padding: 20px;
 }
 
-/* Fake image, just for this example */
-.fakeimg {
-  background-color: #aaa;
-  width: 100%;
-  padding: 20px;
-}
-
 /* On mouse-over, add a deeper shadow */
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -174,6 +167,7 @@ h1 {
 
 img {
   border-radius: 15px 15px 0 0;
+  width: 100%;
 }
 
 .card-container {
@@ -437,8 +431,8 @@ display: none;
   <a href="/toptrumps/">Exit</a>
     <button id="btn-submit"; onclick="submit(); getRoundNumber(); disableButtons(); this.style.display='none'">Submit your category!</button>
     <button id="btn-opponent-submit"; onclick="submit(); getRoundNumber(); this.style.display='none';">Submit Opponents category!</button>
-    <button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); this.style.display='none';">Show winner!</button>
-    <button id="btn-next-round"; onclick="enableOrDisableButtons(); nextRound(); getRoundNumber(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
+    <button id="btn-reveal-winner"; onclick="displayNextRoundButton(); getRoundWinner(); getRoundNumber(); showOpponentsValues(); this.style.display='none';">Show winner!</button>
+    <button id="btn-next-round"; onclick=" enableOrDisableButtons(); nextRound(); getRoundNumber(); hideOpponentsValues(); this.style.display='none'; displayOpponentSubmit();">Next round!</button>
     <button id="btn-finish-game"; onclick="finishGame(); this.style.display='none';">FINISH GAME</button>
     <div id="select-numberOfPlayers-box">
     <label id="select-numberOfPlayer"> Select No. of opponents -</label>
@@ -455,7 +449,7 @@ display: none;
 
                 
                 
-                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); roundNum.style.display='block'; this.style.display = 'none'; removeHeader();"
+                    <button id="btn-default" onclick="setNumberOfPlayers(); getDeck(); hideOpponentsValues(); roundNum.style.display='block'; this.style.display = 'none'; removeHeader();"
                     >Begin!</button>
     
                 <p id="roundNum">Round 1: The active player is highlighted red!</p> 
@@ -473,8 +467,8 @@ display: none;
                     <div class="card">
                         <alt="Avatar" style="width:100%">
                             <div class="container">
-                                <h2 id="cardName">Card Name</h2>
-                                <img src="#" alt="picture of spaceship">
+                                <h2 id="cardName-p1">Card Name</h2>
+                                <img id="p1-card-image" alt="picture of spaceship">
                                 <div id="cat-buttons">
                                     <button id="1" onclick="setCategory(this.id)" disabled=true; style="width: 100%; display: block;"> <p id="p1CardValue1"></p>
                                     </button>
@@ -503,7 +497,7 @@ display: none;
                     <div class="card">
                         <div class="container">
                             <h2 id="cardName-p2">Card Name</h2>
-                            <img src="#" alt="picture of spaceship">
+                            <img id="p2-card-image" alt="picture of spaceship">
                             <div class="cat-tables">
                                 <table class="cat-table">
                                     <tbody>
@@ -545,7 +539,7 @@ display: none;
                         <alt="Avatar" style="width:100%">
                             <div class="container">
                                 <h2 id="cardName-p3">Card Name</h2>
-                                <img src="#" alt="picture of spaceship">
+                                <img id="p3-card-image" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
                                             <tbody>
@@ -589,7 +583,7 @@ display: none;
                         <alt="Avatar" style="width:100%">
                             <div class="container">
                                 <h2 id="cardName-p4">Card Name</h2>
-                                <img src="#" alt="picture of spaceship">
+                                <img id="p4-card-image" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
                                             <tbody>
@@ -633,7 +627,7 @@ display: none;
                         <alt="Avatar" style="width:100%">
                             <div class="container">
                                 <h2 id="cardName-p5">Card Name</h2>
-                                <img src="#" alt="picture of spaceship">
+                                <img id="p5-card-image" alt="picture of spaceship">
                                 <div class="cat-tables">
                                         <table class="cat-table">
                                             <tbody>
@@ -742,7 +736,46 @@ display: none;
                     }
         }
         
+        function hideOpponentsValues(){
+   	     var myClasses = document.querySelectorAll('.cat-tables');
+   			 i = 0;
+   			 length = myClasses.length;
+
+			for (i; i < length; i++) {
+  				  myClasses[i].style.visibility = 'hidden';  				  
+			}      
+			
+			document.getElementById("cardName-p2").style.visibility = 'hidden';
+		  	document.getElementById("cardName-p3").style.visibility = 'hidden';
+		  	document.getElementById("cardName-p4").style.visibility = 'hidden';
+		  	document.getElementById("cardName-p5").style.visibility = 'hidden';
+		  	document.getElementById("p2-card-image").style.visibility = 'hidden';
+		  	document.getElementById("p3-card-image").style.visibility = 'hidden';
+		  	document.getElementById("p4-card-image").style.visibility = 'hidden';
+		  	document.getElementById("p5-card-image").style.visibility = 'hidden';
+        }
         
+        
+        
+        function showOpponentsValues(){
+        
+        var myClasses = document.querySelectorAll('.cat-tables');
+   			 i = 0;
+   			 length = myClasses.length;
+
+			for (i; i < length; i++) {
+  				  myClasses[i].style.visibility = 'visible';
+			}      
+			document.getElementById("cardName-p2").style.visibility = 'visible';
+		  	document.getElementById("cardName-p3").style.visibility = 'visible';
+		  	document.getElementById("cardName-p4").style.visibility = 'visible';
+		  	document.getElementById("cardName-p5").style.visibility = 'visible';
+		  	document.getElementById("p2-card-image").style.visibility = 'visible';
+		  	document.getElementById("p3-card-image").style.visibility = 'visible';
+		  	document.getElementById("p4-card-image").style.visibility = 'visible';
+		  	document.getElementById("p5-card-image").style.visibility = 'visible';
+        }
+                
         function setNumberOfPlayers() {     
         
             // getting numberOfPlayers from dropdown menu and save as variable players
@@ -1027,10 +1060,8 @@ display: none;
                 var responseText = xhr.response;
                 getRoundNumber();
                 checkActivePlayers();
-                getCardName();
+				getPlayerCardName(0);
                 getPlayer1CardValues();
-                getHumanCardCount();
-                getCardCounts();
                 getCardNamesAndValues();
                 
             } 
@@ -1039,33 +1070,25 @@ display: none;
         }
         
         function getCardNamesAndValues(){
-        if (number_of_players == 1){
-                    getPlayer2CardName();
-                    getPlayer2CardValues();
-                    }
-                else if(number_of_players == 2){
-                    getPlayer2CardName();
-                    getPlayer2CardValues();
-                    getPlayer3CardName();
+        		getPlayerCardName(1);
+        		getPlayer2CardValues();
+                getHumanCardCount();   		
+            	getP2CardCount();
+            
+                if(number_of_players > 1){
+                	getP3CardCount();
+        			getPlayerCardName(2);      
                     getPlayer3CardValues();
-                    
                     }
-                else if(number_of_players == 3){
-                    getPlayer2CardName();
-                    getPlayer2CardValues();
-                    getPlayer3CardName();
-                    getPlayer3CardValues();
-                    getPlayer4CardName();
+                if(number_of_players > 2){
+                	getP4CardCount();
+        			getPlayerCardName(3);
                     getPlayer4CardValues();
                     }
-                else if(number_of_players == 4){
-                    getPlayer2CardName();
-                    getPlayer2CardValues();
-                    getPlayer3CardName();
-                    getPlayer3CardValues();
-                    getPlayer4CardName();
-                    getPlayer4CardValues();
-                    getPlayer5CardName();
+                if(number_of_players > 4){
+              		
+              		getP5CardCount();
+        			getPlayerCardName(4);           
                     getPlayer5CardValues();
                 }   
         }
@@ -1113,8 +1136,7 @@ display: none;
             getPlayer2CardValue(2);
             getPlayer2CardValue(3);
             getPlayer2CardValue(4);
-            getPlayer2CardValue(5);
-            
+            getPlayer2CardValue(5);  
           }
         
         function getPlayer3CardValues(){
@@ -1167,15 +1189,7 @@ display: none;
                 current_round_num =  xhr.response;
             } 
         }
-        
-        function getCardName(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getCardName ");
-            xhr.send();
-            xhr.onload = function(e){
-                var responseText = xhr.response;
-                document.getElementById("cardName").innerHTML = responseText;
-            } 
-        }
+  
         
         function getPlayer1CardValue(i){
             var xhr = createCORSRequest('GET',
@@ -1207,15 +1221,46 @@ display: none;
         }
         
         // PLAYER 2 CARD NAME AND CARD VALUES
-        
-        function getPlayer2CardName(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardName");
-            xhr.send();
-            xhr.onload = function(e){
-                var responseText = xhr.response;
+        function getPlayerCardName(i){
+        	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayerCardName?i="+i); // Request type and URL+parameters
+            
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+        		var responseText = xhr.response;
+        		if (i==0){
+                document.getElementById("cardName-p1").innerHTML = responseText;
+                fileSource = "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + responseText + ".jpg";
+                document.getElementById("p1-card-image").src = fileSource;
+                }
+                else if (i==1){
                 document.getElementById("cardName-p2").innerHTML = responseText;
-            } 
+                fileSource = "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + responseText + ".jpg";
+                document.getElementById("p2-card-image").src = fileSource;
+                }
+                else if (i==2){
+                document.getElementById("cardName-p3").innerHTML = responseText;
+                fileSource = "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + responseText + ".jpg";
+                document.getElementById("p3-card-image").src = fileSource;
+                }
+                else if (i==3){
+                document.getElementById("cardName-p4").innerHTML = responseText;
+                fileSource = "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + responseText + ".jpg";
+                document.getElementById("p4-card-image").src = fileSource;
+                }
+                else if (i==4){
+                document.getElementById("cardName-p5").innerHTML = responseText;
+                fileSource = "http://dcs.gla.ac.uk/~richardm/TopTrumps/" + responseText + ".jpg";
+                document.getElementById("p5-card-image").src = fileSource;
+                }
+                
+        	}
         }
+        
         
         function getPlayer2CardValue(i){
             var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue?i="+i); // Request type and URL+parameters
@@ -1245,17 +1290,7 @@ display: none;
                 }
             }
         }
-        
-        // PLAYER 3 CARD NAME AND CARD VALUES
-        
-        function getPlayer3CardName(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer3CardName");
-            xhr.send();
-            xhr.onload = function(e){
-                var responseText = xhr.response;
-                document.getElementById("cardName-p3").innerHTML = responseText;
-            } 
-        }
+ 
         
         
         function getPlayer3CardValue(i){
@@ -1290,15 +1325,6 @@ display: none;
         
         // PLAYER 4 CARD NAME AND CARD VALUES
         
-        function getPlayer4CardName(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer4CardName");
-            xhr.send();
-            xhr.onload = function(e){
-                var responseText = xhr.response;
-                document.getElementById("cardName-p4").innerHTML = responseText;
-            } 
-        }
-        
         function getPlayer4CardValue(i){
             var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer4CardValue?i="+i); 
         
@@ -1330,14 +1356,6 @@ display: none;
         
         
         // PLAYER 5 CARD NAME AND CARD VALUES
-        function getPlayer5CardName(){
-            var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer5CardName");
-            xhr.send();
-            xhr.onload = function(e){
-                var responseText = xhr.response;
-                document.getElementById("cardName-p5").innerHTML = responseText;
-            } 
-        }
         
         function getPlayer5CardValue(i){
             var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer5CardValue?i="+i); 
@@ -1384,10 +1402,7 @@ display: none;
         }
         //AI players
         function getCardCounts(){
-            getP2CardCount();
-            getP3CardCount();
-            getP4CardCount();
-            getP5CardCount();
+            
         }
 
         function getP2CardCount(){

@@ -226,15 +226,12 @@ public class TopTrumpsRESTAPI {
 		return 0;
 	}
 	
+	
 	@GET
-	@Path("/getPlayer2CardName")
-	public String getPlayer2CardName() throws IOException{
-		if (players.get(1).getPersonalDeckSize() > 0) {
-			return players.get(1).getTopCard().getCardName();
-		}
-		else {
-			return "removed";
-		}
+	@Path("/getPlayerCardName")
+	public String getPlayerCardName(@QueryParam("i") String i) throws IOException{
+		int playerIndex = Integer.parseInt(i);
+		return players.get(playerIndex).getTopCard().getCardName();		
 	}
 	
 	
@@ -263,15 +260,6 @@ public class TopTrumpsRESTAPI {
 		return 0;
 	}
 	
-
-	@GET
-	@Path("/getPlayer3CardName")
-	public String getPlayer3CardName() throws IOException{
-		if (players.get(2).getPersonalDeckSize() > 0) {
-			return players.get(2).getTopCard().getCardName();
-		}
-		return "removed";
-	}
 	
 	@GET
 	@Path("/getCatDescriptions")
@@ -304,15 +292,6 @@ public class TopTrumpsRESTAPI {
 		return 0;
 	}
 	
-
-	@GET
-	@Path("/getPlayer4CardName")
-	public String getPlayer4CardName() throws IOException{
-		if (players.get(3).getPersonalDeckSize() > 0) {
-			return players.get(3).getTopCard().getCardName();
-		}
-		return "removed";
-	}
 	
 	@GET
 	@Path("/getPlayer4CardValue")
@@ -339,17 +318,6 @@ public class TopTrumpsRESTAPI {
 		return 0;
 	}
 	
-	
-	
-	
-	@GET
-	@Path("/getPlayer5CardName")
-	public String getPlayer5CardName() throws IOException{
-		if (players.get(4).getPersonalDeckSize() > 0) {
-			return players.get(4).getTopCard().getCardName();
-		}
-		return "removed";
-	}
 	
 	
 	@GET
