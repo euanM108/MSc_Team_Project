@@ -1158,37 +1158,8 @@ display: none;
             } 
         }
   
-        
-        function getPlayer1CardValue(i){
-            var xhr = createCORSRequest('GET',
-            "http://localhost:7777/toptrumps/getPlayer1CardValue?i="+i); // Request type and URL+parameters
-            if (!xhr) {
-                alert("CORS not supported");
-            }
-            
-            xhr.send()
-    
-            xhr.onload = function(e) {
-                var responseText = xhr.response;
-                if (i ==1){
-                    document.getElementById("p1CardValue1").innerHTML = "size : " +responseText;
-                }
-                else if (i==2){
-                    document.getElementById("p1CardValue2").innerHTML = "speed : " +responseText;
-                }
-                else if (i==3){
-                    document.getElementById("p1CardValue3").innerHTML = "range : " + responseText;
-                }
-                else if (i==4){
-                    document.getElementById("p1CardValue4").innerHTML = "fire-power : " +responseText;
-                }
-                else if (i==5){
-                    document.getElementById("p1CardValue5").innerHTML = "cargo : " +responseText;
-                }
-            }
-        }
-        
-        // PLAYER 2 CARD NAME AND CARD VALUES
+     
+        // ALL PLAYER CARD NAMES
         function getPlayerCardName(i){
         	var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayerCardName?i="+i); // Request type and URL+parameters
             
@@ -1229,6 +1200,38 @@ display: none;
         	}
         }
         
+        // HUMAN PLAYER CARD VALUES
+        
+        function getPlayer1CardValue(i){
+            var xhr = createCORSRequest('GET',
+            "http://localhost:7777/toptrumps/getPlayer1CardValue?i="+i); // Request type and URL+parameters
+            if (!xhr) {
+                alert("CORS not supported");
+            }
+            
+            xhr.send()
+    
+            xhr.onload = function(e) {
+                var responseText = xhr.response;
+                if (i ==1){
+                    document.getElementById("p1CardValue1").innerHTML = "size : " +responseText;
+                }
+                else if (i==2){
+                    document.getElementById("p1CardValue2").innerHTML = "speed : " +responseText;
+                }
+                else if (i==3){
+                    document.getElementById("p1CardValue3").innerHTML = "range : " + responseText;
+                }
+                else if (i==4){
+                    document.getElementById("p1CardValue4").innerHTML = "fire-power : " +responseText;
+                }
+                else if (i==5){
+                    document.getElementById("p1CardValue5").innerHTML = "cargo : " +responseText;
+                }
+            }
+        }
+        
+        // PLAYER 2 CARD VALUES
         
         function getPlayer2CardValue(i){
             var xhr = createCORSRequest('GET', "http://localhost:7777/toptrumps/getPlayer2CardValue?i="+i); // Request type and URL+parameters
@@ -1260,6 +1263,7 @@ display: none;
         }
  
         
+        // PLAYER 3 CARD VALUES
         
         function getPlayer3CardValue(i){
             var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer3CardValue?i="+i); 
@@ -1291,7 +1295,7 @@ display: none;
         }
         
         
-        // PLAYER 4 CARD NAME AND CARD VALUES
+        // PLAYER 4 CARD VALUES
         
         function getPlayer4CardValue(i){
             var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer4CardValue?i="+i); 
@@ -1323,7 +1327,7 @@ display: none;
         }
         
         
-        // PLAYER 5 CARD NAME AND CARD VALUES
+        // PLAYER 5 CARD VALUES
         
         function getPlayer5CardValue(i){
             var xhr = createCORSRequest('GET',"http://localhost:7777/toptrumps/getPlayer5CardValue?i="+i); 
